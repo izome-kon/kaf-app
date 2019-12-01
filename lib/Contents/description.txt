@@ -1,0 +1,55 @@
+first : create integer by name _selectedIndex and inti value = 0 
+sacound : put this code in sacfold (bottomNavigationBar:)
+code:-
+BottomNavyBar(
+        selectedIndex: _selectedIndex,
+        showElevation: true, // use this to remove appBar's elevation
+
+        onItemSelected: (index) => setState(() {
+          _selectedIndex = index;
+          _pageController.animateToPage(index,
+              duration: Duration(milliseconds: 300), curve: Curves.ease);
+        }),
+
+        items: [
+          BottomNavyBarItem(
+            selectedIcon: Image.asset(
+              "assets/Home selected.png",
+              width: 25,
+            ),
+            icon: Image.asset(
+              "assets/Home.png",
+              width: 25,
+            ),
+            title: Text('Home'),
+            inactiveColor: Colors.black54,
+            activeColor: Theme.of(context).accentColor,
+          ),
+          BottomNavyBarItem(
+              selectedIcon: Image.asset(
+                "assets/wandLightSelected@2x.png",
+                width: 25,
+              ),
+              icon: Image.asset("assets/wandLight.png", width: 25),
+              title: Text('Offers'),
+              inactiveColor: Colors.black54,
+              activeColor: Theme.of(context).accentColor),
+          BottomNavyBarItem(
+              selectedIcon: Image.asset(
+                "assets/knowledgeSelected.png",
+                width: 20,
+              ),
+              icon: Image.asset("assets/knowledge.png", width: 20),
+              title: Text(
+                'knowledg',
+              ),
+              inactiveColor: Colors.black54,
+              activeColor: Theme.of(context).accentColor),
+          BottomNavyBarItem(
+              selectedIcon: Image.asset("assets/suportSelected.png", width: 25),
+              icon: Image.asset("assets/support.png", width: 25),
+              title: Text('Support'),
+              inactiveColor: Colors.black54,
+              activeColor: Theme.of(context).accentColor),
+        ],
+      ),
