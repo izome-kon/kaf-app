@@ -47,7 +47,7 @@ class _RecentCardsState extends State<RecentCards> {
                                           child: Container(
                         padding: EdgeInsets.only(top: 5, left: 15, right: 15),
                         width: double.infinity,
-                        height: 125,
+                        height: 135,
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.all(Radius.circular(15))),

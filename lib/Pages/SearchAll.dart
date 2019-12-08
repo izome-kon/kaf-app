@@ -13,11 +13,16 @@ class _SearchAllState extends State<SearchAll> {
 _SearchAllState(this.txt);
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-    
-      duration: Duration(milliseconds: 15),
-      child: containe(txt, AppLocalizations.of(context).doctorsAnd,context) ,
-    );
+    return ListView(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      children: <Widget>[
+      AnimatedContainer(
+        duration: Duration(milliseconds: 15),
+        child: containe(txt, AppLocalizations.of(context).doctorsAnd,context) ,
+      ),
+    ],);
   }
 }
 

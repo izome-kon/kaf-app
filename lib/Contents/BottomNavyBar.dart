@@ -33,7 +33,7 @@ class BottomNavyBar extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(50)),
       ),
       child: ListView(
-        padding: EdgeInsets.only(left: 8),
+        padding: EdgeInsets.only(left: 8,right: 8),
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         scrollDirection: Axis.horizontal,

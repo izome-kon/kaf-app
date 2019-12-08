@@ -36,6 +36,7 @@ class _SupportState extends State<Support> {
                         children: <Widget>[
                           Image.asset("assets/Group 2303@2x.png",width: 100,),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(AppLocalizations.of(context).lookForDonation,style: TextStyle(color: Colors.white),),
                             ],

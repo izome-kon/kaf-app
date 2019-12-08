@@ -54,7 +54,7 @@ class _AppState extends State<App> {
     "/Set_location_2":(BuildContext context)=>new Set_location(),
     "/Support":(BuildContext context)=>new Support(),
   },
-  home: LogInState(),
+  home: HomePage(),
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
     fontFamily: "Neo_Sans_Arabic",
