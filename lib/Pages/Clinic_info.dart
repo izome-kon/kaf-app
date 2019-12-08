@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import '../localizations.dart';
 import 'Doctor_info.dart';
 import 'Offer_details_2.dart';
 class Clinic {
@@ -38,7 +39,7 @@ class _Clinic_infoState extends State<Clinic_info> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: new AssetImage("assets/pics/background.jpg"),
+                image: new AssetImage("assets/DrawerBG.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -159,7 +160,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                   MaterialPageRoute(builder: (context) => offer_details_2()),
                 );
               },
-              child: Text("Take this offer",
+              child: Text(AppLocalizations.of(context).takeThisOffer,
                   style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -183,7 +184,7 @@ class _Clinic_infoState extends State<Clinic_info> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top:4.0,left: 8.0),
-              child: Align(alignment: Alignment.topLeft,child: Text("FEEDBACK",style: TextStyle(color: Colors.grey,fontSize: 10),)),
+              child: Align(alignment: Alignment.topLeft,child: Text(AppLocalizations.of(context).feedback,style: TextStyle(color: Colors.grey,fontSize: 10),)),
             ),
             AnyFeed_back("Ahmed", "good .", 3, "just now"),
             Divider(
@@ -198,7 +199,7 @@ class _Clinic_infoState extends State<Clinic_info> {
               indent: 40,
               color: Colors.grey,
             ),
-            Align(alignment: Alignment.center,child: Text("VIEW ALL FEEDBACK",style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1),fontSize: 11,fontWeight: FontWeight.bold),))
+            Align(alignment: Alignment.center,child: Text(AppLocalizations.of(context).viewAllFeedBack,style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1),fontSize: 11,fontWeight: FontWeight.bold),))
           ],
         ),
       ),
@@ -353,7 +354,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                     MaterialPageRoute(builder: (context) => Doctor_info()),
                   );
                 },
-                child: Text("More Details",
+                child: Text(AppLocalizations.of(context).moreDetails,
                     style: TextStyle(
                         fontSize: 13.0,
                         fontWeight: FontWeight.bold,
@@ -375,7 +376,7 @@ class _Clinic_infoState extends State<Clinic_info> {
             width: (MediaQuery.of(context).size.width - 30) / 3,
             child: Center(
                 child: Text(
-              "CLOSED TODAY",
+              AppLocalizations.of(context).closedToday,
               style: TextStyle(fontSize: 14, color: Colors.red),
             ))),
         Padding(
@@ -398,7 +399,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                   borderRadius: new BorderRadius.circular(18.0)),
               color: Theme.of(context).primaryColor,
               onPressed: () {},
-              child: Text("All Timing",
+              child: Text(AppLocalizations.of(context).allTimaing,
                   style: TextStyle(
                       fontSize: 13.0,
                       fontWeight: FontWeight.bold,
@@ -477,10 +478,10 @@ class _Clinic_infoState extends State<Clinic_info> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text("Price           ",
+                          Text(AppLocalizations.of(context).price+"           ",
                               style: TextStyle(fontSize: 12)),
                           Text(
-                            "500 SR",
+                            "500 "+AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
@@ -489,7 +490,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                       ),
                       Center(
                         child: Text(
-                          "125 SR",
+                          "125 "+AppLocalizations.of(context).sr,
                           style: TextStyle(fontSize: 25, color: Colors.red),
                         ),
                       )

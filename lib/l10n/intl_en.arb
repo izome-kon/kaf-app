@@ -1,0 +1,458 @@
+{
+  "@@last_modified": "2019-12-05T23:07:28.434572",
+  "title": "Kaf",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWith": "Login with",
+  "@loginWith": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourEmail": "YOUR EMAIL",
+  "@yourEmail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "startHere": "Start here",
+  "@startHere": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "areYouNew": "Are you new?",
+  "@areYouNew": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logIn": "LOGIN",
+  "@logIn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "userName": "Username",
+  "@userName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "Password",
+  "@password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "forgetPassword": "Forgot Password?",
+  "@forgetPassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullName": "Full name",
+  "@fullName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "email": "E-mail",
+  "@email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phone": "Phone",
+  "@phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signUp": "SIGN UP",
+  "@signUp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectYour": "Select your",
+  "@selectYour": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "location": "location ",
+  "@location": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toHelpFindTheNearest": "to help find the nearest",
+  "@toHelpFindTheNearest": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "serviceForYou": "service for you",
+  "@serviceForYou": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "setLocation": "Set Location",
+  "@setLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "Skip",
+  "@skip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectYourCity": "Select your city",
+  "@selectYourCity": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "useCurrentLocation": "Use current location",
+  "@useCurrentLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "enterCode": "Enter code",
+  "@enterCode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weHaveSent": "We have sent you an SMS on +92 7020764458 with 6 digit verification code.",
+  "@weHaveSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "Submit",
+  "@submit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "didNotReceiveTheCode": "Did not receive the code?",
+  "@didNotReceiveTheCode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "getACallNow": "Get a call now",
+  "@getACallNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resent": "Re-send",
+  "@resent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "support": "Support",
+  "@support": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "offers": "Offers",
+  "@offers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "completYourProfile": "Complete your profile",
+  "@completYourProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myOffers": "My Offers",
+  "@myOffers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myDonations": "My Donations",
+  "@myDonations": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myFavorite": "My Favourite",
+  "@myFavorite": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Language",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "Help",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutKaf": "About Kaf",
+  "@aboutKaf": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyRight": "Copyright © KAF 2019",
+  "@copyRight": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bestDeals": "Best Deals",
+  "@bestDeals": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "benefactor": "Benefactor",
+  "@benefactor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bestOffers": "Best Offers",
+  "@bestOffers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lookForDonation": "Look for a donation",
+  "@lookForDonation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "theHoly": "The Holy Prophet ",
+  "@theHoly": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "says": "(Sallallahu alaihi wa sallam) says:",
+  "@says": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "theBestPerson": "The best person is the one who benefits all ",
+  "@theBestPerson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "humanBegin": "human beings.",
+  "@humanBegin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "writeYourNeed": "write your need here..",
+  "@writeYourNeed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addLocation": "أAdd location",
+  "@addLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addPhoto": "Add photo",
+  "@addPhoto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gender": "Gender",
+  "@gender": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "male": "Male",
+  "@male": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "female": "Female",
+  "@female": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectBlood": "Select Blood Group",
+  "@selectBlood": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "doYouWantToMake": "Do you want to make your contact number\n visible for other",
+  "@doYouWantToMake": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addYourNeed": "Add your need",
+  "@addYourNeed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ago": "ago",
+  "@ago": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "helpHimNow": "Help him now",
+  "@helpHimNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "Search",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchForAll": "Search For All",
+  "@searchForAll": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "doctorsAnd": "Doctors, specialities, clinics",
+  "@doctorsAnd": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter": "Filter",
+  "@filter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearFilter": "Clear Filter",
+  "@clearFilter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sortedBy": "Sort By",
+  "@sortedBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowestPrice": "Lowest price",
+  "@lowestPrice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "closestToYou": "Closest to you",
+  "@closestToYou": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availability": "Availability",
+  "@availability": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableAnyDay": "Available Any Day",
+  "@availableAnyDay": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableToday": "Available Today",
+  "@availableToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableInNext3Days": "Available in next 3 days",
+  "@availableInNext3Days": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableComingWeekend": "Available coming weekend",
+  "@availableComingWeekend": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "price": "Price",
+  "@price": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "free": "Free",
+  "@free": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "one200": "1-200",
+  "@one200": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "two500": "201-500",
+  "@two500": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "five1000": "500-1000",
+  "@five1000": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "know": "Knowledge",
+  "@know": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sr": "SR",
+  "@sr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allTimaing": "All Timing",
+  "@allTimaing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "closedToday": "CLOSED TODAY",
+  "@closedToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "moreDetails": "More Details",
+  "@moreDetails": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewAllFeedBack": "View ALL FEEDBACK",
+  "@viewAllFeedBack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "takeThisOffer": "Take this offer",
+  "@takeThisOffer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "conditionForAbtaining": "Conditions for obtaining this offer",
+  "@conditionForAbtaining": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedback": "FEEDBACK",
+  "@feedback": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "yearsExperience": "Years \n Experience",
+  "@yearsExperience": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "discription": "Discription",
+  "@discription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "donerInfo": "Donor Information",
+  "@donerInfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "birthDate": "Date of Birth",
+  "@birthDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "done": "Done",
+  "@done": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "results": "result",
+  "@results": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "rating": "Rating",
+  "@rating": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

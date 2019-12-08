@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 
 class Set_location extends StatefulWidget {
   @override
@@ -69,7 +70,7 @@ class _Set_locationState extends State<Set_location> {
           decoration: InputDecoration(
               border: InputBorder.none,
               focusColor: Color.fromRGBO(117, 219, 160, 1),
-              hintText: "Select your city",
+              hintText: AppLocalizations.of(context).selectYourCity,
               prefixIcon: Icon(
                 Icons.search,
                 size: 40.0,
@@ -103,7 +104,7 @@ class _Set_locationState extends State<Set_location> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              "Use current location",
+              AppLocalizations.of(context).useCurrentLocation,
               style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
             ),
           )

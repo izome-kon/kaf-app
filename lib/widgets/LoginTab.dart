@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class LoginTab extends StatefulWidget {
@@ -38,7 +39,7 @@ class _LoginTabState extends State<LoginTab> {
                             topRight: const Radius.circular(40.0))),
                     child: Center(
                         child: Text(
-                      "SIGN UP",
+                      AppLocalizations.of(context).signUp,
                       style: TextStyle(
                         fontSize: 23,
                         color: Color.fromRGBO(35, 49, 66, 1),
@@ -59,7 +60,7 @@ class _LoginTabState extends State<LoginTab> {
                           topRight: const Radius.circular(40.0))),
                   child: Center(
                       child: Text(
-                    "LOG IN",
+                    AppLocalizations.of(context).logIn,
                     style: TextStyle(
                       fontSize: 27,
                       color: Color.fromRGBO(202, 75, 75, 1),
@@ -90,16 +91,16 @@ class _LoginTabState extends State<LoginTab> {
                         radius: MediaQuery.of(context).size.height*0.08,
                         child: Image.asset("assets/Logo.png"),
                       )),
-                  new Text("Kaf",
+                  new Text(AppLocalizations.of(context).title,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 40)),
                   TxtFeild(
-                    txt: "Username",
+                    txt: AppLocalizations.of(context).userName,
                     icon: Icon(Icons.person),
                     obscure: false,
                   ),
                   TxtFeild(
-                      txt: "Password", icon: Icon(Icons.lock), obscure: true),
+                      txt: AppLocalizations.of(context).password, icon: Icon(Icons.lock), obscure: true),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -108,7 +109,7 @@ class _LoginTabState extends State<LoginTab> {
                         child: Column(
                           children: <Widget>[
                             InkWell(
-                              child: Text("Forgot Password ?",
+                              child: Text(AppLocalizations.of(context).forgetPassword,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12.0,
@@ -132,7 +133,7 @@ class _LoginTabState extends State<LoginTab> {
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 12.0),
-                                        child: Text("Login",
+                                        child: Text(AppLocalizations.of(context).logIn,
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 color: Colors.white)),

@@ -1,9 +1,9 @@
 class DonationPost{
 
   final String name ;
-  final String Text;
-  final String PhotoURL;
+  final String text;
+  final String photoURL;
 
-  DonationPost(this.name, this.Text, this.PhotoURL);
+  DonationPost(this.name, this.text, this.photoURL);
 
 }

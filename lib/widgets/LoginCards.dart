@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/Pages/login_signin.dart' as def;
+import 'package:kaf/localizations.dart';
 class LoginCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -61,7 +62,7 @@ class LoginCards extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.only(top: 20.0),
-          child: Text("Login with",
+          child: Text(AppLocalizations.of(context).loginWith,
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold)),
         ),
         Padding(
@@ -79,7 +80,7 @@ class LoginCards extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => def.log_sign(1)),
                 );
               },
-              child: Text("YOUR EMAIL",
+              child: Text(AppLocalizations.of(context).yourEmail,
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -110,7 +111,7 @@ class LoginCards extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20.0, left: 80),
           child: Row(
             children: <Widget>[
-              Text("Are you new ?",
+              Text(AppLocalizations.of(context).areYouNew,
                   style: TextStyle(fontSize: 15.0, color: Colors.grey)),
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
@@ -121,7 +122,7 @@ class LoginCards extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => def.log_sign(2)),
                 );
                   },
-                  child: Text("Start here",
+                  child: Text(AppLocalizations.of(context).startHere,
                       style: TextStyle(
                           fontSize: 17.0, color: Color.fromRGBO(201, 71, 71, 1))),
                 ),

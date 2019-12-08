@@ -1,0 +1,458 @@
+{
+  "@@last_modified": "2019-12-05T22:36:38.191662",
+  "title": "كاف",
+  "@title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginWith": "تسجيل الدخول بـ",
+  "@loginWith": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "yourEmail": "بريدك الإلكتروني",
+  "@yourEmail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "startHere": "إبدأ من هنا",
+  "@startHere": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "areYouNew": "هل أنت جديد؟",
+  "@areYouNew": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logIn": "تسجيل الدخول",
+  "@logIn": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "userName": "اسم المستخدم",
+  "@userName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "كلمة المرور",
+  "@password": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "forgetPassword": "هل نسيت كلمة المرور؟",
+  "@forgetPassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fullName": "الاسم بالكامل",
+  "@fullName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "email": "البريد الالكتروني",
+  "@email": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phone": "رقم الهاتف المحمول",
+  "@phone": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "signUp": "تسجيل",
+  "@signUp": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectYour": "قم باختيار",
+  "@selectYour": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "location": "مكانك",
+  "@location": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "toHelpFindTheNearest": "لتساعدنا على عرض اقرب ",
+  "@toHelpFindTheNearest": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "serviceForYou": "خدمة لك",
+  "@serviceForYou": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "setLocation": "تحديد الموقع",
+  "@setLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "skip": "تخطي",
+  "@skip": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectYourCity": "اختر مدينتك",
+  "@selectYourCity": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "useCurrentLocation": "استخدم الموقع الحالي",
+  "@useCurrentLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "enterCode": "ادخل الكود",
+  "@enterCode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "weHaveSent": "لقد أرسلنا لك رسالة قصيرة على +92 7020764458 مع رمز التحقق المكون من 6 أرقام.",
+  "@weHaveSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "تقديم",
+  "@submit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "didNotReceiveTheCode": "لم تحصل على الكود؟",
+  "@didNotReceiveTheCode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "getACallNow": "احصل على مكالمة",
+  "@getACallNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "resent": "اعد ارسال الرسالة",
+  "@resent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "support": "الدعم",
+  "@support": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "offers": "العروض",
+  "@offers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "completYourProfile": "قم باستكمال ملفك الشخصي",
+  "@completYourProfile": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myOffers": "عروضي",
+  "@myOffers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myDonations": "تبرعاتي",
+  "@myDonations": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "myFavorite": "المفضلة",
+  "@myFavorite": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "تغيير اللغة",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "مساعدة",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutKaf": "عن كاف",
+  "@aboutKaf": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "copyRight": "كاف 2019 © حقوق الطبع والنشر محفوظة",
+  "@copyRight": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bestDeals": "أفضل العروض",
+  "@bestDeals": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "benefactor": "متبرع",
+  "@benefactor": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bestOffers": "أفضل العروض",
+  "@bestOffers": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lookForDonation": "تبحث عن متبرع",
+  "@lookForDonation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "theHoly": "النبي محمد",
+  "@theHoly": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "says": "(صلى الله عليه وسلم) قال:",
+  "@says": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "theBestPerson": "خير الناس",
+  "@theBestPerson": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "humanBegin": "أنفعهم للناس.",
+  "@humanBegin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "writeYourNeed": "أكتب احتياجاتك",
+  "@writeYourNeed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addLocation": "أضف موقع التبرع",
+  "@addLocation": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addPhoto": "اضف صورة للحالة",
+  "@addPhoto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gender": "النوع",
+  "@gender": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "male": "ذكر",
+  "@male": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "female": "انثى",
+  "@female": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "selectBlood": "اختر فصيلة الدم",
+  "@selectBlood": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "doYouWantToMake": "هل تريد أن تجعل رقم الاتصال الخاص بك  n مرئيًا للآخرين",
+  "@doYouWantToMake": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addYourNeed": "أضف احتياجك",
+  "@addYourNeed": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ago": "منذ",
+  "@ago": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "helpHimNow": "قم بمساعدته الآن",
+  "@helpHimNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "search": "بحث",
+  "@search": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchForAll": "البحث في الكل",
+  "@searchForAll": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "doctorsAnd": "دكتور, عيادة, تخصص",
+  "@doctorsAnd": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "filter": "تصفية النتائج",
+  "@filter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "clearFilter": "تنظيف",
+  "@clearFilter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sortedBy": "الترتيب بـ",
+  "@sortedBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lowestPrice": "الأقل سعراً",
+  "@lowestPrice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "closestToYou": "الأقرب إليك",
+  "@closestToYou": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availability": "توفر",
+  "@availability": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableAnyDay": "متاح في أي يوم",
+  "@availableAnyDay": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableToday": "متاح اليوم",
+  "@availableToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableInNext3Days": "متاح خلال 3 ايام القادمة",
+  "@availableInNext3Days": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "availableComingWeekend": "متاح في نهاية الأسبوع",
+  "@availableComingWeekend": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "price": "السعر",
+  "@price": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "free": "مجاني",
+  "@free": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "one200": "1-200",
+  "@one200": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "two500": "201-500",
+  "@two500": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "five1000": "500-1000",
+  "@five1000": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "know": "الاثراء",
+  "@know": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sr": "ر.س",
+  "@sr": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "allTimaing": "جميع الأوقات",
+  "@allTimaing": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "closedToday": "مغلق اليوم",
+  "@closedToday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "moreDetails": "تفاصيل أكثر",
+  "@moreDetails": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "viewAllFeedBack": "مشاهدة جميع الآراء",
+  "@viewAllFeedBack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "takeThisOffer": "أحصل على هذا العرض",
+  "@takeThisOffer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "conditionForAbtaining": "شرط للحصول على هذا الطلب",
+  "@conditionForAbtaining": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "feedback": "الآاراء",
+  "@feedback": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "yearsExperience": "سنوات \nالخبرة",
+  "@yearsExperience": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "discription": "الوصف",
+  "@discription": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "donerInfo": "معلومات المتبرع",
+  "@donerInfo": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "birthDate": "تاريخ الميلاد",
+  "@birthDate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "done": "تم",
+  "@done": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "results": "النتائج",
+  "@results": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "rating": "التقييم",
+  "@rating": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

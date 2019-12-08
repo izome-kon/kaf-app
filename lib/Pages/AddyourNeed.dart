@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
 
+import '../localizations.dart';
+
 class AddYourNeed extends StatefulWidget {
   @override
   _AddYourNeedState createState() => _AddYourNeedState();
@@ -13,7 +15,6 @@ class _AddYourNeedState extends State<AddYourNeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: PreferredSize(
         child: Container(
           child: SafeArea(
@@ -38,7 +39,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Text(
-                          "Add Your Need",
+                          AppLocalizations.of(context).addYourNeed,
                           style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                       ),
@@ -53,7 +54,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
         preferredSize: Size.fromHeight(48),
       ),
       backgroundColor: Colors.white.withOpacity(0.8),
-      body:Stack(
+      body: Stack(
         children: <Widget>[
           Container(
             height: 200,
@@ -83,7 +84,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
             ),
           ),
           SingleChildScrollView(
-                      child: Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
@@ -114,15 +115,18 @@ class _AddYourNeedState extends State<AddYourNeed> {
                         child: new TextField(
                           maxLines: 5,
                           decoration: InputDecoration(
-                            disabledBorder:OutlineInputBorder(
+                              disabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(color: Theme.of(context).primaryColor),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).accentColor),
                               ),
-                              labelText: "Write your need",
+                              labelText:
+                                  AppLocalizations.of(context).writeYourNeed,
                               alignLabelWithHint: true,
                               filled: true,
                               fillColor: Colors.white),
@@ -143,10 +147,14 @@ class _AddYourNeedState extends State<AddYourNeed> {
                                       color: Theme.of(context).primaryColor)),
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.camera_enhance,color: Theme.of(context).primaryColor,),
-                                  Text("  Add photo",
+                                  Icon(
+                                    Icons.camera_enhance,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  Text(AppLocalizations.of(context).addPhoto,
                                       style: TextStyle(
-                                          color: Theme.of(context).primaryColor))
+                                          color:
+                                              Theme.of(context).primaryColor))
                                 ],
                               )),
                           RaisedButton(
@@ -159,10 +167,12 @@ class _AddYourNeedState extends State<AddYourNeed> {
                                       color: Theme.of(context).primaryColor)),
                               child: Row(
                                 children: <Widget>[
-                                  Icon(Icons.location_on,color: Theme.of(context).primaryColor),
-                                  Text("  Add Location",
+                                  Icon(Icons.location_on,
+                                      color: Theme.of(context).primaryColor),
+                                  Text(AppLocalizations.of(context).addLocation,
                                       style: TextStyle(
-                                          color: Theme.of(context).primaryColor))
+                                          color:
+                                              Theme.of(context).primaryColor))
                                 ],
                               ))
                         ],
@@ -174,7 +184,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
                             Row(
                               children: <Widget>[
                                 Text(
-                                  "Gender",
+                                  AppLocalizations.of(context).gender,
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Theme.of(context).primaryColor),
@@ -203,13 +213,14 @@ class _AddYourNeedState extends State<AddYourNeed> {
                             ),
                             Row(
                               children: <Widget>[
-                                Text("Select Blood Group"),
+                                Text(AppLocalizations.of(context).selectBlood),
                               ],
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   blood("A+"),
                                   blood("A-"),
@@ -221,7 +232,8 @@ class _AddYourNeedState extends State<AddYourNeed> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   blood("O+"),
                                   blood("O-"),
@@ -237,8 +249,8 @@ class _AddYourNeedState extends State<AddYourNeed> {
                                   value: true,
                                 ),
                                 Container(
-                                  child: Text(
-                                      "Do you want to make your contact \nnumber visible for other"),
+                                  child: Text(AppLocalizations.of(context)
+                                      .doYouWantToMake),
                                 )
                               ],
                             )
@@ -253,7 +265,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
           ),
         ],
       ),
-       floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(
           Icons.add,
@@ -272,7 +284,6 @@ class _AddYourNeedState extends State<AddYourNeed> {
               duration: Duration(milliseconds: 300), curve: Curves.ease);
         }),
 
-
         items: [
           BottomNavyBarItem(
             selectedIcon: Image.asset(
@@ -283,7 +294,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
               "assets/Home.png",
               width: 25,
             ),
-            title: Text('Home'),
+            title: Text(AppLocalizations.of(context).home),
             inactiveColor: Colors.black54,
             activeColor: Theme.of(context).accentColor,
           ),
@@ -293,7 +304,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
                 width: 25,
               ),
               icon: Image.asset("assets/wandLight.png", width: 25),
-              title: Text('Offers'),
+              title: Text(AppLocalizations.of(context).offers),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
@@ -303,14 +314,14 @@ class _AddYourNeedState extends State<AddYourNeed> {
               ),
               icon: Image.asset("assets/knowledge.png", width: 20),
               title: Text(
-                'knowledg',
+                AppLocalizations.of(context).know,
               ),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
               selectedIcon: Image.asset("assets/suportSelected.png", width: 25),
               icon: Image.asset("assets/support.png", width: 25),
-              title: Text('Support'),
+              title: Text(AppLocalizations.of(context).support),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
         ],

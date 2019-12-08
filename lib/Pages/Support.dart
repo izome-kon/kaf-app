@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 
 class Support extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _SupportState extends State<Support> {
                           Image.asset("assets/Group 2303@2x.png",width: 100,),
                           Row(
                             children: <Widget>[
-                              Text("Look for a donation",style: TextStyle(color: Colors.white),),
+                              Text(AppLocalizations.of(context).lookForDonation,style: TextStyle(color: Colors.white),),
                             ],
                           )
                         ],
@@ -65,7 +66,7 @@ class _SupportState extends State<Support> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text("Benefactor",style: TextStyle(color: Colors.white),),
+                              Text(AppLocalizations.of(context).benefactor,style: TextStyle(color: Colors.white),),
                             ],
                           )
                         ],
@@ -86,10 +87,10 @@ class _SupportState extends State<Support> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text("The Holy Prophet",style: TextStyle(),),
-                    Text("(Sallallahu alaihi wa sallam) says:",style: TextStyle(color: Colors.red),),
-                    Text("The best person is the one who benefits all"),
-                    Text("human begins.")
+                    Text(AppLocalizations.of(context).theHoly,style: TextStyle(),),
+                    Text(AppLocalizations.of(context).says,style: TextStyle(color: Colors.red),),
+                    Text(AppLocalizations.of(context).theBestPerson),
+                    Text(AppLocalizations.of(context).humanBegin)
                   ],
                 ),
               ),

@@ -2,6 +2,7 @@ import 'dart:ui' as prefix0;
 
 import 'package:flutter/material.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/cards_list.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -82,7 +83,7 @@ class _SearchResultState extends State<SearchResult> {
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Row(
                       children: <Widget>[
-                        Text("$resultCounter results",
+                        Text("$resultCounter +"+AppLocalizations.of(context).results,
                             style: TextStyle(
                               color: Color.fromRGBO(0, 0, 0, 0.4),
                             ))
@@ -129,7 +130,7 @@ class _SearchResultState extends State<SearchResult> {
               "assets/Home.png",
               width: 25,
             ),
-            title: Text('Home'),
+            title: Text(AppLocalizations.of(context).home),
             inactiveColor: Colors.black54,
             activeColor: Theme.of(context).accentColor,
           ),
@@ -139,7 +140,7 @@ class _SearchResultState extends State<SearchResult> {
                 width: 25,
               ),
               icon: Image.asset("assets/wandLight.png", width: 25),
-              title: Text('Offers'),
+              title: Text(AppLocalizations.of(context).offers),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
@@ -149,14 +150,14 @@ class _SearchResultState extends State<SearchResult> {
               ),
               icon: Image.asset("assets/knowledge.png", width: 20),
               title: Text(
-                'knowledg',
+                AppLocalizations.of(context).know,
               ),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
               selectedIcon: Image.asset("assets/suportSelected.png", width: 25),
               icon: Image.asset("assets/support.png", width: 25),
-              title: Text('Support'),
+              title: Text(AppLocalizations.of(context).support),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
         ],
@@ -206,13 +207,13 @@ class _SearchResultState extends State<SearchResult> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "Filter",
+                                AppLocalizations.of(context).filter,
                                 style:
                                     TextStyle(fontSize: 35, color: Colors.white),
                               ),
                               InkWell(
                                 child: Text(
-                                  "Clear filter",
+                                  AppLocalizations.of(context).clearFilter,
                                   style: TextStyle(color: Colors.white),
                                 ),
                               )
@@ -235,17 +236,17 @@ class _SearchResultState extends State<SearchResult> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("   Sorted by",style: TextStyle(color: Colors.black45),),
+                            Text("   "+AppLocalizations.of(context).sortedBy,style: TextStyle(color: Colors.black45),),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Lowest Price"),
+                                Text(AppLocalizations.of(context).lowestPrice),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Closest to you"),
+                                Text(AppLocalizations.of(context).closestToYou),
                               ],
                             ),
                           ],
@@ -265,7 +266,7 @@ class _SearchResultState extends State<SearchResult> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("   Availability",style: TextStyle(color: Colors.black45),),
+                            Text("   "+AppLocalizations.of(context).availability,style: TextStyle(color: Colors.black45),),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){
@@ -273,25 +274,25 @@ class _SearchResultState extends State<SearchResult> {
                                     grouped=T;
                                   });
                                 },value: 1,groupValue: grouped,),
-                                Text("Available Any Day"),
+                                Text(AppLocalizations.of(context).availableAnyDay),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 2,groupValue: grouped,),
-                                Text("Available Today"),
+                                Text(AppLocalizations.of(context).availableToday),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Available in next 3 days"),
+                                Text(AppLocalizations.of(context).availableInNext3Days),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Available coming weekend"),
+                                Text(AppLocalizations.of(context).availableComingWeekend),
                               ],
                             ),
                           ],
@@ -311,11 +312,11 @@ class _SearchResultState extends State<SearchResult> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("   Price",style: TextStyle(color: Colors.black45),),
+                            Text("   "+AppLocalizations.of(context).price,style: TextStyle(color: Colors.black45),),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Free"),
+                                Text(AppLocalizations.of(context).free),
                               ],
                             ),
                             Row(
@@ -354,17 +355,17 @@ class _SearchResultState extends State<SearchResult> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("   Gender",style: TextStyle(color: Colors.black45),),
+                            Text("   "+AppLocalizations.of(context).gender,style: TextStyle(color: Colors.black45),),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Male"),
+                                Text(AppLocalizations.of(context).male),
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Radio(onChanged: (T){},value: 1,groupValue: 0,),
-                                Text("Female"),
+                                Text(AppLocalizations.of(context).female),
                               ],
                             ),
                           ],

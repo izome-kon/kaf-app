@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'Clinic_info.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 
@@ -114,7 +115,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      " yesrs \nexperience",
+                                      AppLocalizations.of(context).yearsExperience,
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 12),
                                     )
@@ -315,7 +316,7 @@ class _Doctor_infoState extends State<Doctor_info> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "FEEDBACK",
+                    AppLocalizations.of(context).feedback,
                     style: TextStyle(color: Colors.grey, fontSize: 10),
                   )),
             ),
@@ -335,7 +336,7 @@ class _Doctor_infoState extends State<Doctor_info> {
             Align(
                 alignment: Alignment.center,
                 child: Text(
-                  "VIEW ALL FEEDBACK",
+                  AppLocalizations.of(context).viewAllFeedBack,
                   style: TextStyle(
                       color: Color.fromRGBO(35, 49, 66, 1),
                       fontSize: 11,
@@ -443,7 +444,7 @@ class _Doctor_infoState extends State<Doctor_info> {
           Container(
               child: Center(
                   child: Text(
-            "CLOSED TODAY",
+            AppLocalizations.of(context).closedToday,
             style: TextStyle(fontSize: 10, color: Colors.red),
           ))),
           VerticalDivider(
@@ -467,7 +468,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                   borderRadius: new BorderRadius.circular(18.0)),
               color: Theme.of(context).primaryColor,
               onPressed: () {},
-              child: Text("All Timing",
+              child: Text(AppLocalizations.of(context).allTimaing,
                   style: TextStyle(
                       letterSpacing: 1,
                       fontSize: 12.0,
@@ -554,9 +555,9 @@ class _Doctor_infoState extends State<Doctor_info> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text("Price    ", style: TextStyle(fontSize: 8)),
+                            Text(AppLocalizations.of(context).price+"    ", style: TextStyle(fontSize: 8)),
                             Text(
-                              "500 SR",
+                              "500 "+AppLocalizations.of(context).sr,
                               style: TextStyle(
                                   fontSize: 8,
                                   decoration: TextDecoration.lineThrough),
@@ -565,7 +566,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                         ),
                         Center(
                           child: Text(
-                            "125 SR",
+                            "125 "+AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 17,
                                 color: Theme.of(context).accentColor),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class SignUpTab extends StatefulWidget {
@@ -37,7 +38,7 @@ class _SignUpTabState extends State<SignUpTab> {
                             topRight: const Radius.circular(40.0))),
                     child: Center(
                         child: Text(
-                      "LOG IN",
+                      AppLocalizations.of(context).logIn,
                       style: TextStyle(
                         fontSize: 23,
                         color: Color.fromRGBO(35, 49, 66, 1),
@@ -58,7 +59,7 @@ class _SignUpTabState extends State<SignUpTab> {
                           topRight: const Radius.circular(40.0))),
                   child: Center(
                       child: Text(
-                    "SIGN UP",
+                   AppLocalizations.of(context).signUp,
                     style: TextStyle(
                       fontSize: 27,
                       color: Color.fromRGBO(202, 75, 75, 1),
@@ -89,22 +90,22 @@ class _SignUpTabState extends State<SignUpTab> {
                         radius: MediaQuery.of(context).size.height*0.08,
                         child: Image.asset("assets/Logo.png"),
                       )),
-                  new Text("Kaf",
+                  new Text(AppLocalizations.of(context).title,
                       style: TextStyle(color:Theme.of(context).primaryColor, fontSize: 40)),
                   TxtFeild(
-                      txt: "Full name",
+                      txt:AppLocalizations.of(context).fullName,
                       icon: Icon(Icons.person),
                       obscure: false),
                   TxtFeild(
-                      txt: "Username",
+                      txt: AppLocalizations.of(context).userName,
                       icon: Icon(Icons.person),
                       obscure: false),
                   TxtFeild(
-                      txt: "Email", icon: Icon(Icons.email), obscure: false),
+                      txt: AppLocalizations.of(context).email, icon: Icon(Icons.email), obscure: false),
                   TxtFeild(
-                      txt: "Password", icon: Icon(Icons.lock), obscure: true),
+                      txt: AppLocalizations.of(context).password, icon: Icon(Icons.lock), obscure: true),
                   TxtFeild(
-                      txt: "Phone", icon: Icon(Icons.phone), obscure: false),
+                      txt: AppLocalizations.of(context).phone, icon: Icon(Icons.phone), obscure: false),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
@@ -127,7 +128,7 @@ class _SignUpTabState extends State<SignUpTab> {
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 12.0),
-                                    child: Text("Sign up",
+                                    child: Text(AppLocalizations.of(context).signUp,
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             color: Colors.white)),

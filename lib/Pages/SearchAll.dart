@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'SearchPages.dart';
 
 class SearchAll extends StatefulWidget {
@@ -15,7 +16,7 @@ _SearchAllState(this.txt);
     return AnimatedContainer(
     
       duration: Duration(milliseconds: 15),
-      child: containe(txt, 'Doctors, specialities, clinics',context) ,
+      child: containe(txt, AppLocalizations.of(context).doctorsAnd,context) ,
     );
   }
 }

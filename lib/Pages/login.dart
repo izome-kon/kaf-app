@@ -1,4 +1,6 @@
 
+import 'package:flutter/services.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/LoginCards.dart';
 import 'package:kaf/widgets/Logo.dart';
 
@@ -21,7 +23,7 @@ Image GetImage(String path) {
 
 class _LogInStateState extends State<LogInState> {
   double logosize ;
-  double wordW = 100;
+  double wordW = 200;
   double wordH = 60;
   Widget cardswitcher;
   
@@ -48,13 +50,8 @@ class _LogInStateState extends State<LogInState> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Logo(logosize:logosize,),
-                      AnimatedContainer(
-                        width: wordW,
-                        height: wordH,
-                        duration: Duration(milliseconds: 250),
-                        child: new Text("Kaf",
+                      new Text(AppLocalizations.of(context).title,
               style: TextStyle(color: Colors.white, fontSize: 60)),
-                      ),
                     ],
                   ),
                   AnimatedSwitcher(

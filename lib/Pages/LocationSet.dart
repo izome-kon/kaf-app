@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 
 class LocationSet extends StatefulWidget {
   @override
@@ -40,15 +41,15 @@ class _LocationSetState extends State<LocationSet> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text("Select your"),
+                          Text(" "+AppLocalizations.of(context).selectYour+" "),
                           Text(
-                            " location ",
+                            AppLocalizations.of(context).location,
                             style: TextStyle(color: Theme.of(context).accentColor),
                           ),
-                          Text("to help find the nearest"),
+                          Text(AppLocalizations.of(context).toHelpFindTheNearest),
                         ],
                       ),
-                      Text("service for you")
+                      Text(AppLocalizations.of(context).serviceForYou)
                     ],
                   ),
                 ),
@@ -74,7 +75,7 @@ class _LocationSetState extends State<LocationSet> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            " Set Location ",
+                            " "+AppLocalizations.of(context).setLocation+" ",
                             style: TextStyle(color: Colors.white),
                           ),
                           Icon(
@@ -109,7 +110,7 @@ class _LocationSetState extends State<LocationSet> {
                         
                         children: <Widget>[
                           Text(
-                            "Skip",
+                            AppLocalizations.of(context).skip,
                             style: TextStyle(color: Colors.white),
                           ),
                            Icon(

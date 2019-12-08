@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/models/best_deals.dart';
 import 'package:kaf/models/clinic_card.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -13,7 +14,6 @@ class _RecentCardsState extends State<RecentCards> {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -104,7 +104,10 @@ class _RecentCardsState extends State<RecentCards> {
                                     color: Colors.red,
                                   ),
                                   onPressed: () {
-                                    
+                                    setState(() {
+                             
+                                     card.isLiked = card.isLiked?false:true;
+                                    });
                                   },
                                 ),
                               ],
@@ -119,7 +122,7 @@ class _RecentCardsState extends State<RecentCards> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text("Price",style: TextStyle(color: Colors.black45),),
+                                        Text(AppLocalizations.of(context).price,style: TextStyle(color: Colors.black45),),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 35),
                                           child: Text(
@@ -133,7 +136,7 @@ class _RecentCardsState extends State<RecentCards> {
                                       ],
                                     ),
                                     Text(
-                                      card.price.toString() + " SR",
+                                      card.price.toString() + AppLocalizations.of(context).sr,
                                       style: TextStyle(fontSize: 25,color: Theme.of(context).accentColor),
                                     )
                                   ],
@@ -143,7 +146,7 @@ class _RecentCardsState extends State<RecentCards> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text("Rating",style: TextStyle(color: Colors.black45)),
+                                    Text(AppLocalizations.of(context).rating,style: TextStyle(color: Colors.black45)),
                                     Row(
                                       children: <Widget>[
                                         Text(card.clinic.clinicRate.toString()),

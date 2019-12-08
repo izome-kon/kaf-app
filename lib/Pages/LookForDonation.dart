@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
+import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/post.dart';
 
 class LookForDonation extends StatefulWidget {
@@ -63,7 +64,7 @@ class _LookForDonationState extends State<LookForDonation> {
                                       color: Colors.white, fontSize: 40),
                                 ),
                                 Text(
-                                  "Look For Donation",
+                                  AppLocalizations.of(context).lookForDonation,
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -75,7 +76,7 @@ class _LookForDonationState extends State<LookForDonation> {
                                 Navigator.pushNamed(context, "/AddyourNeed");
                               },
                               child: Text(
-                                "Add your need",
+                                AppLocalizations.of(context).addYourNeed,
                                 style: TextStyle(color: Theme.of(context).primaryColor),
                               ),
                               color: Colors.white,
@@ -92,7 +93,7 @@ class _LookForDonationState extends State<LookForDonation> {
                   )
                 ],
               ),
-              title: Text("Look For Donation"),
+              title: Text(AppLocalizations.of(context).lookForDonation),
               centerTitle: true,
             ),
           ),
@@ -139,7 +140,7 @@ class _LookForDonationState extends State<LookForDonation> {
               "assets/Home.png",
               width: 25,
             ),
-            title: Text('Home'),
+            title: Text(AppLocalizations.of(context).home),
             inactiveColor: Colors.black54,
             activeColor: Theme.of(context).accentColor,
           ),
@@ -149,7 +150,7 @@ class _LookForDonationState extends State<LookForDonation> {
                 width: 25,
               ),
               icon: Image.asset("assets/wandLight.png", width: 25),
-              title: Text('Offers'),
+              title: Text(AppLocalizations.of(context).offers),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
@@ -159,14 +160,14 @@ class _LookForDonationState extends State<LookForDonation> {
               ),
               icon: Image.asset("assets/knowledge.png", width: 20),
               title: Text(
-                'knowledg',
+                AppLocalizations.of(context).know,
               ),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
           BottomNavyBarItem(
               selectedIcon: Image.asset("assets/suportSelected.png", width: 25),
               icon: Image.asset("assets/support.png", width: 25),
-              title: Text('Support'),
+              title: Text(AppLocalizations.of(context).support),
               inactiveColor: Colors.black54,
               activeColor: Theme.of(context).accentColor),
         ],

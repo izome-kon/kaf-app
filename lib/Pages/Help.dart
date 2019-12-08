@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../localizations.dart';
+
 class HelpUser extends StatefulWidget {
   @override
   _HelpUserState createState() => _HelpUserState();
@@ -93,7 +95,7 @@ class _HelpUserState extends State<HelpUser> {
                  
                 ],
               ),
-              title: Text("Help Mahmoud"),
+              title: Text(AppLocalizations.of(context).help+" Mahmoud"),
               centerTitle: true,
 
             ),
@@ -127,7 +129,7 @@ class _HelpUserState extends State<HelpUser> {
                            borderRadius: BorderRadius.circular(30.0),
 
                          ),
-                         labelText: "Discription",
+                         labelText: AppLocalizations.of(context).discription,
                          enabled: false,
                  
                          alignLabelWithHint: true,
@@ -166,7 +168,7 @@ class _HelpUserState extends State<HelpUser> {
                      color: Theme.of(context).primaryColor,
                      borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
                    ),
-                   child: Text("Donar information",style: TextStyle(color: Colors.white,fontSize: 20),),
+                   child: Text(AppLocalizations.of(context).donerInfo,style: TextStyle(color: Colors.white,fontSize: 20),),
                  ),
                  Container(
                    padding: EdgeInsets.only(top: 15),
@@ -178,7 +180,7 @@ class _HelpUserState extends State<HelpUser> {
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(30.0),
                          ),
-                         labelText: "Full Name",
+                         labelText: AppLocalizations.of(context).fullName,
                          enabled: false,
                          filled: true,
                          fillColor: Colors.white),
@@ -196,7 +198,7 @@ class _HelpUserState extends State<HelpUser> {
                          border: OutlineInputBorder(
                            borderRadius: BorderRadius.circular(30.0),
                          ),
-                         labelText: "Birthday Date",
+                         labelText: AppLocalizations.of(context).birthDate,
                          enabled: false,
                          filled: true,
                          fillColor: Colors.white),
@@ -210,7 +212,7 @@ class _HelpUserState extends State<HelpUser> {
                    width: 150,
                    child: RaisedButton(
                      onPressed: () {},
-                     child: Text("Done",style: TextStyle(color: Colors.white),),
+                     child: Text(AppLocalizations.of(context).done,style: TextStyle(color: Colors.white),),
                      color: Colors.red,
                      elevation: 0,
                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),

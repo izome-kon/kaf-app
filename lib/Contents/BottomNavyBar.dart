@@ -125,7 +125,7 @@ int x=0;
               ),
               width: double.infinity,
               height: 60,
-              padding: EdgeInsets.only(left: 15, top: 6, bottom: 6),
+              padding: EdgeInsets.only(left: 15, top: 6, bottom: 6,right: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -140,7 +140,7 @@ int x=0;
                     child:_buildItem(item, selectedIndex == index),
                   );
                 }).toList(),),
-                Row(children:  items.getRange(2,4).map((item) {
+                Row(children:items.getRange(2,4).map((item) {
                   var index = items.indexOf(item);
                   x+=1;
                   return GestureDetector(

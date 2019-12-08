@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:kaf/localizations.dart';
 import 'Clinic_info.dart' as prefix0;
 import 'dart:async';
 import 'clinic_info.dart';
@@ -80,8 +81,6 @@ class _offer_details_2State extends State<offer_details_2> {
         child: Column(
           children: <Widget>[
             header_info(clinic),
-           
-          
             Divider(
               height: 2,
               endIndent: 20,
@@ -133,7 +132,7 @@ class _offer_details_2State extends State<offer_details_2> {
                 });
               },
               
-              child: Text(taken?"Taked !":"Take this offer",
+              child: Text(taken?"Taked !":AppLocalizations.of(context).takeThisOffer,
                   style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -153,7 +152,7 @@ class _offer_details_2State extends State<offer_details_2> {
       children: <Widget>[
         
         Text(
-          "Condition for obtaining this order",
+          AppLocalizations.of(context).conditionForAbtaining,
           style: TextStyle(
               fontSize: 17,
               color: Theme.of(context).accentColor,
@@ -298,7 +297,7 @@ class _offer_details_2State extends State<offer_details_2> {
                     borderRadius: new BorderRadius.circular(18.0)),
                 color: Theme.of(context).primaryColor,
                 onPressed: () {},
-                child: Text("More Details",
+                child: Text(AppLocalizations.of(context).moreDetails,
                     style: TextStyle(
                         fontSize: 13.0,
                         fontWeight: FontWeight.bold,
@@ -378,10 +377,10 @@ class _offer_details_2State extends State<offer_details_2> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text("Price           ",
+                          Text(AppLocalizations.of(context).price+"           ",
                               style: TextStyle(fontSize: 12)),
                           Text(
-                            "500 SR",
+                            "500"+AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
@@ -390,7 +389,7 @@ class _offer_details_2State extends State<offer_details_2> {
                       ),
                       Center(
                         child: Text(
-                          "125 SR",
+                          "125 "+AppLocalizations.of(context).sr,
                           style: TextStyle(fontSize: 25, color: Theme.of(context).accentColor),
                         ),
                       )

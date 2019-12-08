@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:kaf/Pages/ActivePhone.dart';
 import 'package:kaf/Pages/AddyourNeed.dart';
 import 'package:kaf/Pages/Clinic_info.dart';
@@ -14,8 +15,28 @@ import 'package:kaf/Pages/Set_location_2.dart';
 import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/Pages/login.dart';
 import 'package:kaf/Pages/login_signin.dart';
+import 'package:kaf/localizations.dart';
 
-void main() => runApp(new MaterialApp(
+void main() => runApp(App());
+
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState(){
+  super.initState();
+  _sprcificLocalizationDelegate =
+  SprcificLocalizationDelegate(new Locale("ar"));
+  }
+
+  SprcificLocalizationDelegate _sprcificLocalizationDelegate;
+  
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
   routes: <String,WidgetBuilder>{
     "/Home":(BuildContext context)=>new HomePage(),
     "/ActivePhone":(BuildContext context)=>new ActivePhone(),
@@ -36,8 +57,22 @@ void main() => runApp(new MaterialApp(
   home: LogInState(),
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
+    fontFamily: "Neo_Sans_Arabic",
     primaryColor: Color.fromRGBO(50, 87, 167, 1),
     accentColor: Color.fromRGBO(219, 64, 78, 1),
     highlightColor: Color.fromRGBO(250, 207, 90, 1),
   ),
-));
+
+  localizationsDelegates: [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    _sprcificLocalizationDelegate,
+  ],
+  supportedLocales: [
+    Locale('en'),
+    Locale('ar'),
+  ],
+  locale: _sprcificLocalizationDelegate.overriddenLocale,
+);
+  }
+}

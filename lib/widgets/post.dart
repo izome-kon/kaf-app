@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 
 class Post extends StatelessWidget {
   bool liked = false;
@@ -86,13 +87,13 @@ class Post extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
-              children: <Widget>[Icon(Icons.access_time), Text("6m ago")],
+              children: <Widget>[Icon(Icons.access_time), Text("6m "+AppLocalizations.of(context).ago)],
             ),
             RaisedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/Help");
               },
-              child: Text("help him now",style: TextStyle(color: Colors.red),),
+              child: Text(AppLocalizations.of(context).helpHimNow,style: TextStyle(color: Colors.red),),
               color: Colors.white,
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),side: BorderSide(color: Colors.red)),

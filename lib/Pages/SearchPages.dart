@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
   Widget containe(String search,String label,BuildContext context)
   {
     final TextEditingController control = new TextEditingController();
@@ -45,7 +46,7 @@ alignment: Alignment.center,
                           Navigator.pushNamed(context, "/SearchResult");
                         },
                             color: Color.fromRGBO(250, 207, 90, 1),
-                            child: new Text('Search',style: TextStyle(color: Colors.black,fontSize: 15),),
+                            child: new Text(AppLocalizations.of(context).search,style: TextStyle(color: Colors.black,fontSize: 15),),
                             shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(15.0))),
                       ),
 

@@ -18,18 +18,10 @@ environment:
 
 dependencies:
   flutter_rating: ^0.0.2
-  extended_navbar_scaffold: ^1.0.1
-  ace_bottom_navigation_bar: ^0.0.4
-  loading: ^1.0.1
-  bubbled_navigation_bar: ^0.0.4
-  bottom_navy_bar: ^5.2.0
-  circular_bottom_navigation: ^1.0.1
-  curved_navigation_bar: ^0.3.0
-  fancy_bottom_navigation: ^0.3.2
-  flutter_vector_icons: ^0.2.0
   pin_input_text_field: ^2.0.0
-  
   paging: ^0.1.0
+  
+  
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -51,6 +43,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  fonts:
+    - family: Neo_Sans_Arabic
+      fonts:
+        - asset: assets/fonts/Neo Sans Arabic Regular.ttf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

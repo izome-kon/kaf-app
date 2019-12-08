@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/localizations.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 class ActivePhone extends StatefulWidget {
   @override
@@ -36,7 +37,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Enter code",
+                      AppLocalizations.of(context).enterCode,
                       style: TextStyle(color: Colors.black54, fontSize: 20),
                     ),
                   ),
@@ -51,7 +52,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                   Padding(
                     padding: const EdgeInsets.only(right: 60, left: 60),
                     child: Text(
-                      "We have sent you an SMS on +92 7020764458 with 6 digit verification code.",
+                      AppLocalizations.of(context).weHaveSent,
                       style: TextStyle(color: Colors.black54, fontSize: 12),
                       textDirection: TextDirection.rtl,
                       textAlign: TextAlign.center,
@@ -102,7 +103,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                                         color: Theme.of(context).primaryColor
                                         ),
                                     child: Text(
-                                      "   Submit   ",
+                                      AppLocalizations.of(context).submit,
                                       style: TextStyle(
                                           color: Colors.white, fontSize: 15),
                                     )),
@@ -119,7 +120,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text("Did not receive the code?"),
+                        Text(AppLocalizations.of(context).didNotReceiveTheCode),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: Row(
@@ -129,7 +130,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                                 onTap: (){},
                                 splashColor: Colors.black26,
 
-                                child: Text("Re-send",style: TextStyle(
+                                child: Text(AppLocalizations.of(context).resent,style: TextStyle(
                                   color: Theme.of(context).accentColor
                                 ),),
                               ),
@@ -138,7 +139,7 @@ class _ActivePhoneState extends State<ActivePhone> {
                                 onTap: (){},
                                 splashColor: Colors.black26,
 
-                                child: Text("Get a call now",style: TextStyle(
+                                child: Text(AppLocalizations.of(context).getACallNow,style: TextStyle(
                                     color:Theme.of(context).accentColor
                                 ),),
                               ),
