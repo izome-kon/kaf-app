@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/models/user_model.dart';
 import 'package:kaf/widgets/TxtField.dart';
+import 'package:http/http.dart'as http;
+import 'dart:convert';
 
 class LoginTab extends StatefulWidget {
   @required VoidCallback onPressed;
@@ -10,6 +13,52 @@ class LoginTab extends StatefulWidget {
 }
 
 class _LoginTabState extends State<LoginTab> {
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+
+
+Future _login(String user,String pass) async{
+  print(user+" "+ pass);
+  var url = "http://kaf.ideagroup-sa.com/api/users/login/$user&$pass";
+  http.Response response = await http.post(url);
+  print(response.statusCode);
+  Map data = jsonDecode(response.body);
+  if(data.length==1){
+    print(data.values.toString());
+    }
+  else
+    showDialog(
+      
+      context: context,
+    builder: (_)=>AlertDialog(
+      title: Text("تنبيه"),
+      content: Text("يرجى التأكد من البريد الالكتروني أو كلمة المرور"),
+      actions: <Widget>[
+        FlatButton(child: Text("حسناً"),onPressed: (){
+          Navigator.of(context).pop();
+        },)
+      ],
+    )
+  );
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////////////////
   int _index = 2;
   @required VoidCallback onPressed;
   _LoginTabState({this.onPressed});
@@ -94,12 +143,15 @@ class _LoginTabState extends State<LoginTab> {
                   new Text(AppLocalizations.of(context).title,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 40)),
+                  
                   TxtFeild(
+                   controller: username,
                     txt: AppLocalizations.of(context).userName,
                     icon: Icon(Icons.person),
                     obscure: false,
                   ),
                   TxtFeild(
+                      controller: password,
                       txt: AppLocalizations.of(context).password, icon: Icon(Icons.lock), obscure: true),
                   Expanded(
                     child: Padding(
@@ -126,7 +178,10 @@ class _LoginTabState extends State<LoginTab> {
                                           new BorderRadius.circular(25.0)),
                                   color: Theme.of(context).primaryColor,
                                   onPressed: () {
-                                    Navigator.pushNamed(context,"/LocationSet");
+                                    print("testtt"+username.text+password.text);
+
+                                    _login(username.text,password.text);
+                                    //Navigator.pushNamed(context,"/LocationSet");
                                   },
                                   child: Row(
                                     children: <Widget>[

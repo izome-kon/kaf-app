@@ -4,8 +4,8 @@ class TxtFeild extends StatelessWidget {
   final String txt;
   final Icon icon;
   final bool obscure;
-
-  TxtFeild({this.txt,this.icon,this.obscure});
+  final TextEditingController controller;
+  TxtFeild({this.txt,this.icon,this.obscure,this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,10 @@ class TxtFeild extends StatelessWidget {
         shadowColor: Colors.black,
         borderRadius: BorderRadius.circular(25.0),
         child: TextFormField(
+          
           obscureText: obscure,
           autofocus: false,
-          controller: null,
+          controller: controller,
           decoration: InputDecoration(
               border: InputBorder.none,
               focusColor: Color.fromRGBO(117, 219, 160, 1),
