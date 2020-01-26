@@ -74,12 +74,12 @@ class LoginCards extends StatelessWidget {
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(18.0)),
               color: Color.fromRGBO(201, 71, 71, 1),
-              onPressed: () {
+              onPressed: () =>
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => def.log_sign(1)),
-                );
-              },
+                  MaterialPageRoute(builder: (BuildContext context) => def.log_sign(1)),
+                ),
+              
               child: Text(AppLocalizations.of(context).yourEmail,
                   style: TextStyle(
                       fontSize: 20.0,

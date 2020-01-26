@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true,
+		"sshfs.configs": [
+			{
+				"host": "ideagroup-sa.com",
+				"name": "test",
+				"password": "V1GgHmmWi2rc",
+				"port": 21,
+				"username": "ideagrou"
+			}
+		]
+	}
+}

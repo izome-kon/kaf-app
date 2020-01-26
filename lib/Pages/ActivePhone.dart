@@ -14,10 +14,6 @@ class _ActivePhoneState extends State<ActivePhone> {
         fit: StackFit.expand,
         alignment: Alignment.center,
         children: <Widget>[
-          Image.asset(
-            "assets/ActivePhoneBG.png",
-            fit: BoxFit.cover,
-          ),
           Center(
             child: SingleChildScrollView(
               child: Column(

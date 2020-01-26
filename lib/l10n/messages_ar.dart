@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "weHaveSent" : MessageLookupByLibrary.simpleMessage("لقد أرسلنا لك رسالة قصيرة على +92 7020764458 مع رمز التحقق المكون من 6 أرقام."),
     "writeYourNeed" : MessageLookupByLibrary.simpleMessage("أكتب احتياجاتك"),
     "yearsExperience" : MessageLookupByLibrary.simpleMessage("سنوات \nالخبرة"),
-    "yourEmail" : MessageLookupByLibrary.simpleMessage("بريدك الإلكتروني")
+    "yourEmail" : MessageLookupByLibrary.simpleMessage("بريدك الإلكتروني"),
+    "resetPassword" : MessageLookupByLibrary.simpleMessage("استعادة كلمة المرور")
   };
 }

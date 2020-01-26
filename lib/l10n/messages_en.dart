@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "weHaveSent" : MessageLookupByLibrary.simpleMessage("We have sent you an SMS on +92 7020764458 with 6 digit verification code."),
     "writeYourNeed" : MessageLookupByLibrary.simpleMessage("write your need here.."),
     "yearsExperience" : MessageLookupByLibrary.simpleMessage("Years \n Experience"),
+    "resetPassword" : MessageLookupByLibrary.simpleMessage("Forget Password"),
     "yourEmail" : MessageLookupByLibrary.simpleMessage("YOUR EMAIL")
   };
 }

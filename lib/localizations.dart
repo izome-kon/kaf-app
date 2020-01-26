@@ -56,6 +56,9 @@ String get password{
 String get forgetPassword{
   return Intl.message('Forgot Password?',name: 'forgetPassword');
 }
+String get resetPassword{
+  return Intl.message('Forget Password',name: 'resetPassword');
+}
 String get fullName{
   return Intl.message('Full name',name: 'fullName');
 }

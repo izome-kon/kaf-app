@@ -4,6 +4,7 @@ import 'package:kaf/Pages/ActivePhone.dart';
 import 'package:kaf/Pages/AddyourNeed.dart';
 import 'package:kaf/Pages/Clinic_info.dart';
 import 'package:kaf/Pages/Doctor_info.dart';
+import 'package:kaf/Pages/ForgetPassword.dart';
 import 'package:kaf/Pages/Help.dart';
 import 'package:kaf/Pages/HomePage.dart';
 import 'package:kaf/Pages/LocationSet.dart';
@@ -29,7 +30,7 @@ class _AppState extends State<App> {
   void initState(){
   super.initState();
   _sprcificLocalizationDelegate =
-  SprcificLocalizationDelegate(new Locale("ar"));
+  SprcificLocalizationDelegate(new Locale("en"));
   }
 
   SprcificLocalizationDelegate _sprcificLocalizationDelegate;
@@ -54,7 +55,7 @@ class _AppState extends State<App> {
     "/Set_location_2":(BuildContext context)=>new Set_location(),
     "/Support":(BuildContext context)=>new Support(),
   },
-  home: LogInState(),
+  home: ForgetPassword(),
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
     fontFamily: "Neo_Sans_Arabic",

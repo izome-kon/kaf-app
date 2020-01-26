@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
-import 'package:kaf/models/user_model.dart';
 import 'package:kaf/widgets/TxtField.dart';
 import 'package:http/http.dart'as http;
 import 'dart:convert';
@@ -19,50 +18,42 @@ class _LoginTabState extends State<LoginTab> {
 
 
 Future _login(String user,String pass) async{
-  print(user+" "+ pass);
+  if(pass==""||user==""){
+    wrongUser();
+  }else{
   var url = "http://kaf.ideagroup-sa.com/api/users/login/$user&$pass";
-  http.Response response = await http.post(url);
+  var response = await http.post(Uri.encodeFull(url));
   print(response.statusCode);
-  Map data = jsonDecode(response.body);
+  var data = jsonDecode(response.body);
   if(data.length==1){
-    print(data.values.toString());
+    print(data[0]['user_name']);
     }
   else
-    showDialog(
-      
+  wrongUser();
+  }
+}
+
+wrongUser(){
+  showDialog(
       context: context,
     builder: (_)=>AlertDialog(
       title: Text("تنبيه"),
       content: Text("يرجى التأكد من البريد الالكتروني أو كلمة المرور"),
       actions: <Widget>[
-        FlatButton(child: Text("حسناً"),onPressed: (){
+          FlatButton(child: Text("حسناً"),onPressed: (){
           Navigator.of(context).pop();
         },)
       ],
     )
   );
- 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /////////////////////////////////////////////
-  int _index = 2;
   @required VoidCallback onPressed;
+  
   _LoginTabState({this.onPressed});
   @override
+  
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
