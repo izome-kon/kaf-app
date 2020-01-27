@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addYourNeed" : MessageLookupByLibrary.simpleMessage("Add your need"),
     "ago" : MessageLookupByLibrary.simpleMessage("ago"),
     "allTimaing" : MessageLookupByLibrary.simpleMessage("All Timing"),
-    "areYouNew" : MessageLookupByLibrary.simpleMessage("Are you new?"),
+    "areYouNew" : MessageLookupByLibrary.simpleMessage("Are you new?  "),
     "availability" : MessageLookupByLibrary.simpleMessage("Availability"),
     "availableAnyDay" : MessageLookupByLibrary.simpleMessage("Available Any Day"),
     "availableComingWeekend" : MessageLookupByLibrary.simpleMessage("Available coming weekend"),

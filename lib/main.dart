@@ -30,7 +30,7 @@ class _AppState extends State<App> {
   void initState(){
   super.initState();
   _sprcificLocalizationDelegate =
-  SprcificLocalizationDelegate(new Locale("en"));
+  SprcificLocalizationDelegate(new Locale("ar"));
   }
 
   SprcificLocalizationDelegate _sprcificLocalizationDelegate;

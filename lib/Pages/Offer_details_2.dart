@@ -17,8 +17,9 @@ class _offer_details_2State extends State<offer_details_2> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    taken=false;
+    taken = false;
   }
+
   @override
   Widget build(BuildContext context) {
     clinic = new Clinic();
@@ -29,38 +30,43 @@ class _offer_details_2State extends State<offer_details_2> {
       child: Stack(
         children: <Widget>[
           Scaffold(
-            
             body: CustomScrollView(
-            slivers: <Widget>[
-             SliverAppBar(
-               backgroundColor: Theme.of(context).primaryColor,
-               pinned: true,
-               expandedHeight:160 ,
-               elevation: 20,
-               leading: IconButton(
-                 onPressed: (){
-                   Navigator.pop(context);
-                 },
-                 icon: Icon(Icons.arrow_back,color: Colors.white,),
-               ),
-               flexibleSpace: FlexibleSpaceBar(
-                 background: Stack(
-                   fit: StackFit.expand,
-                   
-                   children: <Widget>[
-                     Image.asset("assets/clinicBG.png",fit: BoxFit.cover,),
-                     Image.asset("assets/BGevelution.png",fit: BoxFit.cover),
-                   ],
-                 ),
-                 title: Text(clinic.clinc_name),
-                 centerTitle: true,
-               ),
-             ),
-            SliverFillRemaining(
-              child: cardo(clinic),
-            )
-            ],
-          ),
+              slivers: <Widget>[
+                SliverAppBar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  pinned: true,
+                  expandedHeight: 160,
+                  elevation: 20,
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                  ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/clinicBG.png",
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset("assets/BGevelution.png",
+                            fit: BoxFit.cover),
+                      ],
+                    ),
+                    title: Text(clinic.clinc_name),
+                    centerTitle: true,
+                  ),
+                ),
+                SliverFillRemaining(
+                  child: cardo(clinic),
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -69,80 +75,91 @@ class _offer_details_2State extends State<offer_details_2> {
 
   Widget cardo(Clinic clinic) {
     return ListView(
-          shrinkWrap: true,
+        shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        children: <Widget>[ 
-          Container(    
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width - 40,
-        child: Column(
-          children: <Widget>[
-            header_info(clinic),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Doctor_details(),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 12.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(
-                    Icons.location_on,
-                    color: Colors.grey,
-                    size: 15,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width - 40,
+            child: Column(
+              children: <Widget>[
+                header_info(clinic),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Doctor_details(),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 12.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                        color: Colors.grey,
+                        size: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3.0),
+                        child: Text(
+                          "92/6, 3rd Floor, Outer Ring Road, Jeddah",
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
-                    child: Text("92/6, 3rd Floor, Outer Ring Road, Jeddah",style: TextStyle(fontSize: 10),),
-                  )
-                ],
-              ),
+                ),
+                Map_location(),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                conditions_card(),
+                FlatButton(
+                  shape: taken
+                      ? null
+                      : new RoundedRectangleBorder(
+                          side: BorderSide(
+                              color: Theme.of(context).primaryColor, width: 2),
+                          borderRadius: new BorderRadius.circular(18.0)),
+                  color: Colors.white,
+                  disabledColor: Colors.grey,
+                  onPressed: taken
+                      ? null
+                      : () {
+                          setState(() {
+                            taken = true;
+                          });
+                        },
+                  child: Text(
+                      taken
+                          ? "Taked !"
+                          : AppLocalizations.of(context).takeThisOffer,
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: taken
+                              ? Colors.white
+                              : Theme.of(context).primaryColor)),
+                )
+              ],
             ),
-            Map_location(),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            conditions_card(),
-            FlatButton(
-              shape: taken?null:new RoundedRectangleBorder(
-                  side: BorderSide(color: Theme.of(context).primaryColor,width: 2),
-                  borderRadius: new BorderRadius.circular(18.0)),
-              color: Colors.white,
-              disabledColor: Colors.grey,
-              onPressed:taken?null: () {
-                setState(() {
-                  taken=true;
-                });
-              },
-              
-              child: Text(taken?"Taked !":AppLocalizations.of(context).takeThisOffer,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                      color: taken?Colors.white:Theme.of(context).primaryColor)),
-            )
-          ],
-        ),
-      ),
-      ]
-    );
+          ),
+        ]);
   }
 
   Widget conditions_card() {
@@ -150,7 +167,6 @@ class _offer_details_2State extends State<offer_details_2> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        
         Text(
           AppLocalizations.of(context).conditionForAbtaining,
           style: TextStyle(
@@ -158,7 +174,6 @@ class _offer_details_2State extends State<offer_details_2> {
               color: Theme.of(context).accentColor,
               wordSpacing: 2),
         ),
-      
         Container(
           width: MediaQuery.of(context).size.width - 60,
           height: 100,
@@ -171,12 +186,10 @@ class _offer_details_2State extends State<offer_details_2> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                
                 Text(
                   "- Exceded 8 years.",
                   style: TextStyle(fontSize: 15, color: Colors.grey),
                 ),
-               
                 Row(
                   children: <Widget>[
                     Text(
@@ -185,7 +198,8 @@ class _offer_details_2State extends State<offer_details_2> {
                     ),
                     Text(
                       "not responsable",
-                      style: TextStyle(fontSize: 15, color: Theme.of(context).accentColor),
+                      style: TextStyle(
+                          fontSize: 15, color: Theme.of(context).accentColor),
                     ),
                     Text(
                       " for ",
@@ -196,7 +210,6 @@ class _offer_details_2State extends State<offer_details_2> {
                     )
                   ],
                 ),
-                
                 Text(
                   " any improper of clinics.",
                   style: TextStyle(
@@ -208,16 +221,21 @@ class _offer_details_2State extends State<offer_details_2> {
             ),
           ),
         ),
-   
         Row(
-          
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          Checkbox(onChanged: (T){},
-          value: true,
-
-          ),
-          Text("i accept these terms",style: TextStyle(fontSize: 15,color: Colors.black87,)),
-        ],)
+            Checkbox(
+              onChanged: (T) {},
+              value: true,
+            ),
+            Text("i accept these terms",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.black87,
+                )),
+          ],
+        )
       ],
     );
   }
@@ -245,75 +263,77 @@ class _offer_details_2State extends State<offer_details_2> {
     return Container(
       height: 80,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: new AssetImage("assets/Doctor.png"),
-                    fit: BoxFit.cover,
-                  ),
-                )),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Dr. Mahmoud Metwali",
-                    style: TextStyle(
-                        color: Color.fromRGBO(35, 49, 66, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "B.Sc,MD - Cadiology",
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                  Text(
-                    "Advisory",
-                    style: TextStyle(
-                        color: Color.fromRGBO(35, 49, 66, 1), fontSize: 16),
-                  )
-                ],
-              ),
-            ],
-          ),
-          Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Container(
-              height: 25,
-              child: FlatButton(
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(18.0)),
-                color: Theme.of(context).primaryColor,
-                onPressed: () {},
-                child: Text(AppLocalizations.of(context).moreDetails,
-                    style: TextStyle(
-                        fontSize: 13.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-              ),
+          Container(
+            child: Row(
+              children: <Widget>[
+                Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: new AssetImage("assets/Doctor.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Dr. Mahmoud Metwali",
+                          style: TextStyle(
+                              color: Color.fromRGBO(35, 49, 66, 1),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "B.Sc,MD - Cadiology",
+                          style: TextStyle(color: Colors.grey, fontSize: 12),
+                        ),
+                        Text(
+                          "Advisory",
+                          style: TextStyle(
+                              color: Color.fromRGBO(35, 49, 66, 1),
+                              fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
-          )
+          ),
+          Container(
+            height: 25,
+            child: FlatButton(
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(18.0)),
+              color: Theme.of(context).primaryColor,
+              onPressed: () {},
+              child: Text(AppLocalizations.of(context).moreDetails,
+                  style: TextStyle(
+                      fontSize: 13.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Padding header_info(Clinic clinic) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 17.0, top: 15.0),
-        child: Row(
+  Widget header_info(Clinic clinic) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -347,7 +367,6 @@ class _offer_details_2State extends State<offer_details_2> {
                         ))
               ],
             ),
-            Spacer(),
             Column(
               children: <Widget>[
                 Row(
@@ -377,10 +396,12 @@ class _offer_details_2State extends State<offer_details_2> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text(AppLocalizations.of(context).price+"           ",
+                          Text(
+                              AppLocalizations.of(context).price +
+                                  "           ",
                               style: TextStyle(fontSize: 12)),
                           Text(
-                            "500"+AppLocalizations.of(context).sr,
+                            "500" + AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
@@ -389,8 +410,10 @@ class _offer_details_2State extends State<offer_details_2> {
                       ),
                       Center(
                         child: Text(
-                          "125 "+AppLocalizations.of(context).sr,
-                          style: TextStyle(fontSize: 25, color: Theme.of(context).accentColor),
+                          "125 " + AppLocalizations.of(context).sr,
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Theme.of(context).accentColor),
                         ),
                       )
                     ],
@@ -399,6 +422,6 @@ class _offer_details_2State extends State<offer_details_2> {
               ],
             )
           ],
-        ));
+        );
   }
 }

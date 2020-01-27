@@ -110,7 +110,7 @@ class _SignUpTabState extends State<SignUpTab> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                      padding: const EdgeInsets.only(top: 30.0),
+                      padding: const EdgeInsets.only(top: 20.0),
                       child: CircleAvatar(
                         radius: MediaQuery.of(context).size.height * 0.08,
                         child: Image.asset("assets/Logo.png"),
@@ -152,7 +152,7 @@ class _SignUpTabState extends State<SignUpTab> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: SizedBox(
-                            width: 135,
+                            width: MediaQuery.of(context).size.width*6/20,
                             height: 50,
                             child: FlatButton(
                               shape: new RoundedRectangleBorder(
@@ -170,22 +170,19 @@ class _SignUpTabState extends State<SignUpTab> {
                                   Navigator.pushNamed(context, "/LocationSet");
                               },
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 12.0),
-                                    child: Text(
+                                  Text(
                                         AppLocalizations.of(context).signUp,
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             color: Colors.white)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 8.0),
-                                    child: Icon(
+                                  
+                                  Icon(
                                       Icons.arrow_forward,
                                       color: Colors.white,
                                     ),
-                                  ),
                                 ],
                               ),
                             ),

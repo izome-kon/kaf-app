@@ -147,10 +147,11 @@ class _LoginTabState extends State<LoginTab> {
                                       color: Colors.grey)),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 20.0),
+                              padding: const EdgeInsets.only(top: 10.0),
                               child: SizedBox(
-                                width: 120,
-                                height: 50,
+                                width:
+                                    MediaQuery.of(context).size.width * 5 / 18,
+                                height: MediaQuery.of(context).size.height/17,
                                 child: FlatButton(
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
@@ -167,24 +168,19 @@ class _LoginTabState extends State<LoginTab> {
                                           context, "/LocationSet");
                                   },
                                   child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: <Widget>[
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 12.0),
-                                        child: Text(
-                                            AppLocalizations.of(context).logIn,
-                                            style: TextStyle(
-                                                fontSize: 16.0,
-                                                color: Colors.white)),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 8.0),
-                                        child: Icon(
+                                      Text(AppLocalizations.of(context).logIn,
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              color: Colors.white)),
+                                      
+                                      Icon(
                                           Icons.arrow_forward,
                                           color: Colors.white,
-                                        ),
-                                      ),
+                                        )
                                     ],
                                   ),
                                 ),

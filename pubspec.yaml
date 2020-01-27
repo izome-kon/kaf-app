@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
+  photo_view: ^0.3.1
   flutter_rating: ^0.0.2
   pin_input_text_field: ^2.0.0
   paging: ^0.1.0
