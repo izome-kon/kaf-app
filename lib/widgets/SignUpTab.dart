@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class SignUpTab extends StatefulWidget {
-  @required VoidCallback onPressed;
+  @required
+  VoidCallback onPressed;
   SignUpTab({this.onPressed});
   @override
   _SignUpTabState createState() => _SignUpTabState(onPressed: onPressed);
 }
 
 class _SignUpTabState extends State<SignUpTab> {
-  @required VoidCallback onPressed;
+  SqlHelper sql = new SqlHelper();
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController fullName = TextEditingController();
+
+  wrongUser() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("تنبيه"),
+              content: Text("يرجى التأكد من البريد الالكتروني أو كلمة المرور"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("حسناً"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
+  }
+
+  @required
+  VoidCallback onPressed;
   int _index = 2;
   _SignUpTabState({this.onPressed});
   @override
@@ -59,7 +84,7 @@ class _SignUpTabState extends State<SignUpTab> {
                           topRight: const Radius.circular(40.0))),
                   child: Center(
                       child: Text(
-                   AppLocalizations.of(context).signUp,
+                    AppLocalizations.of(context).signUp,
                     style: TextStyle(
                       fontSize: 27,
                       color: Color.fromRGBO(202, 75, 75, 1),
@@ -72,7 +97,7 @@ class _SignUpTabState extends State<SignUpTab> {
         ),
         Container(
           child: Container(
-            height: MediaQuery.of(context).size.height*0.87,
+            height: MediaQuery.of(context).size.height * 0.87,
             width: MediaQuery.of(context).size.width - 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -87,25 +112,38 @@ class _SignUpTabState extends State<SignUpTab> {
                   Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: CircleAvatar(
-                        radius: MediaQuery.of(context).size.height*0.08,
+                        radius: MediaQuery.of(context).size.height * 0.08,
                         child: Image.asset("assets/Logo.png"),
                       )),
                   new Text(AppLocalizations.of(context).title,
-                      style: TextStyle(color:Theme.of(context).primaryColor, fontSize: 40)),
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 40)),
                   TxtFeild(
-                      txt:AppLocalizations.of(context).fullName,
-                      icon: Icon(Icons.person),
-                      obscure: false),
+                    txt: AppLocalizations.of(context).fullName,
+                    icon: Icon(Icons.person),
+                    obscure: false,
+                    controller: fullName,
+                  ),
                   TxtFeild(
                       txt: AppLocalizations.of(context).userName,
                       icon: Icon(Icons.person),
                       obscure: false),
                   TxtFeild(
-                      txt: AppLocalizations.of(context).email, icon: Icon(Icons.email), obscure: false),
+                    txt: AppLocalizations.of(context).email,
+                    icon: Icon(Icons.email),
+                    obscure: false,
+                    controller: username,
+                  ),
                   TxtFeild(
-                      txt: AppLocalizations.of(context).password, icon: Icon(Icons.lock), obscure: true),
+                    txt: AppLocalizations.of(context).password,
+                    icon: Icon(Icons.lock),
+                    obscure: true,
+                    controller: password,
+                  ),
                   TxtFeild(
-                      txt: AppLocalizations.of(context).phone, icon: Icon(Icons.phone), obscure: false),
+                      txt: AppLocalizations.of(context).phone,
+                      icon: Icon(Icons.phone),
+                      obscure: false),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 4.0),
@@ -122,13 +160,21 @@ class _SignUpTabState extends State<SignUpTab> {
                                       new BorderRadius.circular(25.0)),
                               color: Theme.of(context).primaryColor,
                               onPressed: () {
-                                Navigator.pushNamed(context,"/LocationSet");
+                                sql.register(
+                                    name: fullName.text,
+                                    email: username.text,
+                                    password: password.text);
+                                if (!sql.status)
+                                  wrongUser();
+                                else
+                                  Navigator.pushNamed(context, "/LocationSet");
                               },
                               child: Row(
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(left: 12.0),
-                                    child: Text(AppLocalizations.of(context).signUp,
+                                    child: Text(
+                                        AppLocalizations.of(context).signUp,
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             color: Colors.white)),

@@ -1,59 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class LoginTab extends StatefulWidget {
-  @required VoidCallback onPressed;
+  @required
+  VoidCallback onPressed;
   LoginTab({this.onPressed});
   @override
-  _LoginTabState createState() => _LoginTabState(onPressed:onPressed );
+  _LoginTabState createState() => _LoginTabState(onPressed: onPressed);
 }
 
 class _LoginTabState extends State<LoginTab> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
-
-
-Future _login(String user,String pass) async{
-  if(pass==""||user==""){
-    wrongUser();
-  }else{
-  var url = "http://kaf.ideagroup-sa.com/api/users/login/$user&$pass";
-  var response = await http.post(Uri.encodeFull(url));
-  print(response.statusCode);
-  var data = jsonDecode(response.body);
-  if(data.length==1){
-    print(data[0]['user_name']);
-    }
-  else
-  wrongUser();
+  wrongUser() {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("تنبيه"),
+              content: Text("يرجى التأكد من البريد الالكتروني أو كلمة المرور"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("حسناً"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
   }
-}
 
-wrongUser(){
-  showDialog(
-      context: context,
-    builder: (_)=>AlertDialog(
-      title: Text("تنبيه"),
-      content: Text("يرجى التأكد من البريد الالكتروني أو كلمة المرور"),
-      actions: <Widget>[
-          FlatButton(child: Text("حسناً"),onPressed: (){
-          Navigator.of(context).pop();
-        },)
-      ],
-    )
-  );
-}
-
+  SqlHelper sql = new SqlHelper();
   /////////////////////////////////////////////
-  @required VoidCallback onPressed;
-  
+  @required
+  VoidCallback onPressed;
+
   _LoginTabState({this.onPressed});
   @override
-  
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -67,8 +54,7 @@ wrongUser(){
               Align(
                 alignment: Alignment.bottomRight,
                 child: InkWell(
-                  onTap:onPressed,
-                  
+                  onTap: onPressed,
                   child: Container(
                     width: (MediaQuery.of(context).size.width - 20) / 2,
                     height: 35,
@@ -113,7 +99,7 @@ wrongUser(){
         ),
         Container(
           child: Container(
-            height: MediaQuery.of(context).size.height*0.64,
+            height: MediaQuery.of(context).size.height * 0.64,
             width: MediaQuery.of(context).size.width - 20,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -128,22 +114,23 @@ wrongUser(){
                   Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: CircleAvatar(
-                        radius: MediaQuery.of(context).size.height*0.08,
+                        radius: MediaQuery.of(context).size.height * 0.08,
                         child: Image.asset("assets/Logo.png"),
                       )),
                   new Text(AppLocalizations.of(context).title,
                       style: TextStyle(
                           color: Theme.of(context).primaryColor, fontSize: 40)),
-                  
                   TxtFeild(
-                   controller: username,
+                    controller: username,
                     txt: AppLocalizations.of(context).userName,
                     icon: Icon(Icons.person),
                     obscure: false,
                   ),
                   TxtFeild(
                       controller: password,
-                      txt: AppLocalizations.of(context).password, icon: Icon(Icons.lock), obscure: true),
+                      txt: AppLocalizations.of(context).password,
+                      icon: Icon(Icons.lock),
+                      obscure: true),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -152,7 +139,8 @@ wrongUser(){
                         child: Column(
                           children: <Widget>[
                             InkWell(
-                              child: Text(AppLocalizations.of(context).forgetPassword,
+                              child: Text(
+                                  AppLocalizations.of(context).forgetPassword,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12.0,
@@ -169,17 +157,22 @@ wrongUser(){
                                           new BorderRadius.circular(25.0)),
                                   color: Theme.of(context).primaryColor,
                                   onPressed: () {
-                                    print("testtt"+username.text+password.text);
-
-                                    _login(username.text,password.text);
-                                    //Navigator.pushNamed(context,"/LocationSet");
+                                    sql.login(
+                                        email: username.text,
+                                        password: password.text);
+                                    if (sql.status)
+                                      wrongUser();
+                                    else
+                                      Navigator.pushNamed(
+                                          context, "/LocationSet");
                                   },
                                   child: Row(
                                     children: <Widget>[
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(left: 12.0),
-                                        child: Text(AppLocalizations.of(context).logIn,
+                                        child: Text(
+                                            AppLocalizations.of(context).logIn,
                                             style: TextStyle(
                                                 fontSize: 16.0,
                                                 color: Colors.white)),

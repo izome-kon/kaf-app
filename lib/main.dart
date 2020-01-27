@@ -55,7 +55,7 @@ class _AppState extends State<App> {
     "/Set_location_2":(BuildContext context)=>new Set_location(),
     "/Support":(BuildContext context)=>new Support(),
   },
-  home: ForgetPassword(),
+  home: LogInState(),
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
     fontFamily: "Neo_Sans_Arabic",

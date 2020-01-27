@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/Contents/myAppBar.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -9,8 +10,10 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
+  
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+   
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).resetPassword),
@@ -50,8 +53,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     obscure: false),
               ),
              RaisedButton(
-                              onPressed: () {
-                              },
+                              onPressed: (){},
                               child: Text(
                                 'Reset Password',
                                 style: TextStyle(color: Colors.white,fontSize: 16),
