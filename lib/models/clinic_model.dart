@@ -7,7 +7,7 @@ class Clinic{
   final String clinicPhone;
   final String clinicImgUrl;
   final String clinicName;
-  final double clinicRate;
+  final int clinicRate;
   final Doctor doctor;
 
   Clinic(

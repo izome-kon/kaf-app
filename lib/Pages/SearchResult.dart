@@ -90,7 +90,7 @@ class _SearchResultState extends State<SearchResult> {
                       ],
                     ),
                   ),
-                  RecentCards(),
+                 // RecentCards(),
                 ],
               ),
               Padding(

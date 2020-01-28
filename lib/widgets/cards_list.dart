@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/models/best_deals.dart';
 import 'package:kaf/models/clinic_card.dart';
+import 'package:kaf/models/clinic_model.dart';
+import 'package:kaf/models/doctor_model.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class RecentCards extends StatefulWidget {
-  @override
-  _RecentCardsState createState() => _RecentCardsState();
-}
-
-class _RecentCardsState extends State<RecentCards> {
+class RecentCards extends StatelessWidget {
+  List list;
+  RecentCards(this.list);
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,13 +21,27 @@ class _RecentCardsState extends State<RecentCards> {
           )),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-              child: ListView.builder(
-          itemCount: BestDeals().deals.length,
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+        child: ListView.builder(
+          itemCount: list == null ? 0 : list.length,
           itemBuilder: (BuildContext context, int index) {
-            final ClinicCard card = BestDeals().deals[index];
+            final ClinicCard card = ClinicCard(
+              clinic: Clinic(
+                  clinicName: list[index]['name'],
+                  clinicAddress: list[index]['Address'],
+                  clinicHospitalName: "International Medical Hospital",
+                  clinicID: list[index]['id'],
+                  clinicPhone: list[index]['Phone'],
+                  clinicRate: list[index]['Rate'],
+                  doctor: Doctor(doctorID: 1),
+                  clinicImgUrl: "assets/catering image@2x.png"),
+              isLiked: false,
+              pastPrice: 300,
+              price: 150,
+              youSaved: 150,
+            );
             return Padding(
               padding: const EdgeInsets.all(5),
               child: Container(
@@ -41,18 +54,18 @@ class _RecentCardsState extends State<RecentCards> {
                   children: <Widget>[
                     Image.asset(card.clinic.clinicImgUrl),
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, "/Clinic_info");
                       },
-                                          child: Container(
+                      child: Container(
                         padding: EdgeInsets.only(top: 5, left: 15, right: 15),
                         width: double.infinity,
                         height: 135,
                         decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
                         child: Column(
- 
                           children: <Widget>[
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,9 +75,16 @@ class _RecentCardsState extends State<RecentCards> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Text(card.clinic.clinicName,style: TextStyle(fontSize: 25,color: Theme.of(context).primaryColor),),
+                                        Text(
+                                          card.clinic.clinicName,
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -75,39 +95,49 @@ class _RecentCardsState extends State<RecentCards> {
                                           height: 14,
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 8.0),
-                                          child:
-                                              Text(card.clinic.clinicHospitalName,style: TextStyle(color: Theme.of(context).primaryColor)),
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
+                                          child: Text(
+                                              card.clinic.clinicHospitalName,
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor)),
                                         ),
                                       ],
                                     ),
                                     Row(
-                                      
                                       children: <Widget>[
-                                        Icon(Icons.location_on,size: 20,color: Theme.of(context).accentColor,),
+                                        Icon(
+                                          Icons.location_on,
+                                          size: 20,
+                                          color: Theme.of(context).accentColor,
+                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 3),
-                                          child: Text(card.clinic.clinicAddress,style: TextStyle(color: Theme.of(context).accentColor)),
+                                          padding:
+                                              const EdgeInsets.only(left: 3),
+                                          child: Text(card.clinic.clinicAddress,
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .accentColor)),
                                         ),
                                       ],
                                     ),
                                   ],
                                 ),
                                 IconButton(
-                                  icon: card.isLiked ? Icon(
-                                    MdiIcons.heart,
-                                    size: 35,
-                                    color: Colors.red,
-                                  ):Icon(
-                                    MdiIcons.heartOutline,
-                                    size: 35,
-                                    color: Colors.red,
-                                  ),
+                                  icon: card.isLiked
+                                      ? Icon(
+                                          MdiIcons.heart,
+                                          size: 35,
+                                          color: Colors.red,
+                                        )
+                                      : Icon(
+                                          MdiIcons.heartOutline,
+                                          size: 35,
+                                          color: Colors.red,
+                                        ),
                                   onPressed: () {
-                                    setState(() {
-                             
-                                     card.isLiked = card.isLiked?false:true;
-                                    });
+                                    
                                   },
                                 ),
                               ],
@@ -122,13 +152,18 @@ class _RecentCardsState extends State<RecentCards> {
                                   children: <Widget>[
                                     Row(
                                       children: <Widget>[
-                                        Text(AppLocalizations.of(context).price,style: TextStyle(color: Colors.black45),),
+                                        Text(
+                                          AppLocalizations.of(context).price,
+                                          style:
+                                              TextStyle(color: Colors.black45),
+                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 35),
+                                          padding:
+                                              const EdgeInsets.only(left: 35),
                                           child: Text(
                                             card.pastPrice.toString(),
                                             style: TextStyle(
-                                              color: Colors.black45,
+                                                color: Colors.black45,
                                                 decoration:
                                                     TextDecoration.lineThrough),
                                           ),
@@ -136,24 +171,32 @@ class _RecentCardsState extends State<RecentCards> {
                                       ],
                                     ),
                                     Text(
-                                      card.price.toString() + AppLocalizations.of(context).sr,
-                                      style: TextStyle(fontSize: 25,color: Theme.of(context).accentColor),
+                                      card.price.toString() +
+                                          AppLocalizations.of(context).sr,
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          color: Theme.of(context).accentColor),
                                     )
                                   ],
                                 ),
                                 Container(
-                                    color: Colors.black45, height: 30, width: 0.2),
+                                    color: Colors.black45,
+                                    height: 30,
+                                    width: 0.2),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(AppLocalizations.of(context).rating,style: TextStyle(color: Colors.black45)),
+                                    Text(AppLocalizations.of(context).rating,
+                                        style:
+                                            TextStyle(color: Colors.black45)),
                                     Row(
                                       children: <Widget>[
                                         Text(card.clinic.clinicRate.toString()),
                                         Icon(
                                           MdiIcons.star,
                                           size: 18,
-                                          color: Color.fromRGBO(255, 227, 34, 1),
+                                          color:
+                                              Color.fromRGBO(255, 227, 34, 1),
                                         ),
                                         Text("(500+)")
                                       ],
@@ -170,9 +213,7 @@ class _RecentCardsState extends State<RecentCards> {
                 ),
               ),
             );
-            
           },
-          
         ),
       ),
     ));

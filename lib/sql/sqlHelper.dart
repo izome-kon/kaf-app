@@ -18,52 +18,77 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  login({@required String email,@required String password}) async {
+  login({@required String email, @required String password}) async {
     String url = "$webSite/login";
     final http.Response response = await http
-        .post(url, body: {"email": "$email",
-         "password": "$password"});
+        .post(url, body: {"email": "$email", "password": "$password"});
     status = response.body.contains('error');
     var data = json.decode(response.body);
-    if(status){
+    if (status) {
       print('data : ${data["error"]}');
-    }else{
-    print('data : ${data["token"]}');
-    _save('token', data["token"]);
+    } else {
+      print('data : ${data["token"]}');
+      _save('token', data["token"]);
     }
-
   }
 
-  register({@required String name,@required String email,@required String password}) async {
+  register(
+      {@required String name,
+      @required String email,
+      @required String password}) async {
     String url = "$webSite/register";
     print(url);
-    http.Response response = await http.post(url, body: {
-      "email": "$email",
-      "name": "$name",
-      "password": "$password"
-    });
+    http.Response response = await http.post(url,
+        body: {"email": "$email", "name": "$name", "password": "$password"});
     status = response.body.contains('token');
-   // print('stat :$status');
+    // print('stat :$status');
     var data = json.decode(response.body);
-   // print(data);
-    if(!status){
+    // print(data);
+    if (!status) {
       print('data : ${data["error"]}');
-    }else{
-    print('data : ${data["token"]}');
-    if(data!='null')
-    _save('token', data["token"]);
+    } else {
+      print('data : ${data["token"]}');
+      if (data != 'null') _save('token', data["token"]);
     }
   }
 
-
-  _save(String key,String value)async{
+  _save(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
 
-  _load(String key)async{
+  _load(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.get(key)??0);
+    print(prefs.get(key) ?? 0);
     return prefs.get(key) ?? 0;
   }
+
+  Future <List<dynamic>>getOffers(String country, String city, String hasOffer) async {
+    String url = "http://kaf.ideagroup-sa.com/api/offers";
+    http.Response response = await http.post(url, body: {
+      "Country": "$country",
+      "City": "$city",
+      "hasOffer":"$hasOffer"
+    }
+    );
+    return json.decode(response.body);
+  }
+
+    Future <List<dynamic>>getKnowledge() async {
+    String url = "http://kaf.ideagroup-sa.com/api/knowledge";
+    http.Response response = await http.get(url);
+    return json.decode(response.body);
+  }
+
+  Future <List<dynamic>>getDoctor(int id) async {
+    String url = "http://kaf.ideagroup-sa.com/api/doctor";
+    http.Response response = await http.post(url
+    ,body: {
+      "doctor_id":"$id",
+    }
+    );
+    print(json.decode(response.body));
+    return json.decode(response.body);
+  }
+
 }
