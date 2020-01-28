@@ -3,6 +3,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import '../localizations.dart';
 import 'Doctor_info.dart';
 import 'Offer_details_2.dart';
+
 class Clinic {
   String time;
   bool open;
@@ -48,39 +49,44 @@ class _Clinic_infoState extends State<Clinic_info> {
         Scaffold(
           body: CustomScrollView(
             slivers: <Widget>[
-             SliverAppBar(
-               backgroundColor: Theme.of(context).primaryColor,
-               pinned: true,
-               expandedHeight:160 ,
-               elevation: 20,
-               leading: IconButton(
-                 onPressed: (){
-                   Navigator.pop(context);
-                 },
-                 icon: Icon(Icons.arrow_back,color: Colors.white,),
-               ),
-               flexibleSpace: FlexibleSpaceBar(
-                 background: Stack(
-                   fit: StackFit.expand,
-                   
-                   children: <Widget>[
-                     Image.asset("assets/clinicBG.png",fit: BoxFit.cover,),
-                     Image.asset("assets/BGevelution.png",fit: BoxFit.cover),
-                   ],
-                 ),
-                 title: Text(clinic.clinc_name),
-                 centerTitle: true,
-               ),
-             ),
-            SliverFillRemaining(
-              child: cardo(clinic),
-            )
-            //  SliverFixedExtentList(
-            //    itemExtent: MediaQuery.of(context).size.height,
-            //    delegate: SliverChildListDelegate([
-            //      cardo(clinic),
-            //    ]),
-            //  )
+              SliverAppBar(
+                backgroundColor: Theme.of(context).primaryColor,
+                pinned: true,
+                expandedHeight: 160,
+                elevation: 20,
+                leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Stack(
+                    fit: StackFit.expand,
+                    children: <Widget>[
+                      Image.asset(
+                        "assets/clinicBG.png",
+                        fit: BoxFit.cover,
+                      ),
+                      Image.asset("assets/BGevelution.png", fit: BoxFit.cover),
+                    ],
+                  ),
+                  title: Text(clinic.clinc_name),
+                  centerTitle: true,
+                ),
+              ),
+              SliverFillRemaining(
+                child: cardo(clinic),
+              )
+              //  SliverFixedExtentList(
+              //    itemExtent: MediaQuery.of(context).size.height,
+              //    delegate: SliverChildListDelegate([
+              //      cardo(clinic),
+              //    ]),
+              //  )
             ],
           ),
         )
@@ -90,101 +96,109 @@ class _Clinic_infoState extends State<Clinic_info> {
 
   Widget cardo(Clinic clinic) {
     return ListView(
-          shrinkWrap: true,
+        shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
-        children: <Widget>[ 
-          Container(    
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(15)),
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width - 40,
-        child: Column(
-          children: <Widget>[
-            header_info(clinic),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Timing(clinic),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Doctor_details(),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 12.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Icon(
-                    Icons.location_on,
-                    color: Colors.grey,
-                    size: 15,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(15)),
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width - 40,
+            child: Column(
+              children: <Widget>[
+                header_info(clinic),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Timing(clinic),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Doctor_details(),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 12.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Icon(
+                        Icons.location_on,
+                        color: Colors.grey,
+                        size: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 3.0),
+                        child: Text(
+                          "92/6, 3rd Floor, Outer Ring Road, Jeddah",
+                          style: TextStyle(fontSize: 10),
+                        ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 3.0),
-                    child: Text("92/6, 3rd Floor, Outer Ring Road, Jeddah",style: TextStyle(fontSize: 10),),
-                  )
-                ],
-              ),
+                ),
+                Map_location(),
+                Divider(
+                  height: 2,
+                  endIndent: 20,
+                  indent: 20,
+                  color: Colors.grey,
+                ),
+                Feedback(),
+                FlatButton(
+                  shape: new RoundedRectangleBorder(
+                      side: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 2),
+                      borderRadius: new BorderRadius.circular(18.0)),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => offer_details_2()),
+                    );
+                  },
+                  child: Text(AppLocalizations.of(context).takeThisOffer,
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor)),
+                )
+              ],
             ),
-            Map_location(),
-            Divider(
-              height: 2,
-              endIndent: 20,
-              indent: 20,
-              color: Colors.grey,
-            ),
-            Feedback()
-            ,
-            FlatButton(
-              shape: new RoundedRectangleBorder(
-                  side: BorderSide(color: Theme.of(context).primaryColor,width: 2),
-                  borderRadius: new BorderRadius.circular(18.0)),
-              color: Colors.white,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => offer_details_2()),
-                );
-              },
-              child: Text(AppLocalizations.of(context).takeThisOffer,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor)),
-            )
-          ],
-        ),
-      ),
-      ]
-    );
+          ),
+        ]);
   }
 
-  Widget Feedback(){
+  Widget Feedback() {
     return Center(
       child: Container(
-        width: MediaQuery.of(context).size.width-40,
+        width: MediaQuery.of(context).size.width - 40,
         height: 181,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top:4.0,left: 8.0),
-              child: Align(alignment: Alignment.topLeft,child: Text(AppLocalizations.of(context).feedback,style: TextStyle(color: Colors.grey,fontSize: 10),)),
+              padding: const EdgeInsets.only(top: 4.0, left: 8.0),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    AppLocalizations.of(context).feedback,
+                    style: TextStyle(color: Colors.grey, fontSize: 10),
+                  )),
             ),
             AnyFeed_back("Ahmed", "good .", 3, "just now"),
             Divider(
@@ -199,15 +213,24 @@ class _Clinic_infoState extends State<Clinic_info> {
               indent: 40,
               color: Colors.grey,
             ),
-            Align(alignment: Alignment.center,child: Text(AppLocalizations.of(context).viewAllFeedBack,style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1),fontSize: 11,fontWeight: FontWeight.bold),))
+            Align(
+                alignment: Alignment.center,
+                child: Text(
+                  AppLocalizations.of(context).viewAllFeedBack,
+                  style: TextStyle(
+                      color: Color.fromRGBO(35, 49, 66, 1),
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold),
+                ))
           ],
         ),
       ),
     );
   }
-  Widget AnyFeed_back(String name,String stat , double rate,String time){
+
+  Widget AnyFeed_back(String name, String stat, double rate, String time) {
     return Container(
-      width: MediaQuery.of(context).size.width-40,
+      width: MediaQuery.of(context).size.width - 40,
       height: 60,
       child: Row(
         children: <Widget>[
@@ -241,8 +264,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                   ),
                   Text(
                     stat,
-                    style:
-                    TextStyle(color: Colors.grey, fontSize: 13),
+                    style: TextStyle(color: Colors.grey, fontSize: 13),
                   )
                 ],
               ),
@@ -255,8 +277,7 @@ class _Clinic_infoState extends State<Clinic_info> {
             children: <Widget>[
               Text(
                 time,
-                style:
-                TextStyle(color: Colors.grey, fontSize: 13),
+                style: TextStyle(color: Colors.grey, fontSize: 13),
               ),
               StarRating(
                   rating: rate,
@@ -266,24 +287,24 @@ class _Clinic_infoState extends State<Clinic_info> {
                   starCount: 5,
                   onRatingChanged: (rating) => setState(
                         () {},
-                  ))
+                      ))
             ],
           )
         ],
       ),
     );
   }
+
   Widget Map_location() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
         child: Container(
-          height: MediaQuery.of(context).size.height / 9+5,
+          height: MediaQuery.of(context).size.height / 9 + 5,
           width: MediaQuery.of(context).size.width - 80,
           decoration: BoxDecoration(
               image: DecorationImage(
-                image:
-                new AssetImage("assets/Map.png"),
+                image: new AssetImage("assets/Map.png"),
                 fit: BoxFit.cover,
               ),
               color: Colors.red,
@@ -297,51 +318,56 @@ class _Clinic_infoState extends State<Clinic_info> {
     return Container(
       height: 80,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-                height: 60,
-                width: 60,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: new AssetImage("assets/Doctor.png"),
-                    fit: BoxFit.cover,
-                  ),
-                )),
+          Container(
+            child: Row(
+              children: <Widget>[
+                Container(
+                    height: 60,
+                    width: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: new AssetImage("assets/Doctor.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    )),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Dr. Mahmoud Metwali",
+                          style: TextStyle(
+                              color: Color.fromRGBO(35, 49, 66, 1),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "B.Sc,MD - Cadiology",
+                          style: TextStyle(color: Colors.grey, fontSize: 12),
+                        ),
+                        Text(
+                          "Advisory",
+                          style: TextStyle(
+                              color: Color.fromRGBO(35, 49, 66, 1),
+                              fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Dr. Mahmoud Metwali",
-                    style: TextStyle(
-                        color: Color.fromRGBO(35, 49, 66, 1),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    "B.Sc,MD - Cadiology",
-                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                  ),
-                  Text(
-                    "Advisory",
-                    style:
-                        TextStyle(color: Color.fromRGBO(35, 49, 66, 1), fontSize: 16),
-                  )
-                ],
-              ),
-            ],
-          ),
-          Spacer(),
           Padding(
-            padding: const EdgeInsets.only(right:8.0),
+            padding: const EdgeInsets.only(right: 8.0),
             child: Container(
               height: 25,
               child: FlatButton(
@@ -370,7 +396,7 @@ class _Clinic_infoState extends State<Clinic_info> {
   Row Timing(Clinic clinic) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Container(
             width: (MediaQuery.of(context).size.width - 30) / 3,
@@ -379,34 +405,28 @@ class _Clinic_infoState extends State<Clinic_info> {
               AppLocalizations.of(context).closedToday,
               style: TextStyle(fontSize: 14, color: Colors.red),
             ))),
-        Padding(
-          padding: const EdgeInsets.only(right: 8.0),
-          child: Container(
-              width: (MediaQuery.of(context).size.width - 30) / 3,
-              child: Center(
-                  child: Text(
-                "09:30AM - 08:00PM",
+        Container(
+            width: (MediaQuery.of(context).size.width - 30) / 3,
+            child: Center(
+                child: Text(
+              "09:30AM - 08:00PM",
+              style:
+                  TextStyle(fontSize: 12, color: Color.fromRGBO(35, 49, 66, 1)),
+            ))),
+        Container(
+          height: 25,
+          child: FlatButton(
+            shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(18.0)),
+            color: Theme.of(context).primaryColor,
+            onPressed: () {},
+            child: Text(AppLocalizations.of(context).allTimaing,
                 style: TextStyle(
-                    fontSize: 12, color: Color.fromRGBO(35, 49, 66, 1)),
-              ))),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top:4.0,bottom: 4.0),
-          child: Container(
-            height: 25,
-            child: FlatButton(
-              shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(18.0)),
-              color: Theme.of(context).primaryColor,
-              onPressed: () {},
-              child: Text(AppLocalizations.of(context).allTimaing,
-                  style: TextStyle(
-                      fontSize: 13.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
+                    fontSize: 13.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white)),
           ),
-        )
+        ),
       ],
     );
   }
@@ -478,10 +498,12 @@ class _Clinic_infoState extends State<Clinic_info> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text(AppLocalizations.of(context).price+"           ",
+                          Text(
+                              AppLocalizations.of(context).price +
+                                  "           ",
                               style: TextStyle(fontSize: 12)),
                           Text(
-                            "500 "+AppLocalizations.of(context).sr,
+                            "500 " + AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
@@ -490,7 +512,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                       ),
                       Center(
                         child: Text(
-                          "125 "+AppLocalizations.of(context).sr,
+                          "125 " + AppLocalizations.of(context).sr,
                           style: TextStyle(fontSize: 25, color: Colors.red),
                         ),
                       )
