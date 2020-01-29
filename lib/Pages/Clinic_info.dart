@@ -384,6 +384,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Doctor_info()),
+                    
                   );
                 },
                 child: Text(AppLocalizations.of(context).moreDetails,
