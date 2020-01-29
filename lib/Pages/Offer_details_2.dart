@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:kaf/localizations.dart';
-import 'Clinic_info.dart' as prefix0;
+import 'package:kaf/models/clinic_model.dart' ;
 import 'dart:async';
 import 'clinic_info.dart';
 
@@ -23,9 +23,9 @@ class _offer_details_2State extends State<offer_details_2> {
   @override
   Widget build(BuildContext context) {
     clinic = new Clinic();
-    clinic.clinc_name = "Cardiology Clinic";
-    clinic.hospital_name = "international medical hospital";
-    clinic.rate = 4.0;
+    clinic.clinicName = "Cardiology Clinic";
+    clinic.hospitalName = "international medical hospital";
+    clinic.rate = 4;
     return Material(
       child: Stack(
         children: <Widget>[
@@ -58,7 +58,7 @@ class _offer_details_2State extends State<offer_details_2> {
                             fit: BoxFit.cover),
                       ],
                     ),
-                    title: Text(clinic.clinc_name),
+                    title: Text(clinic.clinicName),
                     centerTitle: true,
                   ),
                 ),
@@ -338,7 +338,7 @@ class _offer_details_2State extends State<offer_details_2> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(clinic.clinc_name,
+                Text(clinic.clinicName,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -351,13 +351,13 @@ class _offer_details_2State extends State<offer_details_2> {
                       size: 30,
                     ),
                     Text(
-                      clinic.hospital_name,
+                      clinic.hospitalName,
                       style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1)),
                     ),
                   ],
                 ),
                 StarRating(
-                    rating: clinic.rate,
+                    rating: clinic.rate.toDouble(),
                     size: 25.0,
                     color: Colors.orange,
                     borderColor: Colors.grey,

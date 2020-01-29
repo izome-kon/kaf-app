@@ -3,9 +3,9 @@ import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 
-class PhotoGallery extends StatelessWidget {
+class PhotoGallery1 extends StatelessWidget {
   PageController page ;
-  PhotoGallery(String s,iList)
+  PhotoGallery1(String s,iList)
   {
     imageList = iList;
     index = imageList.indexOf(s);

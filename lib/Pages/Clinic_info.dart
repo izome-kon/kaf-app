@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:kaf/models/doctor_model.dart';
 import '../localizations.dart';
 import 'Doctor_info.dart';
 import 'Offer_details_2.dart';
+import 'package:kaf/models/clinic_model.dart';
 
-class Clinic {
-  String time;
-  bool open;
-  String clinc_name;
-  String hospital_name;
-  double rate;
-}
 
 class Clinic_info extends StatefulWidget {
   @override
@@ -19,13 +14,24 @@ class Clinic_info extends StatefulWidget {
 
 class _Clinic_infoState extends State<Clinic_info> {
   Clinic clinic;
-
+  Doctor doctor;
   @override
   Widget build(BuildContext context) {
     clinic = new Clinic();
-    clinic.clinc_name = "Cardiology Clinic";
-    clinic.hospital_name = "international medical hospital";
-    clinic.rate = 4.0;
+    doctor = new Doctor();
+    clinic.clinicName = "al hayah Clinic";
+    clinic.hospitalName = "international medical hospital";
+    clinic.rate = 4;
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 0;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
+    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.name = "Dr. Mahmoud Metwali";
+    doctor.field = "B.Sc,MD - Cadiology";
+    doctor.jopTitle = "Advisory";
+    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
     return Stack(
       children: <Widget>[
         Container(
@@ -67,14 +73,14 @@ class _Clinic_infoState extends State<Clinic_info> {
                   background: Stack(
                     fit: StackFit.expand,
                     children: <Widget>[
-                      Image.asset(
-                        "assets/clinicBG.png",
+                      Image.network(
+                        clinic.photo,
                         fit: BoxFit.cover,
                       ),
                       Image.asset("assets/BGevelution.png", fit: BoxFit.cover),
                     ],
                   ),
-                  title: Text(clinic.clinc_name),
+                  title: Text(clinic.clinicName),
                   centerTitle: true,
                 ),
               ),
@@ -142,7 +148,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                       Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          "92/6, 3rd Floor, Outer Ring Road, Jeddah",
+                          clinic.address,
                           style: TextStyle(fontSize: 10),
                         ),
                       )
@@ -330,7 +336,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: new AssetImage("assets/Doctor.png"),
+                        image: new NetworkImage(doctor.profileImage),
                         fit: BoxFit.cover,
                       ),
                     )),
@@ -343,18 +349,18 @@ class _Clinic_infoState extends State<Clinic_info> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Dr. Mahmoud Metwali",
+                          doctor.name,
                           style: TextStyle(
                               color: Color.fromRGBO(35, 49, 66, 1),
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "B.Sc,MD - Cadiology",
+                          doctor.field,
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
                         Text(
-                          "Advisory",
+                          doctor.jopTitle,
                           style: TextStyle(
                               color: Color.fromRGBO(35, 49, 66, 1),
                               fontSize: 16),
@@ -439,7 +445,7 @@ class _Clinic_infoState extends State<Clinic_info> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(clinic.clinc_name,
+                Text(clinic.field,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -452,13 +458,13 @@ class _Clinic_infoState extends State<Clinic_info> {
                       size: 30,
                     ),
                     Text(
-                      clinic.hospital_name,
+                      clinic.hospitalName,
                       style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1)),
                     ),
                   ],
                 ),
                 StarRating(
-                    rating: clinic.rate,
+                    rating: clinic.rate.toDouble(),
                     size: 25.0,
                     color: Colors.orange,
                     borderColor: Colors.grey,
@@ -469,7 +475,13 @@ class _Clinic_infoState extends State<Clinic_info> {
               ],
             ),
             Spacer(),
-            Column(
+            price()
+          ],
+        ));
+  }
+  Widget price (){
+    if(clinic.offer>0){
+      return Column(
               children: <Widget>[
                 Row(
                   children: <Widget>[
@@ -479,7 +491,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                     Container(
                       child: Center(
                           child: Text(
-                        "50%",
+                        clinic.offer.toString() + "%",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )),
                       width: 50,
@@ -503,7 +515,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                                   "           ",
                               style: TextStyle(fontSize: 12)),
                           Text(
-                            "500 " + AppLocalizations.of(context).sr,
+                            clinic.price.toString()+" " + AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 12,
                                 decoration: TextDecoration.lineThrough),
@@ -512,7 +524,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                       ),
                       Center(
                         child: Text(
-                          "125 " + AppLocalizations.of(context).sr,
+                          (clinic.price*(clinic.offer/100)).toString()+" " + AppLocalizations.of(context).sr,
                           style: TextStyle(fontSize: 25, color: Colors.red),
                         ),
                       )
@@ -520,8 +532,36 @@ class _Clinic_infoState extends State<Clinic_info> {
                   ),
                 )
               ],
-            )
-          ],
-        ));
+            );
+    }else{
+      return Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                              AppLocalizations.of(context).price +
+                                  "           ",
+                              style: TextStyle(fontSize: 12)),
+                        
+                        ]
+                      ),
+                      Center(
+                        child: Text(
+                          (clinic.price).toString()+" " + AppLocalizations.of(context).sr+" ",
+                          style: TextStyle(fontSize: 25, color: Colors.red),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            );
+    }
   }
 }

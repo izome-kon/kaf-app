@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
-import 'Clinic_info.dart';
+import 'package:kaf/models/doctor_model.dart';
+import 'package:kaf/models/clinic_model.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'gallery.dart';
 
 class Doctor_info extends StatefulWidget {
   @override
@@ -11,12 +13,30 @@ class Doctor_info extends StatefulWidget {
 
 class _Doctor_infoState extends State<Doctor_info> {
   Clinic clinic;
+  Doctor doctor;
   @override
   Widget build(BuildContext context) {
     clinic = new Clinic();
-    clinic.clinc_name = "Cardiology Clinic";
-    clinic.hospital_name = "international medical hospital";
-    clinic.rate = 4.0;
+    doctor = new Doctor();
+    clinic.clinicName = "al hayah Clinic";
+    clinic.hospitalName = "international medical hospital";
+    clinic.rate = 4;
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 50;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
+    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.yearsOfEperience = 14;
+    doctor.name = "Mahmoud Abo Metwli";
+    doctor.rate = 4.8;
+    doctor.field = "B.Sc.MD-Cardoilogy";
+    doctor.images = new List<String>();
+    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
     return Material(
       child: Stack(
         fit: StackFit.expand,
@@ -37,7 +57,7 @@ class _Doctor_infoState extends State<Doctor_info> {
             ),
           ),
           Image.asset(
-            "assets/DrawerBG.png",
+            "asserts/DrawerBG.png",
             fit: BoxFit.cover,
           ),
           Center(
@@ -108,14 +128,15 @@ class _Doctor_infoState extends State<Doctor_info> {
                                 child: Row(
                                   children: <Widget>[
                                     Text(
-                                      "16",
+                                      doctor.yearsOfEperience.toString(),
                                       style: TextStyle(
                                           color: Color.fromRGBO(35, 49, 66, 1),
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      AppLocalizations.of(context).yearsExperience,
+                                      AppLocalizations.of(context)
+                                          .yearsExperience,
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 12),
                                     )
@@ -133,7 +154,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                                       size: 25,
                                     ),
                                     Text(
-                                      "4.2",
+                                      doctor.rate.toString(),
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 20),
                                     )
@@ -147,7 +168,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                           padding: const EdgeInsets.only(top: 15.0),
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: Text("Mahmoud Abo Metwali",
+                            child: Text(doctor.name,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14,
@@ -158,7 +179,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                           padding: const EdgeInsets.only(top: 2.0),
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: Text("B.Sc,MD - Cadiology",
+                            child: Text(doctor.field,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 12,
@@ -180,7 +201,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                       border: Border.all(width: 5, color: Colors.white),
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: new AssetImage("assets/Doctor.png"),
+                        image: new NetworkImage(doctor.profileImage),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -195,36 +216,89 @@ class _Doctor_infoState extends State<Doctor_info> {
   }
 
   Widget photo_view() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          photo("assets/Mask Group 7@2x.png"),
-          photo("assets/Mask Group 8@2x.png"),
-          photo("assets/Mask Group 9@2x.png"),
-          Container(
-            height: 65,
-            width: 65,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken),
-                image: new AssetImage("assets/Mask Group 7@2x.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                "+7",
-                style: TextStyle(fontSize: 25, color: Colors.white),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+    if (doctor.images.length >= 4) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            photo(doctor.images[0]),
+            photo(doctor.images[1]),
+            photo(doctor.images[2]),
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PhotoGallery1(doctor.images[3], doctor.images)),
+                  );
+                },
+                child: Container(
+                  height: 65,
+                  width: 65,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      colorFilter:
+                          ColorFilter.mode(Colors.grey, BlendMode.darken),
+                      image: new NetworkImage(doctor.images[3]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "+" + (doctor.images.length - 3).toString(),
+                      style: TextStyle(fontSize: 25, color: Colors.white),
+                    ),
+                  ),
+                ))
+          ],
+        ),
+      );
+    } else if (doctor.images.length == 3) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            photo(doctor.images[0]),
+            photo(doctor.images[1]),
+            photo(doctor.images[2]),
+          ],
+        ),
+      );
+    } else if (doctor.images.length == 2) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            photo(doctor.images[0]),
+            photo(doctor.images[1]),
+          ],
+        ),
+      );
+    } else if (doctor.images.length == 1){
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            photo(doctor.images[0]),
+          ],
+        ),
+      );
+    }else {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+      
+      );
+    }
   }
 
   Widget cardo(Clinic clinic) {
@@ -265,7 +339,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                   Padding(
                     padding: const EdgeInsets.only(top: 3.0),
                     child: Text(
-                      "92/6, 3rd Floor, Outer Ring Road, Jeddah",
+                      clinic.address,
                       style: TextStyle(fontSize: 10),
                     ),
                   )
@@ -493,7 +567,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(clinic.clinc_name,
+                    Text(clinic.clinicName,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
@@ -506,7 +580,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                           size: 20,
                         ),
                         Text(
-                          clinic.hospital_name,
+                          clinic.hospitalName,
                           style: TextStyle(
                               color: Color.fromRGBO(35, 49, 66, 1),
                               fontSize: 10),
@@ -514,7 +588,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                       ],
                     ),
                     StarRating(
-                        rating: clinic.rate,
+                        rating: clinic.rate.toDouble(),
                         size: 20.0,
                         color: Colors.orange,
                         borderColor: Colors.grey,
@@ -526,7 +600,16 @@ class _Doctor_infoState extends State<Doctor_info> {
                 ),
               ),
               Spacer(),
-              Column(
+              price()
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget price(){
+    if(clinic.offer>0){
+      return Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -536,7 +619,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                       Container(
                         child: Center(
                             child: Text(
-                          "50%",
+                          clinic.offer.toString() + "%",
                           style: TextStyle(color: Colors.white, fontSize: 12),
                         )),
                         width: 40,
@@ -555,9 +638,10 @@ class _Doctor_infoState extends State<Doctor_info> {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text(AppLocalizations.of(context).price+"    ", style: TextStyle(fontSize: 8)),
+                            Text(AppLocalizations.of(context).price + "    ",
+                                style: TextStyle(fontSize: 8)),
                             Text(
-                              "500 "+AppLocalizations.of(context).sr,
+                              clinic.price.toString()+" " + AppLocalizations.of(context).sr,
                               style: TextStyle(
                                   fontSize: 8,
                                   decoration: TextDecoration.lineThrough),
@@ -566,7 +650,7 @@ class _Doctor_infoState extends State<Doctor_info> {
                         ),
                         Center(
                           child: Text(
-                            "125 "+AppLocalizations.of(context).sr,
+                            (clinic.price*(clinic.offer/100)).toString()+" " + AppLocalizations.of(context).sr,
                             style: TextStyle(
                                 fontSize: 17,
                                 color: Theme.of(context).accentColor),
@@ -576,23 +660,53 @@ class _Doctor_infoState extends State<Doctor_info> {
                     ),
                   )
                 ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              );
+    }else {
+      return Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Text(AppLocalizations.of(context).price + "    ",
+                                style: TextStyle(fontSize: 8)),
+                          ],
+                        ),
+                        Center(
+                          child: Text(
+                            (clinic.price).toString()+" " + AppLocalizations.of(context).sr+" ",
+                          style: TextStyle(
+                                fontSize: 17,
+                                color: Theme.of(context).accentColor),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              );
+    }
   }
-
   Widget photo(String path) {
-    return Container(
-      height: 65,
-      width: 65,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: new AssetImage(path),
-          fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => PhotoGallery1(path, doctor.images)),
+        );
+      },
+      child: Container(
+        height: 65,
+        width: 65,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            image: new NetworkImage(path),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
