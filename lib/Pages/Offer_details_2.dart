@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:kaf/localizations.dart';
-import 'Clinic_info.dart' as prefix0;
+import 'package:kaf/models/clinic_model.dart';
 import 'dart:async';
-import 'clinic_info.dart';
-
+import 'package:kaf/Pages/Offer_Details.dart';
+import 'package:kaf/models/doctor_model.dart';
 class offer_details_2 extends StatefulWidget {
   @override
   _offer_details_2State createState() => _offer_details_2State();
@@ -12,6 +12,7 @@ class offer_details_2 extends StatefulWidget {
 
 class _offer_details_2State extends State<offer_details_2> {
   Clinic clinic;
+  Doctor doctor;
   bool taken;
   @override
   void initState() {
@@ -23,9 +24,21 @@ class _offer_details_2State extends State<offer_details_2> {
   @override
   Widget build(BuildContext context) {
     clinic = new Clinic();
-    clinic.clinc_name = "Cardiology Clinic";
-    clinic.hospital_name = "international medical hospital";
-    clinic.rate = 4.0;
+    doctor = new Doctor();
+    clinic.clinicName = "al hayah Clinic";
+    clinic.hospitalName = "international medical hospital";
+    clinic.rate = 4;
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 50;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
+    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.name = "Dr. Mahmoud Metwali";
+    doctor.field = "B.Sc,MD - Cadiology";
+    doctor.jopTitle = "Advisory";
+    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
+    
     return Material(
       child: Stack(
         children: <Widget>[
@@ -50,15 +63,15 @@ class _offer_details_2State extends State<offer_details_2> {
                     background: Stack(
                       fit: StackFit.expand,
                       children: <Widget>[
-                        Image.asset(
-                          "assets/clinicBG.png",
+                        Image.network(
+                          clinic.photo,
                           fit: BoxFit.cover,
                         ),
                         Image.asset("assets/BGevelution.png",
                             fit: BoxFit.cover),
                       ],
                     ),
-                    title: Text(clinic.clinc_name),
+                    title: Text(clinic.clinicName),
                     centerTitle: true,
                   ),
                 ),
@@ -114,7 +127,7 @@ class _offer_details_2State extends State<offer_details_2> {
                       Padding(
                         padding: const EdgeInsets.only(top: 3.0),
                         child: Text(
-                          "92/6, 3rd Floor, Outer Ring Road, Jeddah",
+                          clinic.address,
                           style: TextStyle(fontSize: 10),
                         ),
                       )
@@ -142,6 +155,11 @@ class _offer_details_2State extends State<offer_details_2> {
                       ? null
                       : () {
                           setState(() {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => offer_details()),
+                            );
                             taken = true;
                           });
                         },
@@ -275,7 +293,7 @@ class _offer_details_2State extends State<offer_details_2> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: new AssetImage("assets/Doctor.png"),
+                        image: new NetworkImage(doctor.profileImage),
                         fit: BoxFit.cover,
                       ),
                     )),
@@ -288,18 +306,18 @@ class _offer_details_2State extends State<offer_details_2> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Dr. Mahmoud Metwali",
+                          doctor.name,
                           style: TextStyle(
                               color: Color.fromRGBO(35, 49, 66, 1),
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          "B.Sc,MD - Cadiology",
+                          doctor.field,
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
                         Text(
-                          "Advisory",
+                          doctor.jopTitle,
                           style: TextStyle(
                               color: Color.fromRGBO(35, 49, 66, 1),
                               fontSize: 16),
@@ -334,94 +352,91 @@ class _offer_details_2State extends State<offer_details_2> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Text(clinic.clinicName,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Color.fromRGBO(35, 49, 66, 1))),
+            Row(
               children: <Widget>[
-                Text(clinic.clinc_name,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Color.fromRGBO(35, 49, 66, 1))),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.location_city,
-                      color: Theme.of(context).accentColor,
-                      size: 30,
-                    ),
-                    Text(
-                      clinic.hospital_name,
-                      style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1)),
-                    ),
-                  ],
+                Icon(
+                  Icons.location_city,
+                  color: Theme.of(context).accentColor,
+                  size: 30,
                 ),
-                StarRating(
-                    rating: clinic.rate,
-                    size: 25.0,
-                    color: Colors.orange,
-                    borderColor: Colors.grey,
-                    starCount: 5,
-                    onRatingChanged: (rating) => setState(
-                          () {},
-                        ))
+                Text(
+                  clinic.hospitalName,
+                  style: TextStyle(color: Color.fromRGBO(35, 49, 66, 1)),
+                ),
               ],
             ),
-            Column(
+            StarRating(
+                rating: clinic.rate.toDouble(),
+                size: 25.0,
+                color: Colors.orange,
+                borderColor: Colors.grey,
+                starCount: 5,
+                onRatingChanged: (rating) => setState(
+                      () {},
+                    ))
+          ],
+        ),
+        Column(
+          children: <Widget>[
+            Row(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width / 5,
-                    ),
-                    Container(
-                      child: Center(
-                          child: Text(
-                        "50%",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      )),
-                      width: 50,
-                      height: 25,
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(201, 71, 71, 1),
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25),
-                              bottomLeft: Radius.circular(25))),
-                    ),
-                  ],
+                Container(
+                  width: MediaQuery.of(context).size.width / 5,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+                Container(
+                  child: Center(
+                      child: Text(
+                    clinic.offer.toString()+"%",
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  )),
+                  width: 50,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      color: Color.fromRGBO(201, 71, 71, 1),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(25),
+                          bottomLeft: Radius.circular(25))),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          Text(
-                              AppLocalizations.of(context).price +
-                                  "           ",
-                              style: TextStyle(fontSize: 12)),
-                          Text(
-                            "500" + AppLocalizations.of(context).sr,
-                            style: TextStyle(
-                                fontSize: 12,
-                                decoration: TextDecoration.lineThrough),
-                          )
-                        ],
-                      ),
-                      Center(
-                        child: Text(
-                          "125 " + AppLocalizations.of(context).sr,
-                          style: TextStyle(
-                              fontSize: 25,
-                              color: Theme.of(context).accentColor),
-                        ),
+                      Text(AppLocalizations.of(context).price + "           ",
+                          style: TextStyle(fontSize: 12)),
+                      Text(
+                        clinic.price.toString() + AppLocalizations.of(context).sr,
+                        style: TextStyle(
+                            fontSize: 12,
+                            decoration: TextDecoration.lineThrough),
                       )
                     ],
                   ),
-                )
-              ],
+                  Center(
+                    child: Text(
+                     (clinic.price*(clinic.offer/100)).toString()+" " + AppLocalizations.of(context).sr,
+                      style: TextStyle(
+                          fontSize: 25, color: Theme.of(context).accentColor),
+                    ),
+                  )
+                ],
+              ),
             )
           ],
-        );
+        )
+      ],
+    );
   }
 }

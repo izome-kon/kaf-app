@@ -13,13 +13,11 @@ class BestDeals{
   for (var item in list) {
     deals.add(ClinicCard(clinic: Clinic(
        clinicName: item['name'],
-      clinicAddress:item['Address'],
-      clinicHospitalName: "International Medical Hospital",
-      clinicID: item['id'],
-      clinicPhone: item['Phone'],
-      clinicRate: item['Rate'],
-      doctor: Doctor(doctorID:1),
-      clinicImgUrl: "assets/catering image@2x.png"
+      address:item['Address'],
+      hospitalName: "International Medical Hospital",
+      iD: item['id'],
+      rate: item['Rate'],
+      photo: "assets/catering image@2x.png"
     ),
     isLiked: false,
     pastPrice: 300,

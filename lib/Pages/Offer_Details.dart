@@ -1,14 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Clinic_info.dart';
+import 'package:kaf/models/clinic_model.dart';
 class offer_details extends StatefulWidget {
   @override
   _offer_detailsState createState() => _offer_detailsState();
 }
 
 class _offer_detailsState extends State<offer_details> {
+  
+  Clinic clinic;
   @override
   Widget build(BuildContext context) {
+    clinic = new Clinic();
+    clinic.clinicName = "al hayah Clinic";
+    clinic.hospitalName = "international medical hospital";
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 30;
+    clinic.price = 500;
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
@@ -116,7 +125,7 @@ class _offer_detailsState extends State<offer_details> {
                       border: Border.all(width: 5, color: Colors.white),
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: new AssetImage("assets/pics/background.jpeg"),
+                        image: new NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRO4tOLoCpCEaarwQ9T0yKcWdmlybvZBGFOT95bh6SEwOnkDrZ3"),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -135,7 +144,7 @@ class _offer_detailsState extends State<offer_details> {
       padding: const EdgeInsets.only(top: 20.0),
       child: Container(
         width: MediaQuery.of(context).size.width - 20,
-        height: 240,
+        height: 270,
         color: Colors.grey.withOpacity(0),
         child: Column(
           children: <Widget>[
@@ -158,7 +167,7 @@ class _offer_detailsState extends State<offer_details> {
             ),
             Container(
                 width: MediaQuery.of(context).size.width - 20,
-                height: 190,
+                height: 200,
                 child: Material(
                   color: Colors.white,
                   elevation: 20.0,
@@ -185,7 +194,7 @@ class _offer_detailsState extends State<offer_details> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text("El kholy Clinic",
+                                  Text(clinic.clinicName,
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
@@ -199,7 +208,7 @@ class _offer_detailsState extends State<offer_details> {
                                         size: 30,
                                       ),
                                       Text(
-                                        " International Medical Hospital",
+                                        clinic.hospitalName,
                                         style: TextStyle(
                                             color:
                                                 Color.fromRGBO(35, 49, 66, 1)),
@@ -244,12 +253,12 @@ class _offer_detailsState extends State<offer_details> {
                               Row(
                                 children: <Widget>[
                                   Text("Price           ",style: TextStyle(fontSize: 12)),
-                                  Text("500 SR",style: TextStyle(fontSize: 12,decoration:TextDecoration.lineThrough),)
+                                  Text(clinic.price.toString()+" SR",style: TextStyle(fontSize: 12,decoration:TextDecoration.lineThrough),)
                                 ],
                               ),
                               Center(
                                 child:Text(
-                                  "125 SR",
+                                  (clinic.price*(clinic.offer/100)).toString()+" SR",
                                   style: TextStyle(fontSize: 30, color: Colors.red),
                                 ) ,
                               )

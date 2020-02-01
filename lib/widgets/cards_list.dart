@@ -30,13 +30,11 @@ class RecentCards extends StatelessWidget {
             final ClinicCard card = ClinicCard(
               clinic: Clinic(
                   clinicName: list[index]['name'],
-                  clinicAddress: list[index]['Address'],
-                  clinicHospitalName: "International Medical Hospital",
-                  clinicID: list[index]['id'],
-                  clinicPhone: list[index]['Phone'],
-                  clinicRate: list[index]['Rate'],
-                  doctor: Doctor(doctorID: 1),
-                  clinicImgUrl: "assets/catering image@2x.png"),
+                  address: list[index]['Address'],
+                  hospitalName: "International Medical Hospital",
+                  iD: list[index]['id'],
+                  rate: list[index]['Rate'],
+                  photo: "assets/catering image@2x.png"),
               isLiked: false,
               pastPrice: 300,
               price: 150,
@@ -52,7 +50,7 @@ class RecentCards extends StatelessWidget {
                   overflow: Overflow.clip,
                   alignment: Alignment.bottomCenter,
                   children: <Widget>[
-                    Image.asset(card.clinic.clinicImgUrl),
+                    Image.asset(card.clinic.photo),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, "/Clinic_info");
@@ -98,7 +96,7 @@ class RecentCards extends StatelessWidget {
                                           padding:
                                               const EdgeInsets.only(left: 8.0),
                                           child: Text(
-                                              card.clinic.clinicHospitalName,
+                                              card.clinic.hospitalName,
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .primaryColor)),
@@ -115,7 +113,7 @@ class RecentCards extends StatelessWidget {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(left: 3),
-                                          child: Text(card.clinic.clinicAddress,
+                                          child: Text(card.clinic.address,
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .accentColor)),
@@ -191,7 +189,7 @@ class RecentCards extends StatelessWidget {
                                             TextStyle(color: Colors.black45)),
                                     Row(
                                       children: <Widget>[
-                                        Text(card.clinic.clinicRate.toString()),
+                                        Text(card.clinic.rate.toString()),
                                         Icon(
                                           MdiIcons.star,
                                           size: 18,
