@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:kaf/Pages/SearchResult.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/sql/sqlHelper.dart';
   Widget containe(String search,String label,BuildContext context)
   {
-    final TextEditingController control = new TextEditingController();
+     TextEditingController control = new TextEditingController();
     return SingleChildScrollView(
-      
           child: Center(
         child: new Container(
             width: double.infinity,
@@ -24,7 +27,7 @@ import 'package:kaf/localizations.dart';
                       children: <Widget>[
                         new Text(search,style: TextStyle(color: Colors.white,fontSize: 35),),
                         Container(
-                          width: 450,
+                          width: MediaQuery.of(context).size.width*0.9,
                           child: new TextField(
                             decoration: InputDecoration(
                                 contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -41,7 +44,12 @@ import 'package:kaf/localizations.dart';
                         Container(
                           width: 150,
                           child: new RaisedButton(onPressed:(){
-                            Navigator.pushNamed(context, "/SearchResult");
+                          Future<List<dynamic>> resList = SqlHelper().search(control.text);
+                          
+                          Navigator.push(context,  MaterialPageRoute(
+                          builder: (context) => SearchResult(keyWord:control.text,resultList: resList,)
+                          )
+                          );
                           },
                               color: Color.fromRGBO(250, 207, 90, 1),
                               child: new Text(AppLocalizations.of(context).search,style: TextStyle(color: Colors.black,fontSize: 15),),

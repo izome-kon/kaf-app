@@ -151,36 +151,39 @@ class _LoginTabState extends State<LoginTab> {
                               child: SizedBox(
                                 width:
                                     MediaQuery.of(context).size.width * 5 / 18,
-                                height: MediaQuery.of(context).size.height/17,
+                                height: MediaQuery.of(context).size.height / 17,
                                 child: FlatButton(
                                   shape: new RoundedRectangleBorder(
                                       borderRadius:
                                           new BorderRadius.circular(25.0)),
                                   color: Theme.of(context).primaryColor,
-                                  onPressed: () {
-                                    sql.login(
-                                        email: username.text,
-                                        password: password.text);
-                                    if (sql.status)
-                                      wrongUser();
-                                    else
-                                      Navigator.pushNamed(
-                                          context, "/LocationSet");
+                                  onPressed: (){
+                                    SqlHelper.login(
+                                            email: username.text,
+                                            password: password.text)
+                                            
+                                        .then((v) {
+                                      if (!SqlHelper.status)
+                                        wrongUser();
+                                      else
+                                        Navigator.pushNamed(
+                                            context, "/LocationSet");
+                                    });
                                   },
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: <Widget>[
                                       Text(AppLocalizations.of(context).logIn,
                                           style: TextStyle(
                                               fontSize: 16.0,
                                               color: Colors.white)),
-                                      
                                       Icon(
-                                          Icons.arrow_forward,
-                                          color: Colors.white,
-                                        )
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      )
                                     ],
                                   ),
                                 ),

@@ -6,9 +6,7 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/AppDrawer.dart';
-import 'package:kaf/widgets/Drawer_Button.dart';
 import 'package:kaf/widgets/cards_list.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -52,7 +50,6 @@ class _HomePageState extends State<HomePage> {
                   FutureBuilder<List>(
                     future: SqlHelper().getOffers('1', '1', '1'),
                     builder: (context,snapshot){
-                      
                       if(snapshot.hasError) print(snapshot.error);
                       return snapshot.hasData? RecentCards(snapshot.data)
                       :new Center(child: new CircularProgressIndicator(),);
@@ -97,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                  FutureBuilder<List>(
-
+                   
                     future: SqlHelper().getKnowledge(),
                     builder: (context,snapshot){
                       if(snapshot.hasError) print(snapshot.error);

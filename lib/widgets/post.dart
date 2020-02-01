@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/models/post_model.dart';
 
 class Post extends StatelessWidget {
   bool liked = false;
+  final PostModel postModel;
+  String imgPaths = "http://Kaf.ideagroup-sa.com/storage/app/public/posts/";
+  Post({this.postModel});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,7 +32,7 @@ class Post extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
-                                "Mahmoud Mohamed",
+                                postModel.user.name,
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 15),
@@ -40,7 +44,7 @@ class Post extends StatelessWidget {
                                     size: 15,
                                   ),
                                   Text(
-                                    "  Riyadh",
+                                    postModel.location,
                                     style: TextStyle(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 10),
@@ -71,7 +75,7 @@ class Post extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Text(
-                        "I need a blood donation",
+                        postModel.text,
                         style:
                         TextStyle(color: Theme.of(context).primaryColor),
                       )
@@ -82,12 +86,12 @@ class Post extends StatelessWidget {
             ),
           ],
         ),
-        Image.asset("assets/blood.png"),
+        Image.network("$imgPaths"+postModel.imageUrl,fit: BoxFit.cover,height: 250,width: MediaQuery.of(context).size.width,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
-              children: <Widget>[Icon(Icons.access_time), Text("6m "+AppLocalizations.of(context).ago)],
+              children: <Widget>[Icon(Icons.access_time), Text(postModel.time)],
             ),
             RaisedButton(
               onPressed: () {

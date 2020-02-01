@@ -4,7 +4,6 @@ import 'package:kaf/Pages/ActivePhone.dart';
 import 'package:kaf/Pages/AddyourNeed.dart';
 import 'package:kaf/Pages/Clinic_info.dart';
 import 'package:kaf/Pages/Doctor_info.dart';
-import 'package:kaf/Pages/ForgetPassword.dart';
 import 'package:kaf/Pages/Help.dart';
 import 'package:kaf/Pages/HomePage.dart';
 import 'package:kaf/Pages/LocationSet.dart';
@@ -17,24 +16,44 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/Pages/login.dart';
 import 'package:kaf/Pages/login_signin.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/sql/test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() => runApp(App());
 
 class App extends StatefulWidget {
+ static getAppLanguage(){
+    return _AppState.appLanguage;
+  }
+   setAppLanguage(){
+   
+  }
+  
   @override
   _AppState createState() => _AppState();
 }
 
 class _AppState extends State<App> {
+  static String appLanguage ; 
+
+   updateApp(){
+    setState(() {
+    });
+  }
+
   @override
   void initState(){
+  
+    
+    appLanguage=  'ar';
   super.initState();
   _sprcificLocalizationDelegate =
-  SprcificLocalizationDelegate(new Locale("ar"));
+  SprcificLocalizationDelegate(new Locale(appLanguage));
   }
 
   SprcificLocalizationDelegate _sprcificLocalizationDelegate;
-  
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -54,8 +73,9 @@ class _AppState extends State<App> {
     "/SearchResult":(BuildContext context)=>new SearchResult(),
     "/Set_location_2":(BuildContext context)=>new Set_location(),
     "/Support":(BuildContext context)=>new Support(),
+    
   },
-  home: HomePage(),
+  home: LogInState(),
   debugShowCheckedModeBanner: false,
   theme: ThemeData(
     fontFamily: "Neo_Sans_Arabic",

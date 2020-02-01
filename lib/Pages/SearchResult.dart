@@ -7,22 +7,25 @@ import 'package:kaf/widgets/cards_list.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SearchResult extends StatefulWidget {
+  String keyWord;
+  final Future<List> resultList;
+  SearchResult({this.keyWord,this.resultList});
   @override
-  _SearchResultState createState() => _SearchResultState();
+  _SearchResultState createState() => _SearchResultState(search: keyWord,resultList:resultList);
 }
 
 class _SearchResultState extends State<SearchResult> {
   final String search;
-  final String resultCounter;
-  final RecentCards resultCard;
+  int resultCounter;
+  final Future<List<dynamic>> resultList;
   bool filtring;
   var _selectedIndex = 0;
   int grouped;
   PageController _pageController;
   _SearchResultState(
-      {this.search = "Heart",
-      this.resultCard,
-      this.resultCounter = "200",
+      {this.search,
+      this.resultList,
+      this.resultCounter,
       this.filtring = false,
       this.grouped=0
       });
@@ -79,18 +82,16 @@ class _SearchResultState extends State<SearchResult> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      children: <Widget>[
-                        Text("$resultCounter +"+AppLocalizations.of(context).results,
-                            style: TextStyle(
-                              color: Color.fromRGBO(0, 0, 0, 0.4),
-                            ))
-                      ],
-                    ),
+                  
+                FutureBuilder<List>(
+                    future: resultList,
+                    builder: (context,snapshot){
+                      if(snapshot.hasError) print(snapshot.error);
+                      return (snapshot.hasData)?RecentCards(snapshot.data)
+                      :new Center(child: new CircularProgressIndicator(
+                      ),);
+                    },
                   ),
-                 // RecentCards(),
                 ],
               ),
               Padding(

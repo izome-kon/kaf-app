@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
 import 'package:kaf/localizations.dart';
+import 'package:kaf/main.dart';
+import 'package:kaf/models/post_model.dart';
+import 'package:kaf/models/user_model.dart';
+import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/post.dart';
 
 class LookForDonation extends StatefulWidget {
@@ -11,11 +16,25 @@ class LookForDonation extends StatefulWidget {
 
 class _LookForDonationState extends State<LookForDonation> {
     var _selectedIndex = 3;
+    int _postsCounter;
+    List test;
   PageController _pageController = new PageController(initialPage: 3);
+
+  bool load;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    load=false;
+    fun();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
+      body: !load?Center(child: CircularProgressIndicator(),):
+      CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
             backgroundColor: Theme.of(context).primaryColor,
@@ -59,7 +78,7 @@ class _LookForDonationState extends State<LookForDonation> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "20976",
+                                  _postsCounter.toString(),
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 40),
                                 ),
@@ -98,15 +117,12 @@ class _LookForDonationState extends State<LookForDonation> {
             ),
           ),
           SliverPrototypeExtentList(
-            prototypeItem: Post(),
-            delegate: SliverChildListDelegate([
-              Post(),
-              Post(),
-              Post(),
-              Post(),
-              Post(),
-              Post(),
-            ]),
+            prototypeItem: Post(
+          postModel: PostModel(User(name: '?'), '?', "?", "? ", "?"),
+        ),
+            delegate: SliverChildListDelegate(
+             children1        
+            ),
           )
         ],
       ),
@@ -122,8 +138,9 @@ class _LookForDonationState extends State<LookForDonation> {
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: _selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
-
+        
         onItemSelected: (index) => setState(() {
+          Navigator.pop(context);
           _selectedIndex = index;
           _pageController.animateToPage(index,
               duration: Duration(milliseconds: 300), curve: Curves.ease);
@@ -175,4 +192,30 @@ class _LookForDonationState extends State<LookForDonation> {
     
     );
   }
+  List<Widget> children1 ;
+    Future <List> fun() async{
+      await Jiffy.locale(App.getAppLanguage());
+      return await SqlHelper().needs().then(
+        (v){
+         setState(() {
+           _postsCounter = v.length;
+           children1= children(v);
+            load = true;
+         });
+        }
+      ) ;
+    }
+     List<Widget> children(List data){
+       List<Widget> posts = new List<Widget>();
+       for (var item in data) {
+         posts.add(Post(
+          postModel: PostModel(User(name: item['user_id'].toString()), item['text'], item['image'], Jiffy(DateTime.parse(item['created_at'])).fromNow(), item['address']),
+        ));
+       }
+       return posts;
+     } 
+
+
+
+ 
 }

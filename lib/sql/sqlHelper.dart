@@ -1,14 +1,19 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:kaf/models/post_model.dart';
 import 'package:kaf/models/user_model.dart';
+import 'package:kaf/widgets/post.dart';
+import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SqlHelper {
-  String webSite = "http://kaf.ideagroup-sa.com/api/user";
+  static String webSite = "http://kaf.ideagroup-sa.com/api/user";
   User user;
-  var status;
+  static bool status =false;
+  static bool loading  = true;
   getData() async {
     String url = "http://kaf.ideagroup-sa.com/api/user/me";
     http.Response response = await http.post(url, headers: {
@@ -18,21 +23,23 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  login({@required String email, @required String password}) async {
+  static Future <List>login({@required String email, @required String password}) async {
+    loading= true;
     String url = "$webSite/login";
     final http.Response response = await http
         .post(url, body: {"email": "$email", "password": "$password"});
-    status = response.body.contains('error');
+    status = response.body.contains('token');
     var data = json.decode(response.body);
     if (status) {
-      print('data : ${data["error"]}');
-    } else {
       print('data : ${data["token"]}');
       _save('token', data["token"]);
+    } else {
+        print('data : ${data["error"]}');
     }
+    loading = false;
   }
 
-  register(
+  Future register(
       {@required String name,
       @required String email,
       @required String password}) async {
@@ -41,9 +48,7 @@ class SqlHelper {
     http.Response response = await http.post(url,
         body: {"email": "$email", "name": "$name", "password": "$password"});
     status = response.body.contains('token');
-    // print('stat :$status');
     var data = json.decode(response.body);
-    // print(data);
     if (!status) {
       print('data : ${data["error"]}');
     } else {
@@ -52,12 +57,12 @@ class SqlHelper {
     }
   }
 
-  _save(String key, String value) async {
+  static _save(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
 
-  _load(String key) async {
+  static _load(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     print(prefs.get(key) ?? 0);
     return prefs.get(key) ?? 0;
@@ -74,7 +79,7 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-    Future <List<dynamic>>getKnowledge() async {
+    Future <List>getKnowledge() async {
     String url = "http://kaf.ideagroup-sa.com/api/knowledge";
     http.Response response = await http.get(url);
     return json.decode(response.body);
@@ -87,7 +92,52 @@ class SqlHelper {
       "doctor_id":"$id",
     }
     );
-    print(json.decode(response.body));
+    return json.decode(response.body);
+  }
+
+  Future <List>search(String keyWord) async {
+    String url = "http://kaf.ideagroup-sa.com/api/search";
+    http.Response response = await http.post(url
+    ,body: {
+      "keyword":"$keyWord",
+    }
+    );
+    return json.decode(response.body);
+  }
+
+  Future <List> needs() async {
+    String url = "http://kaf.ideagroup-sa.com/api/need";
+    http.Response response = await http.get(url);
+    return json.decode(response.body);
+  }
+
+  addNeed(PostModel post) async {
+    String url = "http://kaf.ideagroup-sa.com/api/need";
+    http.Response response = await http.post(url,
+    
+    body: {
+      "text":post.text,
+      "user_id":post.user.id,
+      'address':post.location,
+      'image':post.imageUrl
+    }
+    );
+    print(response.body);
+    return json.decode(response.body);
+  }
+
+  uploadImage(File image,String pathOnServer) async {
+    String url = "http://kaf.ideagroup-sa.com/api/uploadImage";
+    String type = image.path.split('.').last;
+
+    http.Response response = await http.post(url,
+    body:{
+     "image":base64Encode(image.readAsBytesSync()),
+     "type":type,
+     "pathOnServer":pathOnServer
+    }
+    );
+    print(response.body);
     return json.decode(response.body);
   }
 

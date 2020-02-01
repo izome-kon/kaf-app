@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../localizations.dart';
@@ -149,7 +150,9 @@ class AppDrawer extends StatelessWidget {
                     DrawerButton(
                       name: AppLocalizations.of(context).language,
                       icon: Icons.language,
-                      onPressed: () {},
+                      onPressed: () {
+                        App.getAppLanguage();
+                      },
                     ),
                     Container(
                       color: Colors.white,

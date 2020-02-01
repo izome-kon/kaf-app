@@ -163,11 +163,14 @@ class _SignUpTabState extends State<SignUpTab> {
                                 sql.register(
                                     name: fullName.text,
                                     email: username.text,
-                                    password: password.text);
-                                if (!sql.status)
-                                  wrongUser();
-                                else
-                                  Navigator.pushNamed(context, "/LocationSet");
+                                    password: password.text)
+                                 .then((v) {
+                                      if (!SqlHelper.status)
+                                        wrongUser();
+                                      else
+                                        Navigator.pushNamed(
+                                            context, "/LocationSet");
+                                    });
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,

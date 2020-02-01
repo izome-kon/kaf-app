@@ -1,5 +1,18 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:gender_selection/gender_selection.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
+import 'package:kaf/models/post_model.dart';
+import 'package:kaf/models/user_model.dart';
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/widgets/BloodButton.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:dio/dio.dart';
+
+//import 'package:permission_handler/permission_handler.dart';
 
 import '../localizations.dart';
 
@@ -12,6 +25,19 @@ class _AddYourNeedState extends State<AddYourNeed> {
   final TextEditingController control = new TextEditingController();
   var _selectedIndex = 3;
   PageController _pageController = new PageController(initialPage: 3);
+
+  bool rouleValue;
+  File  image;
+  @override
+  void initState() {
+    
+    rouleValue = false;
+    super.initState();
+  }
+
+  Future getImage() async {
+    image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,189 +110,208 @@ class _AddYourNeedState extends State<AddYourNeed> {
             ),
           ),
           SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        CircleAvatar(
-                          radius: 50,
-                          child: Image.asset("assets/comment.png"),
-                        ),
-                        Text("Mahmoud Mohamed",
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: 20)),
-                        Text("+966015505886"),
-                      ],
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: Column(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30, left: 30),
-                        child: new TextField(
-                          maxLines: 5,
-                          decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30.0),
-                                borderSide: BorderSide(
-                                    color: Theme.of(context).accentColor),
-                              ),
-                              labelText:
-                                  AppLocalizations.of(context).writeYourNeed,
-                              alignLabelWithHint: true,
-                              filled: true,
-                              fillColor: Colors.white),
-                          style: new TextStyle(color: Colors.black),
-                          controller: control,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Column(
                         children: <Widget>[
-                          RaisedButton(
-                              elevation: 0,
-                              onPressed: () {},
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                  side: BorderSide(
-                                      color: Theme.of(context).primaryColor)),
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(
-                                    Icons.camera_enhance,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                  Text(AppLocalizations.of(context).addPhoto,
-                                      style: TextStyle(
-                                          color:
-                                              Theme.of(context).primaryColor))
-                                ],
-                              )),
-                          RaisedButton(
-                              elevation: 0,
-                              onPressed: () {},
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                  side: BorderSide(
-                                      color: Theme.of(context).primaryColor)),
-                              child: Row(
-                                children: <Widget>[
-                                  Icon(Icons.location_on,
-                                      color: Theme.of(context).primaryColor),
-                                  Text(AppLocalizations.of(context).addLocation,
-                                      style: TextStyle(
-                                          color:
-                                              Theme.of(context).primaryColor))
-                                ],
-                              ))
+                          CircleAvatar(
+                            radius: 50,
+                            child: Image.asset("assets/comment.png"),
+                          ),
+                          Text("Mahmoud Mohamed",
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 20)),
+                          Text("+966015505886"),
                         ],
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context).gender,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Theme.of(context).primaryColor),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Image.asset(
-                                  "assets/Male@2x.png",
-                                  width: 70,
-                                  height: 70,
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 50,
-                                  color: Colors.black26,
-                                ),
-                                Image.asset(
-                                  "assets/Female@2x.png",
-                                  width: 70,
-                                  height: 70,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Text(AppLocalizations.of(context).selectBlood),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  blood("A+"),
-                                  blood("A-"),
-                                  blood("B+"),
-                                  blood("B-"),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  blood("O+"),
-                                  blood("O-"),
-                                  blood("AB+"),
-                                  blood("AB-"),
-                                ],
-                              ),
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Checkbox(
-                                  onChanged: (T) {},
-                                  value: true,
-                                ),
-                                Container(
-                                  child: Text(AppLocalizations.of(context)
-                                      .doYouWantToMake),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
                       ),
                     ],
                   ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0, bottom: 50),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30, left: 30),
+                          child: new TextField(
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context).accentColor),
+                                ),
+                                labelText:
+                                    AppLocalizations.of(context).writeYourNeed,
+                                alignLabelWithHint: true,
+                                filled: true,
+                                fillColor: Colors.white),
+                            style: new TextStyle(color: Colors.black),
+                            controller: control,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            RaisedButton(
+                                elevation: 0,
+                                onPressed: getImage,
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                    side: BorderSide(
+                                        color: Theme.of(context).primaryColor)),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.camera_enhance,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                                    Text(AppLocalizations.of(context).addPhoto,
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor))
+                                  ],
+                                )),
+                            RaisedButton(
+                                elevation: 0,
+                                onPressed: () {},
+                                color: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50),
+                                    side: BorderSide(
+                                        color: Theme.of(context).primaryColor)),
+                                child: Row(
+                                  children: <Widget>[
+                                    Icon(Icons.location_on,
+                                        color: Theme.of(context).primaryColor),
+                                    Text(
+                                        AppLocalizations.of(context)
+                                            .addLocation,
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor))
+                                  ],
+                                ))
+                          ],
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                    AppLocalizations.of(context).gender,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Theme.of(context).primaryColor),
+                                  ),
+                                ],
+                              ),
+                              GenderSelection(
+                                maleText: "Male",
+                                femaleText: "Female",
+                                femaleImage:
+                                    AssetImage('assets/woman (2)@2x.png'),
+                                maleImage: AssetImage('assets/man (5)@2x.png'),
+                                selectedGenderIconBackgroundColor:
+                                    Theme.of(context).primaryColor,
+                                checkIconAlignment: Alignment.bottomRight,
+                                onChanged: (Gender gender) {
+                                  print(gender);
+                                },
+                                equallyAligned: true,
+                                animationDuration: Duration(milliseconds: 400),
+                                isCircular: true, // default : true,
+                                isSelectedGenderIconCircular: true,
+                                opacityOfGradient: 0.1,
+                                linearGradient: LinearGradient(colors: [
+                                  Theme.of(context).accentColor,
+                                  Theme.of(context).accentColor
+                                ]),
+                                padding: const EdgeInsets.all(3),
+                                size: 80, //default : 120
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Text(
+                                      AppLocalizations.of(context).selectBlood),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    BloodButton("A+"),
+                                    BloodButton("A-"),
+                                    BloodButton("B+"),
+                                    BloodButton("B-"),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    BloodButton("O+"),
+                                    BloodButton("O-"),
+                                    BloodButton("AB+"),
+                                    BloodButton("AB-"),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  Checkbox(
+                                    onChanged: (T) {
+                                      setState(() {
+                                        rouleValue = !rouleValue;
+                                      });
+                                    },
+                                    value: rouleValue,
+                                  ),
+                                  Container(
+                                    child: Text(AppLocalizations.of(context)
+                                        .doYouWantToMake),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          String imgPath = await SqlHelper().uploadImage(image,"posts");
+          SqlHelper().addNeed(
+            PostModel(User(id: '1'), control.text, imgPath, '', 'Saudi Arabia')
+           );
+        },
         child: Icon(
           Icons.add,
           size: 40,
@@ -279,6 +324,7 @@ class _AddYourNeedState extends State<AddYourNeed> {
         showElevation: true, // use this to remove appBar's elevation
 
         onItemSelected: (index) => setState(() {
+          Navigator.pop(context);
           _selectedIndex = index;
           _pageController.animateToPage(index,
               duration: Duration(milliseconds: 300), curve: Curves.ease);
@@ -329,18 +375,4 @@ class _AddYourNeedState extends State<AddYourNeed> {
     );
   }
 
-  blood(String blood) {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(width: 2, color: Theme.of(context).primaryColor)),
-      child: CircleAvatar(
-        child: Text(
-          blood,
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-        backgroundColor: Colors.white,
-      ),
-    );
-  }
 }
