@@ -5,7 +5,7 @@ import 'package:kaf/models/post_model.dart';
 class Post extends StatelessWidget {
   bool liked = false;
   final PostModel postModel;
-  String imgPaths = "http://Kaf.ideagroup-sa.com/storage/app/public/posts/";
+  final String imgPaths = "http://Kaf.ideagroup-sa.com/storage/app/public/posts/";
   Post({this.postModel});
   @override
   Widget build(BuildContext context) {

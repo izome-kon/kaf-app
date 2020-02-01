@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -10,10 +9,6 @@ import 'package:kaf/models/user_model.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/BloodButton.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dio/dio.dart';
-
-//import 'package:permission_handler/permission_handler.dart';
-
 import '../localizations.dart';
 
 class AddYourNeed extends StatefulWidget {

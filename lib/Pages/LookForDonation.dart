@@ -24,7 +24,6 @@ class _LookForDonationState extends State<LookForDonation> {
 
   @override
   void initState() {
-    // TODO: implement initState
     load=false;
     fun();
     super.initState();

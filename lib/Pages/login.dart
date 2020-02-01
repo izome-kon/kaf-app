@@ -1,10 +1,6 @@
-
-import 'package:flutter/services.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/widgets/LoginCards.dart';
 import 'package:kaf/widgets/Logo.dart';
-
-import 'login_signin.dart' as def;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -14,7 +10,7 @@ class LogInState extends StatefulWidget {
   _LogInStateState createState() => _LogInStateState();
 }
 
-Image GetImage(String path) {
+Image getImage(String path) {
   return new Image.asset(
     path,
     fit: BoxFit.cover,

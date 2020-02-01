@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
-import 'package:kaf/models/best_deals.dart';
 import 'package:kaf/models/clinic_card.dart';
 import 'package:kaf/models/clinic_model.dart';
-import 'package:kaf/models/doctor_model.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class RecentCards extends StatelessWidget {
-  List list;
+  final List list;
   RecentCards(this.list);
   @override
   Widget build(BuildContext context) {

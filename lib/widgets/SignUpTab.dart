@@ -36,7 +36,6 @@ class _SignUpTabState extends State<SignUpTab> {
 
   @required
   VoidCallback onPressed;
-  int _index = 2;
   _SignUpTabState({this.onPressed});
   @override
   Widget build(BuildContext context) {

@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
+
 class BloodButton extends StatefulWidget {
- String blood;
+ final String blood;
   BloodButton(this.blood);
   @override
   _BloodButtonState createState() => _BloodButtonState(blood);
 }
 
 class _BloodButtonState extends State<BloodButton> {
-    String blood;
-    bool cheked ;
+   String blood;
+   bool cheked  ;
    _BloodButtonState(String blood){
     this.blood=blood;
   }
   @override
   void initState() {
-    // TODO: implement initState
     cheked = false;
     super.initState();
   }

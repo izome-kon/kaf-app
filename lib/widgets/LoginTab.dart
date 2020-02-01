@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class LoginTab extends StatefulWidget {
   @required
-  VoidCallback onPressed;
+  final VoidCallback onPressed;
   LoginTab({this.onPressed});
   @override
   _LoginTabState createState() => _LoginTabState(onPressed: onPressed);

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Clinic_info.dart';
 import 'package:kaf/models/clinic_model.dart';
-class offer_details extends StatefulWidget {
+class OfferDetails extends StatefulWidget {
   @override
-  _offer_detailsState createState() => _offer_detailsState();
+  _OfferDetailsState createState() => _OfferDetailsState();
 }
 
-class _offer_detailsState extends State<offer_details> {
+class _OfferDetailsState extends State<OfferDetails> {
   
   Clinic clinic;
   @override
@@ -222,7 +222,7 @@ class _offer_detailsState extends State<offer_details> {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) =>Clinic_info() ),
+                                    MaterialPageRoute(builder: (context) =>ClinicInfo() ),
                                   );
                                 },
                                 child: new Icon(

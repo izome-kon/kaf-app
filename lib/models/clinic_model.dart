@@ -1,4 +1,3 @@
-import 'package:kaf/models/doctor_model.dart';
 
 class Clinic {
   int iD;

@@ -5,8 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:kaf/models/post_model.dart';
 import 'package:kaf/models/user_model.dart';
-import 'package:kaf/widgets/post.dart';
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SqlHelper {
@@ -37,6 +35,7 @@ class SqlHelper {
         print('data : ${data["error"]}');
     }
     loading = false;
+    return null;
   }
 
   Future register(

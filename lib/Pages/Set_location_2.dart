@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
 
-class Set_location extends StatefulWidget {
+class SetLocation extends StatefulWidget {
   @override
-  _Set_locationState createState() => _Set_locationState();
+  _SetLocationState createState() => _SetLocationState();
 }
 
-class _Set_locationState extends State<Set_location> {
+class _SetLocationState extends State<SetLocation> {
   var citys = [
     "jeddah",
     "Sharqia",
@@ -47,7 +47,7 @@ class _Set_locationState extends State<Set_location> {
           Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 75.0),
             child: Column(
-              children: <Widget>[searchfield(), use_curr_loc(), locations()],
+              children: <Widget>[searchfield(), useCurrLoc(), locations()],
             ),
           )
         ],
@@ -89,7 +89,7 @@ class _Set_locationState extends State<Set_location> {
     );
   }
 
-  Widget use_curr_loc() {
+  Widget useCurrLoc() {
     return MaterialButton(
       onPressed: (){
         Navigator.pushNamed(context, "/ActivePhone");

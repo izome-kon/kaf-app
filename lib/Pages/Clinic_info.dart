@@ -7,12 +7,12 @@ import 'Offer_details_2.dart';
 import 'package:kaf/models/clinic_model.dart';
 
 
-class Clinic_info extends StatefulWidget {
+class ClinicInfo extends StatefulWidget {
   @override
-  _Clinic_infoState createState() => _Clinic_infoState();
+  _ClinicInfoState createState() => _ClinicInfoState();
 }
 
-class _Clinic_infoState extends State<Clinic_info> {
+class _ClinicInfoState extends State<ClinicInfo> {
   Clinic clinic;
   Doctor doctor;
   @override
@@ -113,21 +113,21 @@ class _Clinic_infoState extends State<Clinic_info> {
             width: MediaQuery.of(context).size.width - 40,
             child: Column(
               children: <Widget>[
-                header_info(clinic),
+                headerInfo(clinic),
                 Divider(
                   height: 2,
                   endIndent: 20,
                   indent: 20,
                   color: Colors.grey,
                 ),
-                Timing(clinic),
+                timing(clinic),
                 Divider(
                   height: 2,
                   endIndent: 20,
                   indent: 20,
                   color: Colors.grey,
                 ),
-                Doctor_details(),
+                doctorDetails(),
                 Divider(
                   height: 2,
                   endIndent: 20,
@@ -155,14 +155,14 @@ class _Clinic_infoState extends State<Clinic_info> {
                     ],
                   ),
                 ),
-                Map_location(),
+                mapLocation(),
                 Divider(
                   height: 2,
                   endIndent: 20,
                   indent: 20,
                   color: Colors.grey,
                 ),
-                Feedback(),
+                feedback(),
                 FlatButton(
                   shape: new RoundedRectangleBorder(
                       side: BorderSide(
@@ -173,7 +173,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => offer_details_2()),
+                          builder: (context) => OfferDetails2()),
                     );
                   },
                   child: Text(AppLocalizations.of(context).takeThisOffer,
@@ -188,7 +188,7 @@ class _Clinic_infoState extends State<Clinic_info> {
         ]);
   }
 
-  Widget Feedback() {
+  Widget feedback() {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width - 40,
@@ -206,14 +206,14 @@ class _Clinic_infoState extends State<Clinic_info> {
                     style: TextStyle(color: Colors.grey, fontSize: 10),
                   )),
             ),
-            AnyFeed_back("Ahmed", "good .", 3, "just now"),
+            anyFeedBack("Ahmed", "good .", 3, "just now"),
             Divider(
               height: 2,
               endIndent: 40,
               indent: 40,
               color: Colors.grey,
             ),
-            AnyFeed_back("Mohamed", "very good .", 4, "just now"),
+            anyFeedBack("Mohamed", "very good .", 4, "just now"),
             Divider(
               endIndent: 40,
               indent: 40,
@@ -234,7 +234,7 @@ class _Clinic_infoState extends State<Clinic_info> {
     );
   }
 
-  Widget AnyFeed_back(String name, String stat, double rate, String time) {
+  Widget anyFeedBack(String name, String stat, double rate, String time) {
     return Container(
       width: MediaQuery.of(context).size.width - 40,
       height: 60,
@@ -301,7 +301,7 @@ class _Clinic_infoState extends State<Clinic_info> {
     );
   }
 
-  Widget Map_location() {
+  Widget mapLocation() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
@@ -320,7 +320,7 @@ class _Clinic_infoState extends State<Clinic_info> {
     );
   }
 
-  Widget Doctor_details() {
+  Widget doctorDetails() {
     return Container(
       height: 80,
       child: Row(
@@ -383,7 +383,7 @@ class _Clinic_infoState extends State<Clinic_info> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Doctor_info()),
+                    MaterialPageRoute(builder: (context) => DoctorInfo()),
                     
                   );
                 },
@@ -400,7 +400,7 @@ class _Clinic_infoState extends State<Clinic_info> {
     );
   }
 
-  Row Timing(Clinic clinic) {
+  Row timing(Clinic clinic) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -438,7 +438,7 @@ class _Clinic_infoState extends State<Clinic_info> {
     );
   }
 
-  Padding header_info(Clinic clinic) {
+  Padding headerInfo(Clinic clinic) {
     return Padding(
         padding: const EdgeInsets.only(left: 17.0, top: 15.0),
         child: Row(

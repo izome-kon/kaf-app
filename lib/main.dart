@@ -16,9 +16,6 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/Pages/login.dart';
 import 'package:kaf/Pages/login_signin.dart';
 import 'package:kaf/localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-
 void main() => runApp(App());
 
 class App extends StatefulWidget {
@@ -60,17 +57,17 @@ class _AppState extends State<App> {
     "/Home":(BuildContext context)=>new HomePage(),
     "/ActivePhone":(BuildContext context)=>new ActivePhone(),
     "/AddyourNeed":(BuildContext context)=>new AddYourNeed(),
-    "/Clinic_info":(BuildContext context)=>new Clinic_info(),
-    "/Doctor_info":(BuildContext context)=>new Doctor_info(),
+    "/Clinic_info":(BuildContext context)=>new ClinicInfo(),
+    "/Doctor_info":(BuildContext context)=>new DoctorInfo(),
     "/Help":(BuildContext context)=>new HelpUser(),
     "/LocationSet":(BuildContext context)=>new LocationSet(),
-    "/login_signin":(BuildContext context)=>new log_sign(1),
+    "/login_signin":(BuildContext context)=>new LogSign(1),
     "/login":(BuildContext context)=>new LogInState(),
     "/LookForDonation":(BuildContext context)=>new LookForDonation(),
-    "/Offer_details_2":(BuildContext context)=>new offer_details_2(),
-    "/Offer_Details":(BuildContext context)=>new offer_details(),
+    "/Offer_details_2":(BuildContext context)=>new OfferDetails2(),
+    "/Offer_Details":(BuildContext context)=>new OfferDetails(),
     "/SearchResult":(BuildContext context)=>new SearchResult(),
-    "/Set_location_2":(BuildContext context)=>new Set_location(),
+    "/Set_location_2":(BuildContext context)=>new SetLocation(),
     "/Support":(BuildContext context)=>new Support(),
     
   },

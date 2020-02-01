@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/models/clinic_model.dart';
-import 'dart:async';
 import 'package:kaf/Pages/Offer_Details.dart';
 import 'package:kaf/models/doctor_model.dart';
-class offer_details_2 extends StatefulWidget {
+class OfferDetails2 extends StatefulWidget {
   @override
-  _offer_details_2State createState() => _offer_details_2State();
+  _OfferDetails2State createState() => _OfferDetails2State();
 }
 
-class _offer_details_2State extends State<offer_details_2> {
+class _OfferDetails2State extends State<OfferDetails2> {
   Clinic clinic;
   Doctor doctor;
   bool taken;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     taken = false;
   }
@@ -99,14 +97,14 @@ class _offer_details_2State extends State<offer_details_2> {
             width: MediaQuery.of(context).size.width - 40,
             child: Column(
               children: <Widget>[
-                header_info(clinic),
+                headerInfo(clinic),
                 Divider(
                   height: 2,
                   endIndent: 20,
                   indent: 20,
                   color: Colors.grey,
                 ),
-                Doctor_details(),
+                doctorDetails(),
                 Divider(
                   height: 2,
                   endIndent: 20,
@@ -134,14 +132,14 @@ class _offer_details_2State extends State<offer_details_2> {
                     ],
                   ),
                 ),
-                Map_location(),
+                mapLocation(),
                 Divider(
                   height: 2,
                   endIndent: 20,
                   indent: 20,
                   color: Colors.grey,
                 ),
-                conditions_card(),
+                conditionsCard(),
                 FlatButton(
                   shape: taken
                       ? null
@@ -158,7 +156,7 @@ class _offer_details_2State extends State<offer_details_2> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => offer_details()),
+                                  builder: (context) => OfferDetails()),
                             );
                             taken = true;
                           });
@@ -180,7 +178,7 @@ class _offer_details_2State extends State<offer_details_2> {
         ]);
   }
 
-  Widget conditions_card() {
+  Widget conditionsCard() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -258,7 +256,7 @@ class _offer_details_2State extends State<offer_details_2> {
     );
   }
 
-  Widget Map_location() {
+  Widget mapLocation() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Center(
@@ -277,7 +275,7 @@ class _offer_details_2State extends State<offer_details_2> {
     );
   }
 
-  Widget Doctor_details() {
+  Widget doctorDetails() {
     return Container(
       height: 80,
       child: Row(
@@ -348,7 +346,7 @@ class _offer_details_2State extends State<offer_details_2> {
     );
   }
 
-  Widget header_info(Clinic clinic) {
+  Widget headerInfo(Clinic clinic) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceAround,

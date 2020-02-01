@@ -3,7 +3,7 @@ import 'package:kaf/localizations.dart';
 import 'SearchPages.dart';
 
 class SearchAll extends StatefulWidget {
-  String txt;
+  final String txt;
   SearchAll(this.txt);
   @override
   _SearchAllState createState() => _SearchAllState(txt);

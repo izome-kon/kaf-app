@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kaf/Contents/myAppBar.dart';
 import 'package:kaf/localizations.dart';
-import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class ForgetPassword extends StatefulWidget {

@@ -48,7 +48,7 @@ class LoginCards extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                             topLeft: const Radius.circular(40.0),
                             topRight: const Radius.circular(40.0))),
-                    child: LogInComponents(context)),
+                    child: logInComponents(context)),
               ),
             ],
           ),
@@ -57,7 +57,7 @@ class LoginCards extends StatelessWidget {
     );
   }
 
-  Widget LogInComponents(BuildContext context) {
+  Widget logInComponents(BuildContext context) {
     return Column(
       children: <Widget>[
         Padding(
@@ -77,7 +77,7 @@ class LoginCards extends StatelessWidget {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => def.log_sign(1)),
+                    builder: (BuildContext context) => def.LogSign(1)),
               ),
               child: Text(AppLocalizations.of(context).yourEmail,
                   style: TextStyle(
@@ -116,7 +116,7 @@ class LoginCards extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => def.log_sign(2)),
+                    MaterialPageRoute(builder: (context) => def.LogSign(2)),
                   );
                 },
                 child: Text(AppLocalizations.of(context).startHere,

@@ -7,7 +7,7 @@ import 'package:kaf/widgets/cards_list.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SearchResult extends StatefulWidget {
-  String keyWord;
+  final String keyWord;
   final Future<List> resultList;
   SearchResult({this.keyWord,this.resultList});
   @override

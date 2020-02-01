@@ -9,7 +9,7 @@ class PhotoGallery1 extends StatelessWidget {
   {
     imageList = iList;
     index = imageList.indexOf(s);
-    page = new PageController(initialPage: index);
+    this.page = new PageController(initialPage: index);
   }
   int index;
   List <String> imageList;

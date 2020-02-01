@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:kaf/models/clinic_card.dart';
 import 'package:kaf/models/clinic_model.dart';
-import 'package:kaf/models/doctor_model.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 
 class BestDeals{

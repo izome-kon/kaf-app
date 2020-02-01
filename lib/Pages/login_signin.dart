@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/widgets/LoginTab.dart';
 import 'package:kaf/widgets/SignUpTab.dart';
-import 'package:kaf/widgets/TxtField.dart';
 
-class log_sign extends StatefulWidget {
-  int index;
-  log_sign(this.index);
+class LogSign extends StatefulWidget {
+  final int index;
+  LogSign(this.index);
   @override
-  _log_signState createState() => _log_signState(index);
+  _LogSignState createState() => _LogSignState(index);
 }
 
 double tabheight = 600;
 
-class _log_signState extends State<log_sign>
+class _LogSignState extends State<LogSign>
     with SingleTickerProviderStateMixin {
     int _index;
-      _log_signState(this._index);
+      _LogSignState(this._index);
   TabController tabController;
   Widget cardtype;
   
@@ -36,13 +35,13 @@ class _log_signState extends State<log_sign>
                       return ScaleTransition(child: child, scale: animation);
                     },
                     duration: Duration(microseconds: 450),
-                    child: cardtype = choose_card(_index))),
+                    child: cardtype = chooseCard(_index))),
         ],
       ),
     );
   }
 
-  Widget choose_card(int x) {
+  Widget chooseCard(int x) {
     if (x == 1)
       return SingleChildScrollView(child: LoginTab(
         onPressed: (){
