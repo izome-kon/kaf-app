@@ -16,7 +16,6 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/Pages/login.dart';
 import 'package:kaf/Pages/login_signin.dart';
 import 'package:kaf/localizations.dart';
-import 'package:kaf/sql/test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

@@ -12,7 +12,7 @@ class _LocationSetState extends State<LocationSet> {
     return Scaffold(
         body: Stack(fit: StackFit.expand, children: <Widget>[
       Image.asset(
-        "assets/loginEfBG.png",
+        "assets/BGLogInState@2x.png",
         fit: BoxFit.cover,
       ),
       Column(
