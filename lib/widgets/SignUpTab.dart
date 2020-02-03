@@ -27,7 +27,7 @@ class _SignUpTabState extends State<SignUpTab> {
                 FlatButton(
                   child: Text("حسناً"),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context, rootNavigator: true).pop();
                   },
                 )
               ],
@@ -151,7 +151,7 @@ class _SignUpTabState extends State<SignUpTab> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 4.0),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width*6/20,
+                            width: MediaQuery.of(context).size.width * 6 / 20,
                             height: 50,
                             child: FlatButton(
                               shape: new RoundedRectangleBorder(
@@ -159,32 +159,31 @@ class _SignUpTabState extends State<SignUpTab> {
                                       new BorderRadius.circular(25.0)),
                               color: Theme.of(context).primaryColor,
                               onPressed: () {
-                                sql.register(
-                                    name: fullName.text,
-                                    email: username.text,
-                                    password: password.text)
-                                 .then((v) {
-                                      if (!SqlHelper.status)
-                                        wrongUser();
-                                      else
-                                        Navigator.pushNamed(
-                                            context, "/LocationSet");
-                                    });
+                                sql
+                                    .register(
+                                        name: fullName.text,
+                                        email: username.text,
+                                        password: password.text)
+                                    .then((v) {
+                                  if (!SqlHelper.status)
+                                    wrongUser();
+                                  else
+                                    Navigator.pushNamed(
+                                        context, "/LocationSet");
+                                });
                               },
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: <Widget>[
-                                  Text(
-                                        AppLocalizations.of(context).signUp,
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            color: Colors.white)),
-                                  
+                                  Text(AppLocalizations.of(context).signUp,
+                                      style: TextStyle(
+                                          fontSize: 16.0, color: Colors.white)),
                                   Icon(
-                                      Icons.arrow_forward,
-                                      color: Colors.white,
-                                    ),
+                                    Icons.arrow_forward,
+                                    color: Colors.white,
+                                  ),
                                 ],
                               ),
                             ),

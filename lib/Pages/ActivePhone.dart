@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/localizations.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
+
 class ActivePhone extends StatefulWidget {
   @override
   _ActivePhoneState createState() => _ActivePhoneState();
@@ -65,18 +66,15 @@ class _ActivePhoneState extends State<ActivePhone> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                          PinInputTextField(
-                          pinLength: 6,
-                          autoFocus: false,
-
-                          decoration: UnderlineDecoration(
-                            color: Theme.of(context).accentColor,
-                            textStyle: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 30
-                            )
-                          ),
-                        ),
+                            PinInputTextField(
+                              pinLength: 6,
+                              autoFocus: false,
+                              decoration: UnderlineDecoration(
+                                  color: Theme.of(context).accentColor,
+                                  textStyle: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 30)),
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(
                                   left: 30, right: 30, top: 30),
@@ -91,13 +89,15 @@ class _ActivePhoneState extends State<ActivePhone> {
                                 },
                                 child: Container(
                                     padding: EdgeInsets.only(
-                                        left: 15, right: 15, top: 10, bottom: 10),
+                                        left: 15,
+                                        right: 15,
+                                        top: 10,
+                                        bottom: 10),
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(40)),
-                                        color: Theme.of(context).primaryColor
-                                        ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(40)),
+                                        color: Theme.of(context).primaryColor),
                                     child: Text(
                                       AppLocalizations.of(context).submit,
                                       style: TextStyle(
@@ -105,7 +105,6 @@ class _ActivePhoneState extends State<ActivePhone> {
                                     )),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -123,21 +122,22 @@ class _ActivePhoneState extends State<ActivePhone> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
                               InkWell(
-                                onTap: (){},
+                                onTap: () {},
                                 splashColor: Colors.black26,
-
-                                child: Text(AppLocalizations.of(context).resent,style: TextStyle(
-                                  color: Theme.of(context).accentColor
-                                ),),
+                                child: Text(
+                                  AppLocalizations.of(context).resent,
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor),
+                                ),
                               ),
-
                               InkWell(
-                                onTap: (){},
+                                onTap: () {},
                                 splashColor: Colors.black26,
-
-                                child: Text(AppLocalizations.of(context).getACallNow,style: TextStyle(
-                                    color:Theme.of(context).accentColor
-                                ),),
+                                child: Text(
+                                  AppLocalizations.of(context).getACallNow,
+                                  style: TextStyle(
+                                      color: Theme.of(context).accentColor),
+                                ),
                               ),
                             ],
                           ),
@@ -151,7 +151,6 @@ class _ActivePhoneState extends State<ActivePhone> {
           )
         ],
       ),
-
     );
   }
 }

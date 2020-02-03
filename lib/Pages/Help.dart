@@ -192,7 +192,6 @@ class _HelpUserState extends State<HelpUser> {
                    padding: EdgeInsets.only(top: 5),
                    width: MediaQuery.of(context).size.width*0.8,
                    child: new TextField(
-
                      decoration: InputDecoration(
                          suffixIcon: Icon(Icons.date_range),
                          border: OutlineInputBorder(

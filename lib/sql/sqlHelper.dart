@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SqlHelper {
   static String webSite = "http://kaf.ideagroup-sa.com/api/user";
   User user;
-  static bool status =false;
-  static bool loading  = true;
+  static bool status = false;
+  static bool loading = true;
   getData() async {
     String url = "http://kaf.ideagroup-sa.com/api/user/me";
     http.Response response = await http.post(url, headers: {
@@ -21,8 +21,9 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  static Future <List>login({@required String email, @required String password}) async {
-    loading= true;
+  static Future<List> login(
+      {@required String email, @required String password}) async {
+    loading = true;
     String url = "$webSite/login";
     final http.Response response = await http
         .post(url, body: {"email": "$email", "password": "$password"});
@@ -30,9 +31,9 @@ class SqlHelper {
     var data = json.decode(response.body);
     if (status) {
       print('data : ${data["token"]}');
-      _save('token', data["token"]);
+      save('token', data["token"]);
     } else {
-        print('data : ${data["error"]}');
+      print('data : ${data["error"]}');
     }
     loading = false;
     return null;
@@ -52,59 +53,70 @@ class SqlHelper {
       print('data : ${data["error"]}');
     } else {
       print('data : ${data["token"]}');
-      if (data != 'null') _save('token', data["token"]);
+      if (data != 'null') save('token', data["token"]);
     }
   }
 
-  static _save(String key, String value) async {
+  static logOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+    prefs.remove('userList');
+    String url = "http://kaf.ideagroup-sa.com/api/user/logout";
+    http.Response response = await http.post(url);
+    return json.decode(response.body);
+  }
+
+  static save(String key, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, value);
   }
 
-  static _load(String key) async {
+  static load(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print(prefs.get(key) ?? 0);
-    return prefs.get(key) ?? 0;
+    return prefs.get(key);
   }
 
-  Future <List<dynamic>>getOffers(String country, String city, String hasOffer) async {
+  static Future getUser(String token) async {
+    String url = "http://kaf.ideagroup-sa.com/api/user/me";
+    http.Response response =
+        await http.post(url, headers: {'Authorization': 'Bearer $token'});
+    return json.decode(response.body);
+  }
+
+  Future<List<dynamic>> getOffers(
+      String country, String city, String hasOffer) async {
     String url = "http://kaf.ideagroup-sa.com/api/offers";
     http.Response response = await http.post(url, body: {
       "Country": "$country",
       "City": "$city",
-      "hasOffer":"$hasOffer"
-    }
-    );
+      "hasOffer": "$hasOffer"
+    });
     return json.decode(response.body);
   }
 
-    Future <List>getKnowledge() async {
+  Future<List> getKnowledge() async {
     String url = "http://kaf.ideagroup-sa.com/api/knowledge";
     http.Response response = await http.get(url);
     return json.decode(response.body);
   }
 
-  Future <List<dynamic>>getDoctor(int id) async {
+  Future<List<dynamic>> getDoctor(int id) async {
     String url = "http://kaf.ideagroup-sa.com/api/doctor";
-    http.Response response = await http.post(url
-    ,body: {
-      "doctor_id":"$id",
-    }
-    );
+    http.Response response = await http.post(url, body: {
+      "doctor_id": "$id",
+    });
     return json.decode(response.body);
   }
 
-  Future <List>search(String keyWord) async {
+  Future<List> search(String keyWord) async {
     String url = "http://kaf.ideagroup-sa.com/api/search";
-    http.Response response = await http.post(url
-    ,body: {
-      "keyword":"$keyWord",
-    }
-    );
+    http.Response response = await http.post(url, body: {
+      "keyword": "$keyWord",
+    });
     return json.decode(response.body);
   }
 
-  Future <List> needs() async {
+  Future<List> needs() async {
     String url = "http://kaf.ideagroup-sa.com/api/need";
     http.Response response = await http.get(url);
     return json.decode(response.body);
@@ -112,32 +124,26 @@ class SqlHelper {
 
   addNeed(PostModel post) async {
     String url = "http://kaf.ideagroup-sa.com/api/need";
-    http.Response response = await http.post(url,
-    
-    body: {
-      "text":post.text,
-      "user_id":post.user.id,
-      'address':post.location,
-      'image':post.imageUrl
-    }
-    );
+    http.Response response = await http.post(url, body: {
+      "text": post.text,
+      "user_id": post.user.id,
+      'address': post.location,
+      'image': post.imageUrl
+    });
     print(response.body);
     return json.decode(response.body);
   }
 
-  uploadImage(File image,String pathOnServer) async {
+  uploadImage(File image, String pathOnServer) async {
     String url = "http://kaf.ideagroup-sa.com/api/uploadImage";
     String type = image.path.split('.').last;
 
-    http.Response response = await http.post(url,
-    body:{
-     "image":base64Encode(image.readAsBytesSync()),
-     "type":type,
-     "pathOnServer":pathOnServer
-    }
-    );
+    http.Response response = await http.post(url, body: {
+      "image": base64Encode(image.readAsBytesSync()),
+      "type": type,
+      "pathOnServer": pathOnServer
+    });
     print(response.body);
     return json.decode(response.body);
   }
-
 }

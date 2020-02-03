@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kaf/Pages/ForgetPassword.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/TxtField.dart';
@@ -15,7 +16,7 @@ class _LoginTabState extends State<LoginTab> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  wrongUser() {
+  wrongUser(BuildContext context) {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
@@ -25,7 +26,7 @@ class _LoginTabState extends State<LoginTab> {
                 FlatButton(
                   child: Text("حسناً"),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context, rootNavigator: true).pop();
                   },
                 )
               ],
@@ -137,6 +138,13 @@ class _LoginTabState extends State<LoginTab> {
                         child: Column(
                           children: <Widget>[
                             InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ForgetPassword(),
+                                    ));
+                              },
                               child: Text(
                                   AppLocalizations.of(context).forgetPassword,
                                   style: TextStyle(
@@ -155,14 +163,13 @@ class _LoginTabState extends State<LoginTab> {
                                       borderRadius:
                                           new BorderRadius.circular(25.0)),
                                   color: Theme.of(context).primaryColor,
-                                  onPressed: (){
+                                  onPressed: () {
                                     SqlHelper.login(
                                             email: username.text,
                                             password: password.text)
-                                            
                                         .then((v) {
                                       if (!SqlHelper.status)
-                                        wrongUser();
+                                        wrongUser(context);
                                       else
                                         Navigator.pushNamed(
                                             context, "/LocationSet");

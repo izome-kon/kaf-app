@@ -100,7 +100,7 @@ class BottomNavyBar extends StatelessWidget {
       ),
     );
   }
-int x=0;
+  int x=0;
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(

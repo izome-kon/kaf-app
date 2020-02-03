@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
 import 'package:kaf/Contents/myAppBar.dart';
 import 'package:kaf/Pages/SearchAll.dart';
@@ -6,6 +7,7 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/AppDrawer.dart';
+import 'package:kaf/widgets/Logo.dart';
 import 'package:kaf/widgets/cards_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,8 +19,13 @@ class _HomePageState extends State<HomePage> {
   var _selectedIndex = 0;
   bool searchclick;
   SearchAll search;
-  _HomePageState({this.searchclick = false});
   PageController _pageController = new PageController(initialPage: 0);
+
+  @override
+  void initState() {
+    searchclick = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,7 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size.fromHeight(80),
         child: HomeAppBar(),
       ),
-      drawer:AppDrawer(), 
+      drawer: AppDrawer(),
       body: Stack(
         children: <Widget>[
           PageView(
@@ -49,10 +56,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FutureBuilder<List>(
                     future: SqlHelper().getOffers('1', '1', '1'),
-                    builder: (context,snapshot){
-                      if(snapshot.hasError) print(snapshot.error);
-                      return snapshot.hasData? RecentCards(snapshot.data)
-                      :new Center(child: new CircularProgressIndicator(),);
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) print(snapshot.error);
+                      return snapshot.hasData
+                          ? RecentCards(snapshot.data)
+                          : new Center(
+                              child: new CircularProgressIndicator(),
+                            );
                     },
                   ),
                 ],
@@ -70,12 +80,15 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                FutureBuilder<List>(
+                  FutureBuilder<List>(
                     future: SqlHelper().getOffers('1', '1', '1'),
-                    builder: (context,snapshot){
-                      if(snapshot.hasError) print(snapshot.error);
-                      return snapshot.hasData?RecentCards(snapshot.data)
-                      :new Center(child: new CircularProgressIndicator(),);
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) print(snapshot.error);
+                      return snapshot.hasData
+                          ? RecentCards(snapshot.data)
+                          : new Center(
+                              child: new CircularProgressIndicator(),
+                            );
                     },
                   ),
                 ],
@@ -93,14 +106,15 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                 FutureBuilder<List>(
-                   
+                  FutureBuilder<List>(
                     future: SqlHelper().getKnowledge(),
-                    builder: (context,snapshot){
-                      if(snapshot.hasError) print(snapshot.error);
-                      return snapshot.hasData?RecentCards(snapshot.data)
-                      :new Center(child: new CircularProgressIndicator(
-                      ),);
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) print(snapshot.error);
+                      return snapshot.hasData
+                          ? RecentCards(snapshot.data)
+                          : new Center(
+                              child: new CircularProgressIndicator(),
+                            );
                     },
                   ),
                 ],
@@ -116,9 +130,7 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              
-              if (searchclick)
-              search,
+              if (searchclick) search,
             ],
           ),
         ],

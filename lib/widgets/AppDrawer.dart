@@ -1,11 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:kaf/main.dart';
+import 'package:kaf/models/user_model.dart';
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/Pages/EditProfile.dart';
+import 'package:kaf/Pages/LoadPage.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../localizations.dart';
 import 'Drawer_Button.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  User user;
+  bool finish;
+  setUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.get('token');
+    //print(token);
+    if (token == null)
+      Navigator.pushNamed(context, '/login');
+    else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> userList = prefs.getStringList('userList');
+      if (userList == null) {
+        Map userData = await SqlHelper.getUser(token);
+        user = new User(
+            id: userData['id'].toString(),
+            email: userData['email'].toString(),
+            name: userData['name'],
+            imageUrl: userData['avatar']);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setStringList('userList', user.getUserList());
+        setState(() {
+          finish = true;
+        });
+      } else {
+        Map<int, String> userData = userList.asMap();
+        user = new User(
+          id: userData[0],
+          name: userData[1],
+          imageUrl: userData[2],
+          birthdate: userData[3],
+          bloodType: userData[4],
+          email: userData[5],
+          gender: userData[6],
+          phone: userData[7],
+          type: userData[8],
+        );
+        setState(() {
+          finish = true;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    finish = false;
+    setUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -28,15 +87,21 @@ class AppDrawer extends StatelessWidget {
                         children: <Widget>[
                           SafeArea(
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 IconButton(
                                   icon: Icon(
                                     MdiIcons.settingsOutline,
                                     color: Colors.white,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              EditProfile(user)),
+                                    );
+                                  },
                                 ),
                                 IconButton(
                                   icon: Icon(
@@ -50,70 +115,93 @@ class AppDrawer extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: Image.asset(
-                              "assets/Logo.png",
-                              width: 100,
-                              height: 100,
-                            ),
-                          ),
-                          Text(
-                            "Mahmoud Mohamed",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          ),
-                          Text("+966 9712345667",
-                              style: TextStyle(
-                                color: Colors.white,
-                              )),
-                          SafeArea(
-                            child: Column(
-                              children: <Widget>[
-                                Text(
-                                  "22%",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                      color: Colors.black45,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(50))),
-                                  width: MediaQuery.of(context).size.width *
-                                      0.8,
-                                  height: 10,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Container(
-                                        padding: EdgeInsets.only(left: 15),
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50))),
-                                        width: 75,
+                          finish
+                              ? Column(
+                                  children: <Widget>[
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Image.asset(
+                                        "assets/Logo.png",
+                                        width: 100,
+                                        height: 100,
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                OutlineButton(
-                                  borderSide:
-                                      BorderSide(color: Colors.white),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(30.0)),
-                                  onPressed: () {},
-                                  child: Text(
-                                    AppLocalizations.of(context)
-                                        .completYourProfile,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                    ),
+                                    Text(
+                                      user.name,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    Text("+966 9712345667",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        )),
+                                    SafeArea(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text(
+                                            "22%",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          Container(
+                                            padding: EdgeInsets.all(3),
+                                            decoration: BoxDecoration(
+                                                color: Colors.black45,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(50))),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.8,
+                                            height: 10,
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                  padding:
+                                                      EdgeInsets.only(left: 15),
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  50))),
+                                                  width: 75,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          OutlineButton(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    new BorderRadius.circular(
+                                                        30.0)),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        EditProfile(user)),
+                                              );
+                                            },
+                                            child: Text(
+                                              AppLocalizations.of(context)
+                                                  .completYourProfile,
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 )
-                              ],
-                            ),
-                          ),
+                              : CircularProgressIndicator(
+                                  backgroundColor: Colors.white,
+                                ),
                         ],
                       ),
                     ),
@@ -150,8 +238,17 @@ class AppDrawer extends StatelessWidget {
                     DrawerButton(
                       name: AppLocalizations.of(context).language,
                       icon: Icons.language,
-                      onPressed: () {
-                        App.getAppLanguage();
+                      onPressed: () async {
+                        SharedPreferences pref =
+                            await SharedPreferences.getInstance();
+                        if (App.getAppLanguage() == "en")
+                          pref.setString('language', 'ar');
+                        else
+                          pref.setString('language', 'en');
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoadPage()),
+                        );
                       },
                     ),
                     Container(
@@ -177,7 +274,7 @@ class AppDrawer extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom:20.0),
+                  padding: const EdgeInsets.only(bottom: 20.0),
                   child: Text(
                     AppLocalizations.of(context).copyRight,
                     style: TextStyle(color: Colors.white54),
