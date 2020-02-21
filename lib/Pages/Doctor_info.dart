@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kaf/Pages/LoadPage.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/models/doctor_model.dart';
 import 'package:kaf/models/clinic_model.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:kaf/test.dart';
 import 'gallery.dart';
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/Pages/Offer_details_2.dart';
 
 class DoctorInfo extends StatefulWidget {
+  final List<String> ids;
+
+  DoctorInfo({Key key, @required this.ids}) : super(key: key);
   @override
   _DoctorInfoState createState() => _DoctorInfoState();
 }
@@ -14,30 +21,29 @@ class DoctorInfo extends StatefulWidget {
 class _DoctorInfoState extends State<DoctorInfo> {
   Clinic clinic;
   Doctor doctor;
+  List doctorData;
+  List clinicData;
+  static bool finishLoad ;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    finishLoad = false;
     clinic = new Clinic();
     doctor = new Doctor();
-    clinic.clinicName = "al hayah Clinic";
-    clinic.hospitalName = "international medical hospital";
-    clinic.rate = 4;
-    clinic.field = "Cardiology Clinic";
-    clinic.offer = 50;
-    clinic.price = 500;
-    clinic.status = false;
-    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
-    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
-    doctor.yearsOfEperience = 14;
-    doctor.name = "Mahmoud Abo Metwli";
-    doctor.rate = 4.8;
-    doctor.field = "B.Sc.MD-Cardoilogy";
-    doctor.images = new List<String>();
-    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
-    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
-    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
-    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
-    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
-    return Material(
+    getData(widget.ids).then((v){
+       setState(() {
+ finishLoad = true;
+ fillpage(clinic,doctor);
+       });
+      
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return !finishLoad?Test():
+    Material(
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -56,10 +62,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
               ],
             ),
           ),
-          Image.asset(
-            "asserts/DrawerBG.png",
-            fit: BoxFit.cover,
-          ),
+       
           Center(
             child: SingleChildScrollView(
               child: Column(
@@ -282,7 +285,7 @@ class _DoctorInfoState extends State<DoctorInfo> {
           ],
         ),
       );
-    } else if (doctor.images.length == 1){
+    } else if (doctor.images.length == 1) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -293,10 +296,9 @@ class _DoctorInfoState extends State<DoctorInfo> {
           ],
         ),
       );
-    }else {
+    } else {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-      
       );
     }
   }
@@ -362,7 +364,11 @@ class _DoctorInfoState extends State<DoctorInfo> {
                   borderRadius: new BorderRadius.circular(18.0)),
               color: Colors.white,
               onPressed: () {
-                Navigator.pushNamed(context, "/Offer_details_2");
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OfferDetails2(ids :widget.ids)),
+                    );
               },
               child: Text("Take this offer",
                   style: TextStyle(
@@ -607,88 +613,94 @@ class _DoctorInfoState extends State<DoctorInfo> {
       ),
     );
   }
-  Widget price(){
-    if(clinic.offer>0){
+
+  Widget price() {
+    if (clinic.offer > 0) {
       return Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        width: 40,
-                      ),
-                      Container(
-                        child: Center(
-                            child: Text(
-                          clinic.offer.toString() + "%",
-                          style: TextStyle(color: Colors.white, fontSize: 12),
-                        )),
-                        width: 40,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(201, 71, 71, 1),
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(25),
-                                bottomLeft: Radius.circular(25))),
-                      ),
-                    ],
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Container(
+                width: 40,
+              ),
+              Container(
+                child: Center(
+                    child: Text(
+                  clinic.offer.toString() + "%",
+                  style: TextStyle(color: Colors.white, fontSize: 12),
+                )),
+                width: 40,
+                height: 20,
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(201, 71, 71, 1),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        bottomLeft: Radius.circular(25))),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context).price + "    ",
+                        style: TextStyle(fontSize: 8)),
+                    Text(
+                      clinic.price.toString() +
+                          " " +
+                          AppLocalizations.of(context).sr,
+                      style: TextStyle(
+                          fontSize: 8, decoration: TextDecoration.lineThrough),
+                    )
+                  ],
+                ),
+                Center(
+                  child: Text(
+                    (clinic.price * (clinic.offer / 100)).toString() +
+                        " " +
+                        AppLocalizations.of(context).sr,
+                    style: TextStyle(
+                        fontSize: 17, color: Theme.of(context).accentColor),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(AppLocalizations.of(context).price + "    ",
-                                style: TextStyle(fontSize: 8)),
-                            Text(
-                              clinic.price.toString()+" " + AppLocalizations.of(context).sr,
-                              style: TextStyle(
-                                  fontSize: 8,
-                                  decoration: TextDecoration.lineThrough),
-                            )
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            (clinic.price*(clinic.offer/100)).toString()+" " + AppLocalizations.of(context).sr,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Theme.of(context).accentColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              );
-    }else {
+                )
+              ],
+            ),
+          )
+        ],
+      );
+    } else {
       return Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(AppLocalizations.of(context).price + "    ",
-                                style: TextStyle(fontSize: 8)),
-                          ],
-                        ),
-                        Center(
-                          child: Text(
-                            (clinic.price).toString()+" " + AppLocalizations.of(context).sr+" ",
-                          style: TextStyle(
-                                fontSize: 17,
-                                color: Theme.of(context).accentColor),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              );
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Text(AppLocalizations.of(context).price + "    ",
+                        style: TextStyle(fontSize: 8)),
+                  ],
+                ),
+                Center(
+                  child: Text(
+                    (clinic.price).toString() +
+                        " " +
+                        AppLocalizations.of(context).sr +
+                        " ",
+                    style: TextStyle(
+                        fontSize: 17, color: Theme.of(context).accentColor),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
+      );
     }
   }
+
   Widget photo(String path) {
     return InkWell(
       onTap: () {
@@ -710,5 +722,33 @@ class _DoctorInfoState extends State<DoctorInfo> {
         ),
       ),
     );
+  }
+
+  Future getData(List<String> ids) async {
+    doctorData = await SqlHelper.getDoctor(int.parse(widget.ids[1]));
+    clinicData = await SqlHelper.getClinic(int.parse(widget.ids[0]));
+  }
+  void fillpage(Clinic clinic,Doctor doctor){
+    clinic.clinicName = clinicData[0]['name'].toString();
+    clinic.hospitalName = clinicData[0]['hospital_Name'].toString();
+    clinic.rate = int.parse(clinicData[0]['Rate'].toString());
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 50;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = clinicData[0]['Address'].toString();
+    clinic.photo =
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.yearsOfEperience = doctorData[0]['Years_Of_Experience'];
+    doctor.name = doctorData[0]['name'].toString();
+    doctor.rate = double.parse(doctorData[0]['Rate'].toString());
+    doctor.field = doctorData[0]['Field'];
+    doctor.images = new List<String>();
+    doctor.profileImage =
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
+    doctor.images.add("http://kaf.ideagroup-sa.com/image/doctors/doctor1.jpg");
   }
 }

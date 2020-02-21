@@ -5,34 +5,43 @@ import '../localizations.dart';
 import 'Doctor_info.dart';
 import 'Offer_details_2.dart';
 import 'package:kaf/models/clinic_model.dart';
-
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/test.dart';
 
 class ClinicInfo extends StatefulWidget {
   @override
   _ClinicInfoState createState() => _ClinicInfoState();
+  final List<String> ids;
+
+  ClinicInfo({Key key, @required this.ids}) : super(key: key);
 }
 
 class _ClinicInfoState extends State<ClinicInfo> {
   Clinic clinic;
   Doctor doctor;
+  
+  List doctorData;
+  List clinicData;
+  static bool finishLoad ;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
+    finishLoad = false;
     clinic = new Clinic();
     doctor = new Doctor();
-    clinic.clinicName = "al hayah Clinic";
-    clinic.hospitalName = "international medical hospital";
-    clinic.rate = 4;
-    clinic.field = "Cardiology Clinic";
-    clinic.offer = 0;
-    clinic.price = 500;
-    clinic.status = false;
-    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
-    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
-    doctor.name = "Dr. Mahmoud Metwali";
-    doctor.field = "B.Sc,MD - Cadiology";
-    doctor.jopTitle = "Advisory";
-    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
-    return Stack(
+    getData(widget.ids).then((v){
+       setState(() {
+ finishLoad = true;
+ fillpage(clinic,doctor);
+       });
+      
+    });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return !finishLoad?Test():
+     Stack(
       children: <Widget>[
         Container(
           height: MediaQuery.of(context).size.height,
@@ -173,7 +182,7 @@ class _ClinicInfoState extends State<ClinicInfo> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => OfferDetails2()),
+                          builder: (context) => OfferDetails2(ids :widget.ids)),
                     );
                   },
                   child: Text(AppLocalizations.of(context).takeThisOffer,
@@ -383,8 +392,7 @@ class _ClinicInfoState extends State<ClinicInfo> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => DoctorInfo()),
-                    
+                    MaterialPageRoute(builder: (context) => DoctorInfo(ids: widget.ids)),                    
                   );
                 },
                 child: Text(AppLocalizations.of(context).moreDetails,
@@ -481,6 +489,7 @@ class _ClinicInfoState extends State<ClinicInfo> {
         ));
   }
   Widget price (){
+
     if(clinic.offer>0){
       return Column(
               children: <Widget>[
@@ -565,4 +574,26 @@ class _ClinicInfoState extends State<ClinicInfo> {
             );
     }
   }
+
+
+  Future getData(List<String> ids) async {
+    doctorData = await SqlHelper.getDoctor(int.parse(widget.ids[1]));
+    clinicData = await SqlHelper.getClinic(int.parse(widget.ids[0]));
+  }
+    void fillpage(Clinic clinic,Doctor doctor){
+    clinic.clinicName = clinicData[0]['name'].toString();
+    clinic.hospitalName = clinicData[0]['hospital_Name'].toString();
+    clinic.rate = int.parse(clinicData[0]['Rate'].toString());
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 0;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = clinicData[0]['Address'].toString();
+    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.name = doctorData[0]['name'].toString();
+    doctor.field = doctorData[0]['Field'];
+    doctor.jopTitle = "Advisory";
+    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
+  }
+
 }

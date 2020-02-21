@@ -3,7 +3,7 @@ import 'package:kaf/localizations.dart';
 import 'package:kaf/models/clinic_card.dart';
 import 'package:kaf/models/clinic_model.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'package:kaf/Pages/Clinic_info.dart';
 class RecentCards extends StatelessWidget {
   final List list;
   RecentCards(this.list);
@@ -51,7 +51,13 @@ class RecentCards extends StatelessWidget {
                     Image.asset(card.clinic.photo),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, "/Clinic_info");
+                        List<String> idlist = new List<String>();
+                        idlist.add(list[index]['id'].toString());
+                        idlist.add(list[index]['doctor_id'].toString());
+                        Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ClinicInfo(ids: idlist)),                    
+                  );
                       },
                       child: Container(
                         padding: EdgeInsets.only(top: 5, left: 15, right: 15),

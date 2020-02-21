@@ -100,10 +100,18 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  Future<List<dynamic>> getDoctor(int id) async {
+  static Future<List> getDoctor(int id) async {
     String url = "http://kaf.ideagroup-sa.com/api/doctor";
     http.Response response = await http.post(url, body: {
       "doctor_id": "$id",
+    });
+    return json.decode(response.body);
+  }
+
+static Future<List> getClinic(int id) async {
+    String url = "http://kaf.ideagroup-sa.com/api/clinic";
+    http.Response response = await http.post(url, body: {
+      "id": "$id",
     });
     return json.decode(response.body);
   }

@@ -4,40 +4,46 @@ import 'package:kaf/localizations.dart';
 import 'package:kaf/models/clinic_model.dart';
 import 'package:kaf/Pages/Offer_Details.dart';
 import 'package:kaf/models/doctor_model.dart';
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/test.dart';
 class OfferDetails2 extends StatefulWidget {
   @override
   _OfferDetails2State createState() => _OfferDetails2State();
+  final List<String> ids;
+
+  OfferDetails2({Key key, @required this.ids}) : super(key: key);
 }
 
 class _OfferDetails2State extends State<OfferDetails2> {
   Clinic clinic;
   Doctor doctor;
   bool taken;
+  
+  List doctorData;
+  List clinicData;
+  static bool finishLoad ;
+  @override
+  
   @override
   void initState() {
-    super.initState();
     taken = false;
+    finishLoad = false;
+    clinic = new Clinic();
+    doctor = new Doctor();
+    getData(widget.ids).then((v){
+       setState(() {
+ finishLoad = true;
+ fillpage(clinic,doctor);
+       });
+      
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    clinic = new Clinic();
-    doctor = new Doctor();
-    clinic.clinicName = "al hayah Clinic";
-    clinic.hospitalName = "international medical hospital";
-    clinic.rate = 4;
-    clinic.field = "Cardiology Clinic";
-    clinic.offer = 50;
-    clinic.price = 500;
-    clinic.status = false;
-    clinic.address = "92/6, 3rd Floor, Outer Ring Road, Jeddah";
-    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
-    doctor.name = "Dr. Mahmoud Metwali";
-    doctor.field = "B.Sc,MD - Cadiology";
-    doctor.jopTitle = "Advisory";
-    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";
-    
-    return Material(
+    return !finishLoad?Test(): 
+    Material(
       child: Stack(
         children: <Widget>[
           Scaffold(
@@ -156,7 +162,7 @@ class _OfferDetails2State extends State<OfferDetails2> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OfferDetails()),
+                                  builder: (context) => OfferDetails(clinicId: clinicData[0]['id'].toString(),)),
                             );
                             taken = true;
                           });
@@ -437,4 +443,27 @@ class _OfferDetails2State extends State<OfferDetails2> {
       ],
     );
   }
+
+  Future getData(List<String> ids) async {
+    doctorData = await SqlHelper.getDoctor(int.parse(widget.ids[1]));
+    clinicData = await SqlHelper.getClinic(int.parse(widget.ids[0]));
+  }
+    void fillpage(Clinic clinic,Doctor doctor){
+    
+    clinic.clinicName = clinicData[0]['name'].toString();
+    clinic.hospitalName = clinicData[0]['hospital_Name'].toString();
+    clinic.rate = int.parse(clinicData[0]['Rate'].toString());
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 50;
+    clinic.price = 500;
+    clinic.status = false;
+    clinic.address = clinicData[0]['Address'].toString();
+    clinic.photo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAhiikVdPYN4lQQTs55zTP5DZ-aXPPX911PgWbVUIqJwhCyeQ';
+    doctor.name = doctorData[0]['name'].toString();
+    doctor.field = doctorData[0]['Field'];
+    doctor.jopTitle = "Advisory";
+    doctor.profileImage = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRFFULKS9deO06AFbzEWpy49NXfKcrU6nRwUjo3LUMHLnCXPRaa";    
+
+  }
+
 }
