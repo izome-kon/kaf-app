@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/widgets/Logo.dart';
 import 'package:kaf/widgets/TxtField.dart';
 
 class SignUpTab extends StatefulWidget {
@@ -13,6 +15,7 @@ class SignUpTab extends StatefulWidget {
 
 class _SignUpTabState extends State<SignUpTab> {
   SqlHelper sql = new SqlHelper();
+  bool laod;
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController fullName = TextEditingController();
@@ -32,6 +35,12 @@ class _SignUpTabState extends State<SignUpTab> {
                 )
               ],
             ));
+  }
+
+  @override
+  void initState() {
+    laod = false;
+    super.initState();
   }
 
   @required
@@ -104,97 +113,129 @@ class _SignUpTabState extends State<SignUpTab> {
                   bottomLeft: const Radius.circular(20.0),
                   bottomRight: const Radius.circular(20.0)),
             ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 40.0, right: 40.0),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.only(top: 20.0),
-                      child: CircleAvatar(
-                        radius: MediaQuery.of(context).size.height * 0.08,
-                        child: Image.asset("assets/Logo.png"),
+            child: laod
+                ? Stack(
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/DrawerBG.png',
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      Center(
+                          child: Logo(
+                        logosize: 200,
                       )),
-                  new Text(AppLocalizations.of(context).title,
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor, fontSize: 40)),
-                  TxtFeild(
-                    txt: AppLocalizations.of(context).fullName,
-                    icon: Icon(Icons.person),
-                    obscure: false,
-                    controller: fullName,
-                  ),
-                  TxtFeild(
-                      txt: AppLocalizations.of(context).userName,
-                      icon: Icon(Icons.person),
-                      obscure: false),
-                  TxtFeild(
-                    txt: AppLocalizations.of(context).email,
-                    icon: Icon(Icons.email),
-                    obscure: false,
-                    controller: username,
-                  ),
-                  TxtFeild(
-                    txt: AppLocalizations.of(context).password,
-                    icon: Icon(Icons.lock),
-                    obscure: true,
-                    controller: password,
-                  ),
-                  TxtFeild(
-                      txt: AppLocalizations.of(context).phone,
-                      icon: Icon(Icons.phone),
-                      obscure: false),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 4.0),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 6 / 20,
-                            height: 50,
-                            child: FlatButton(
-                              shape: new RoundedRectangleBorder(
-                                  borderRadius:
-                                      new BorderRadius.circular(25.0)),
-                              color: Theme.of(context).primaryColor,
-                              onPressed: () {
-                                sql
-                                    .register(
-                                        name: fullName.text,
-                                        email: username.text,
-                                        password: password.text)
-                                    .then((v) {
-                                  if (!SqlHelper.status)
-                                    wrongUser();
-                                  else
-                                    Navigator.pushNamed(
-                                        context, "/LocationSet");
-                                });
-                              },
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: <Widget>[
-                                  Text(AppLocalizations.of(context).signUp,
-                                      style: TextStyle(
-                                          fontSize: 16.0, color: Colors.white)),
-                                  Icon(
-                                    Icons.arrow_forward,
-                                    color: Colors.white,
+                      Center(
+                        child: SpinKitPulse(
+                          color: Colors.white,
+                          size: 200.0,
+                        ),
+                      ),
+                    ],
+                  )
+                : Padding(
+                    padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: CircleAvatar(
+                              radius: MediaQuery.of(context).size.height * 0.08,
+                              child: Image.asset("assets/Logo.png"),
+                            )),
+                        new Text(AppLocalizations.of(context).title,
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 40)),
+                        TxtFeild(
+                          txt: AppLocalizations.of(context).fullName,
+                          icon: Icon(Icons.person),
+                          obscure: false,
+                          controller: fullName,
+                        ),
+                        TxtFeild(
+                            txt: AppLocalizations.of(context).userName,
+                            icon: Icon(Icons.person),
+                            obscure: false),
+                        TxtFeild(
+                          txt: AppLocalizations.of(context).email,
+                          icon: Icon(Icons.email),
+                          obscure: false,
+                          controller: username,
+                        ),
+                        TxtFeild(
+                          txt: AppLocalizations.of(context).password,
+                          icon: Icon(Icons.lock),
+                          obscure: true,
+                          controller: password,
+                        ),
+                        TxtFeild(
+                            txt: AppLocalizations.of(context).phone,
+                            icon: Icon(Icons.phone),
+                            obscure: false),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 4.0),
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 4.0),
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      6 /
+                                      20,
+                                  height: 50,
+                                  child: FlatButton(
+                                    shape: new RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(25.0)),
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () {
+                                      setState(() {
+                                        laod = true;
+                                      });
+                                      sql
+                                          .register(
+                                              name: fullName.text,
+                                              email: username.text,
+                                              password: password.text)
+                                          .then((v) {
+                                        setState(() {
+                                          laod = false;
+                                        });
+                                        if (!SqlHelper.status)
+                                          wrongUser();
+                                        else
+                                          Navigator.pushNamed(
+                                              context, "/LocationSet");
+                                      });
+                                    },
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        Text(
+                                            AppLocalizations.of(context).signUp,
+                                            style: TextStyle(
+                                                fontSize: 16.0,
+                                                color: Colors.white)),
+                                        Icon(
+                                          Icons.arrow_forward,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
           ),
         ),
       ],

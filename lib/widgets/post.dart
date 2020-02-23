@@ -5,7 +5,8 @@ import 'package:kaf/models/post_model.dart';
 class Post extends StatelessWidget {
   bool liked = false;
   final PostModel postModel;
-  final String imgPaths = "http://Kaf.ideagroup-sa.com/storage/app/public/posts/";
+  final String imgPaths =
+      "http://Kaf.ideagroup-sa.com/storage/app/public/posts/";
   Post({this.postModel});
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class Post extends StatelessWidget {
                           IconButton(
                             onPressed: () {},
                             icon: Icon(
-                              liked? Icons.star:Icons.star_border,
+                              liked ? Icons.star : Icons.star_border,
                               color: Colors.amber,
                             ),
                           ),
@@ -76,8 +77,7 @@ class Post extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         postModel.text,
-                        style:
-                        TextStyle(color: Theme.of(context).primaryColor),
+                        style: TextStyle(color: Theme.of(context).primaryColor),
                       )
                     ],
                   )
@@ -86,7 +86,20 @@ class Post extends StatelessWidget {
             ),
           ],
         ),
-        Image.network("$imgPaths"+postModel.imageUrl,fit: BoxFit.cover,height: 250,width: MediaQuery.of(context).size.width,),
+        postModel.imageUrl != ""
+            ? Image.network(
+                "$imgPaths" + postModel.imageUrl,
+                fit: BoxFit.cover,
+                height: 250,
+                width: MediaQuery.of(context).size.width,
+              )
+            : Center(
+                child: Icon(
+                  Icons.broken_image,
+                  color: Colors.black12,
+                  size: 200,
+                ),
+              ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -97,10 +110,15 @@ class Post extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, "/Help");
               },
-              child: Text(AppLocalizations.of(context).helpHimNow,style: TextStyle(color: Colors.red),),
+              child: Text(
+                AppLocalizations.of(context).helpHimNow,
+                style: TextStyle(color: Colors.red),
+              ),
               color: Colors.white,
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50),side: BorderSide(color: Colors.red)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                  side: BorderSide(color: Colors.red)),
             )
           ],
         )

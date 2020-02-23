@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
 import 'package:kaf/Contents/myAppBar.dart';
 import 'package:kaf/Pages/SearchAll.dart';
@@ -7,7 +6,6 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/localizations.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/AppDrawer.dart';
-import 'package:kaf/widgets/Logo.dart';
 import 'package:kaf/widgets/cards_list.dart';
 
 class HomePage extends StatefulWidget {

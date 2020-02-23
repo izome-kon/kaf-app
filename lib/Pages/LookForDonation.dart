@@ -15,16 +15,16 @@ class LookForDonation extends StatefulWidget {
 }
 
 class _LookForDonationState extends State<LookForDonation> {
-    var _selectedIndex = 3;
-    int _postsCounter;
-    List test;
+  var _selectedIndex = 3;
+  int _postsCounter;
+  List test;
   PageController _pageController = new PageController(initialPage: 3);
 
   bool load;
 
   @override
   void initState() {
-    load=false;
+    load = false;
     fun();
     super.initState();
   }
@@ -32,100 +32,105 @@ class _LookForDonationState extends State<LookForDonation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: !load?Center(child: CircularProgressIndicator(),):
-      CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            backgroundColor: Theme.of(context).primaryColor,
-            pinned: true,
-            expandedHeight: 250,
-            elevation: 20,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                fit: StackFit.expand,
-                children: <Widget>[
-                  Image.asset(
-                    "assets/BGLogInState@2x.png",
-                    fit: BoxFit.cover,
+      body: !load
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : CustomScrollView(
+              slivers: <Widget>[
+                SliverAppBar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  pinned: true,
+                  expandedHeight: 250,
+                  elevation: 20,
+                  leading: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        height: MediaQuery.of(context).size.height * 0.2,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white24,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Stack(
+                      fit: StackFit.expand,
+                      children: <Widget>[
+                        Image.asset(
+                          "assets/BGLogInState@2x.png",
+                          fit: BoxFit.cover,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  _postsCounter.toString(),
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 40),
-                                ),
-                                Text(
-                                  AppLocalizations.of(context).lookForDonation,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                            RaisedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, "/AddyourNeed");
-                              },
-                              child: Text(
-                                AppLocalizations.of(context).addYourNeed,
-                                style: TextStyle(color: Theme.of(context).primaryColor),
+                            Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white24,
                               ),
-                              color: Colors.white,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50),
-                                  
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        _postsCounter.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 40),
+                                      ),
+                                      Text(
+                                        AppLocalizations.of(context)
+                                            .lookForDonation,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                            )
+                                  RaisedButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, "/AddyourNeed");
+                                    },
+                                    child: Text(
+                                      AppLocalizations.of(context).addYourNeed,
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    ),
+                                    color: Colors.white,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              title: Text(AppLocalizations.of(context).lookForDonation),
-              centerTitle: true,
+                        )
+                      ],
+                    ),
+                    title: Text(AppLocalizations.of(context).lookForDonation),
+                    centerTitle: true,
+                  ),
+                ),
+                SliverPrototypeExtentList(
+                  prototypeItem: Post(
+                    postModel: PostModel(User(name: '?'), '?', "?", "? ", "?"),
+                  ),
+                  delegate: SliverChildListDelegate(children1),
+                )
+              ],
             ),
-          ),
-          SliverPrototypeExtentList(
-            prototypeItem: Post(
-          postModel: PostModel(User(name: '?'), '?', "?", "? ", "?"),
-        ),
-            delegate: SliverChildListDelegate(
-             children1        
-            ),
-          )
-        ],
-      ),
-         floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(
           Icons.search,
@@ -137,14 +142,13 @@ class _LookForDonationState extends State<LookForDonation> {
       bottomNavigationBar: BottomNavyBar(
         selectedIndex: _selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
-        
+
         onItemSelected: (index) => setState(() {
           Navigator.pop(context);
           _selectedIndex = index;
           _pageController.animateToPage(index,
               duration: Duration(milliseconds: 300), curve: Curves.ease);
         }),
-
 
         items: [
           BottomNavyBarItem(
@@ -188,33 +192,34 @@ class _LookForDonationState extends State<LookForDonation> {
               activeColor: Theme.of(context).accentColor),
         ],
       ),
-    
     );
   }
-  List<Widget> children1 ;
-    Future <List> fun() async{
-      await Jiffy.locale(App.getAppLanguage());
-      return await SqlHelper().needs().then(
-        (v){
-         setState(() {
-           _postsCounter = v.length;
-           children1= children(v);
-            load = true;
-         });
-        }
-      ) ;
+
+  List<Widget> children1;
+  Future<List> fun() async {
+    await Jiffy.locale(App.getAppLanguage());
+    return await SqlHelper().needs().then((v) {
+      setState(() {
+        _postsCounter = v.length;
+        children1 = children(v);
+        load = true;
+      });
+    });
+  }
+
+  List<Widget> children(List data) {
+    List<Widget> posts = new List<Widget>();
+    for (var item in data) {
+      var image = item['image'] != null ? item['image'] : "";
+      posts.add(Post(
+        postModel: PostModel(
+            User(name: item['user_id'].toString()),
+            item['text'],
+            image,
+            Jiffy(DateTime.parse(item['created_at'])).fromNow(),
+            item['address']),
+      ));
     }
-     List<Widget> children(List data){
-       List<Widget> posts = new List<Widget>();
-       for (var item in data) {
-         posts.add(Post(
-          postModel: PostModel(User(name: item['user_id'].toString()), item['text'], item['image'], Jiffy(DateTime.parse(item['created_at'])).fromNow(), item['address']),
-        ));
-       }
-       return posts;
-     } 
-
-
-
- 
+    return posts;
+  }
 }

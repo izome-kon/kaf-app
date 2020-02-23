@@ -27,29 +27,29 @@ class _AppDrawerState extends State<AppDrawer> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String> userList = prefs.getStringList('userList');
       if (userList == null) {
-        Map userData = await SqlHelper.getUser(token);
+        Map userMap = await SqlHelper.getUser(token);
         user = new User(
-            id: userData['id'].toString(),
-            email: userData['email'].toString(),
-            name: userData['name'],
-            imageUrl: userData['avatar']);
+            id: userMap['id'].toString(),
+            email: userMap['email'].toString(),
+            name: userMap['name'],
+            imageUrl: userMap['avatar']);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setStringList('userList', user.getUserList());
         setState(() {
           finish = true;
         });
       } else {
-        Map<int, String> userData = userList.asMap();
+        Map<int, String> userMap = userList.asMap();
         user = new User(
-          id: userData[0],
-          name: userData[1],
-          imageUrl: userData[2],
-          birthdate: userData[3],
-          bloodType: userData[4],
-          email: userData[5],
-          gender: userData[6],
-          phone: userData[7],
-          type: userData[8],
+          id: userMap[0],
+          name: userMap[1],
+          imageUrl: userMap[2],
+          birthdate: userMap[3],
+          bloodType: userMap[4],
+          email: userMap[5],
+          gender: userMap[6],
+          phone: userMap[7],
+          type: userMap[8],
         );
         setState(() {
           finish = true;

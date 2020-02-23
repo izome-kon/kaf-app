@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gender_selection/gender_selection.dart';
 import 'package:kaf/Contents/BottomNavyBar.dart';
 import 'package:kaf/models/post_model.dart';
@@ -9,6 +10,7 @@ import 'package:kaf/models/user_model.dart';
 import 'package:kaf/sql/sqlHelper.dart';
 import 'package:kaf/widgets/BloodButton.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kaf/widgets/Logo.dart';
 import '../localizations.dart';
 
 class AddYourNeed extends StatefulWidget {
@@ -22,17 +24,41 @@ class _AddYourNeedState extends State<AddYourNeed> {
   PageController _pageController = new PageController(initialPage: 3);
 
   bool rouleValue;
-  File  image;
+  File image;
+
+  bool laod;
+
+  bool imageLoaded;
   @override
   void initState() {
-    
+    imageLoaded = false;
+    laod = false;
     rouleValue = false;
     super.initState();
   }
 
   Future getImage() async {
     image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    imageLoaded = true;
   }
+
+  alter(String msg) {
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+              title: Text("تنبيه"),
+              content: Text(msg),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("حسناً"),
+                  onPressed: () {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                )
+              ],
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,197 +130,235 @@ class _AddYourNeedState extends State<AddYourNeed> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
+          Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: laod
+                    ? Stack(
                         children: <Widget>[
-                          CircleAvatar(
-                            radius: 50,
-                            child: Image.asset("assets/comment.png"),
+                          Center(
+                              child: Logo(
+                            logosize: 200,
+                          )),
+                          Center(
+                            child: SpinKitPulse(
+                              color: Colors.white,
+                              size: 200.0,
+                            ),
                           ),
-                          Text("Mahmoud Mohamed",
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 20)),
-                          Text("+966015505886"),
                         ],
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0, bottom: 50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30, left: 30),
-                          child: new TextField(
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context).primaryColor),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context).accentColor),
-                                ),
-                                labelText:
-                                    AppLocalizations.of(context).writeYourNeed,
-                                alignLabelWithHint: true,
-                                filled: true,
-                                fillColor: Colors.white),
-                            style: new TextStyle(color: Colors.black),
-                            controller: control,
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            RaisedButton(
-                                elevation: 0,
-                                onPressed: getImage,
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    side: BorderSide(
-                                        color: Theme.of(context).primaryColor)),
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.camera_enhance,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                    Text(AppLocalizations.of(context).addPhoto,
-                                        style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor))
-                                  ],
-                                )),
-                            RaisedButton(
-                                elevation: 0,
-                                onPressed: () {},
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                    side: BorderSide(
-                                        color: Theme.of(context).primaryColor)),
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(Icons.location_on,
-                                        color: Theme.of(context).primaryColor),
-                                    Text(
-                                        AppLocalizations.of(context)
-                                            .addLocation,
-                                        style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor))
-                                  ],
-                                ))
-                          ],
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: Column(
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Row(
+                              Column(
                                 children: <Widget>[
-                                  Text(
-                                    AppLocalizations.of(context).gender,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: Theme.of(context).primaryColor),
+                                  CircleAvatar(
+                                    radius: 50,
+                                    child: Image.asset("assets/comment.png"),
                                   ),
+                                  Text("Mahmoud Mohamed",
+                                      style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
+                                          fontSize: 20)),
+                                  Text("+966015505886"),
                                 ],
                               ),
-                              GenderSelection(
-                                maleText: "Male",
-                                femaleText: "Female",
-                                femaleImage:
-                                    AssetImage('assets/woman (2)@2x.png'),
-                                maleImage: AssetImage('assets/man (5)@2x.png'),
-                                selectedGenderIconBackgroundColor:
-                                    Theme.of(context).primaryColor,
-                                checkIconAlignment: Alignment.bottomRight,
-                                onChanged: (Gender gender) {
-                                  print(gender);
-                                },
-                                equallyAligned: true,
-                                animationDuration: Duration(milliseconds: 400),
-                                isCircular: true, // default : true,
-                                isSelectedGenderIconCircular: true,
-                                opacityOfGradient: 0.1,
-                                linearGradient: LinearGradient(colors: [
-                                  Theme.of(context).accentColor,
-                                  Theme.of(context).accentColor
-                                ]),
-                                padding: const EdgeInsets.all(3),
-                                size: 80, //default : 120
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Text(
-                                      AppLocalizations.of(context).selectBlood),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    BloodButton("A+"),
-                                    BloodButton("A-"),
-                                    BloodButton("B+"),
-                                    BloodButton("B-"),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    BloodButton("O+"),
-                                    BloodButton("O-"),
-                                    BloodButton("AB+"),
-                                    BloodButton("AB-"),
-                                  ],
-                                ),
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Checkbox(
-                                    onChanged: (T) {
-                                      setState(() {
-                                        rouleValue = !rouleValue;
-                                      });
-                                    },
-                                    value: rouleValue,
-                                  ),
-                                  Container(
-                                    child: Text(AppLocalizations.of(context)
-                                        .doYouWantToMake),
-                                  )
-                                ],
-                              )
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(top: 5.0, bottom: 50),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 30, left: 30),
+                                  child: new TextField(
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                        disabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          borderSide: BorderSide(
+                                              color: Theme.of(context)
+                                                  .accentColor),
+                                        ),
+                                        labelText: AppLocalizations.of(context)
+                                            .writeYourNeed,
+                                        alignLabelWithHint: true,
+                                        filled: true,
+                                        fillColor: Colors.white),
+                                    style: new TextStyle(color: Colors.black),
+                                    controller: control,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    RaisedButton(
+                                        elevation: 0,
+                                        onPressed: getImage,
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            side: BorderSide(
+                                                color: Theme.of(context)
+                                                    .primaryColor)),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Icon(
+                                              Icons.camera_enhance,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                            Text(
+                                                AppLocalizations.of(context)
+                                                    .addPhoto,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor))
+                                          ],
+                                        )),
+                                    RaisedButton(
+                                        elevation: 0,
+                                        onPressed: () {},
+                                        color: Colors.white,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            side: BorderSide(
+                                                color: Theme.of(context)
+                                                    .primaryColor)),
+                                        child: Row(
+                                          children: <Widget>[
+                                            Icon(Icons.location_on,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                            Text(
+                                                AppLocalizations.of(context)
+                                                    .addLocation,
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor))
+                                          ],
+                                        ))
+                                  ],
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  child: Column(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            AppLocalizations.of(context).gender,
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Theme.of(context)
+                                                    .primaryColor),
+                                          ),
+                                        ],
+                                      ),
+                                      GenderSelection(
+                                        maleText: "Male",
+                                        femaleText: "Female",
+                                        femaleImage: AssetImage(
+                                            'assets/woman (2)@2x.png'),
+                                        maleImage:
+                                            AssetImage('assets/man (5)@2x.png'),
+                                        selectedGenderIconBackgroundColor:
+                                            Theme.of(context).primaryColor,
+                                        checkIconAlignment:
+                                            Alignment.bottomRight,
+                                        onChanged: (Gender gender) {
+                                          print(gender);
+                                        },
+                                        equallyAligned: true,
+                                        animationDuration:
+                                            Duration(milliseconds: 400),
+                                        isCircular: true, // default : true,
+                                        isSelectedGenderIconCircular: true,
+                                        opacityOfGradient: 0.1,
+                                        linearGradient: LinearGradient(colors: [
+                                          Theme.of(context).accentColor,
+                                          Theme.of(context).accentColor
+                                        ]),
+                                        padding: const EdgeInsets.all(3),
+                                        size: 80, //default : 120
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Text(AppLocalizations.of(context)
+                                              .selectBlood),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            BloodButton("A+"),
+                                            BloodButton("A-"),
+                                            BloodButton("B+"),
+                                            BloodButton("B-"),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: <Widget>[
+                                            BloodButton("O+"),
+                                            BloodButton("O-"),
+                                            BloodButton("AB+"),
+                                            BloodButton("AB-"),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Checkbox(
+                                            onChanged: (T) {
+                                              setState(() {
+                                                rouleValue = !rouleValue;
+                                              });
+                                            },
+                                            value: rouleValue,
+                                          ),
+                                          Container(
+                                            child: Text(
+                                                AppLocalizations.of(context)
+                                                    .doYouWantToMake),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
               ),
             ),
           ),
@@ -302,10 +366,22 @@ class _AddYourNeedState extends State<AddYourNeed> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          String imgPath = await SqlHelper().uploadImage(image,"posts");
-          SqlHelper().addNeed(
-            PostModel(User(id: '1'), control.text, imgPath, '', 'Saudi Arabia')
-           );
+          if (control.text == "")
+            alter("يرجى التأكد من إضافة نص");
+          else {
+            setState(() {
+              laod = true;
+            });
+            String imgPath = "";
+            if (imageLoaded)
+              imgPath = await SqlHelper().uploadImage(image, "posts");
+            SqlHelper().addNeed(PostModel(
+                User(id: '1'), control.text, imgPath, '', 'Saudi Arabia'));
+            setState(() {
+              laod = false;
+            });
+            alter("تمت الإضافة");
+          }
         },
         child: Icon(
           Icons.add,
@@ -369,5 +445,4 @@ class _AddYourNeedState extends State<AddYourNeed> {
       ),
     );
   }
-
 }

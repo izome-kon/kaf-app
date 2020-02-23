@@ -24,13 +24,14 @@ class SqlHelper {
   static Future<List> login(
       {@required String email, @required String password}) async {
     loading = true;
+
     String url = "$webSite/login";
     final http.Response response = await http
         .post(url, body: {"email": "$email", "password": "$password"});
     status = response.body.contains('token');
     var data = json.decode(response.body);
     if (status) {
-      print('data : ${data["token"]}');
+      //   print('data : ${data["token"]}');
       save('token', data["token"]);
     } else {
       print('data : ${data["error"]}');
@@ -100,7 +101,7 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  Future<List<dynamic>> getDoctor(int id) async {
+  Future<List> getDoctor(int id) async {
     String url = "http://kaf.ideagroup-sa.com/api/doctor";
     http.Response response = await http.post(url, body: {
       "doctor_id": "$id",
@@ -134,7 +135,7 @@ class SqlHelper {
     return json.decode(response.body);
   }
 
-  uploadImage(File image, String pathOnServer) async {
+   uploadImage(File image, String pathOnServer) async {
     String url = "http://kaf.ideagroup-sa.com/api/uploadImage";
     String type = image.path.split('.').last;
 
