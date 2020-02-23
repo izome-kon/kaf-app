@@ -17,9 +17,6 @@ import 'package:kaf/Pages/Support.dart';
 import 'package:kaf/Pages/login.dart';
 import 'package:kaf/Pages/login_signin.dart';
 import 'package:kaf/localizations.dart';
-import 'package:kaf/sql/sqlHelper.dart';
-import 'package:kaf/widgets/AppDrawer.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(WelcomePage());
 
@@ -45,6 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
 class App extends StatefulWidget {
   String language;
+  static bool load = false;
   var home;
   App(this.language, this.home);
   static String getAppLanguage() {
@@ -88,7 +86,7 @@ class _AppState extends State<App> {
         "/Set_location_2": (BuildContext context) => new SetLocation(),
         "/Support": (BuildContext context) => new Support(),
       },
-      home: widget.home,
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "Neo_Sans_Arabic",

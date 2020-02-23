@@ -2,23 +2,40 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Clinic_info.dart';
 import 'package:kaf/models/clinic_model.dart';
+import 'package:kaf/sql/sqlHelper.dart';
+import 'package:kaf/test.dart';
+
 class OfferDetails extends StatefulWidget {
   @override
   _OfferDetailsState createState() => _OfferDetailsState();
+  final String clinicId;
+
+  OfferDetails({Key key, @required this.clinicId}) : super(key: key);
 }
 
 class _OfferDetailsState extends State<OfferDetails> {
   
   Clinic clinic;
+  List clinicData;
+  static bool finishLoad ;
+  @override
+  void initState() {
+    // TODO: implement initState
+    finishLoad = false;
+    clinic = new Clinic();
+    getData(widget.clinicId).then((v){
+       setState(() {
+ finishLoad = true;
+ fillpage(clinic);
+       });
+      
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    clinic = new Clinic();
-    clinic.clinicName = "al hayah Clinic";
-    clinic.hospitalName = "international medical hospital";
-    clinic.field = "Cardiology Clinic";
-    clinic.offer = 30;
-    clinic.price = 500;
-    return Stack(
+    return !finishLoad?Test():
+     Stack(
       fit: StackFit.expand,
       children: <Widget>[
         Container(
@@ -335,5 +352,17 @@ class _OfferDetailsState extends State<OfferDetails> {
         ],
       ),
     );
+  }
+
+Future getData(String id) async {
+    clinicData = await SqlHelper.getClinic(int.parse(widget.clinicId));
+    print(clinicData);
+  }
+    void fillpage(Clinic clinic){
+    clinic.clinicName = clinicData[0]['name'].toString();
+    clinic.hospitalName = clinicData[0]['hospital_Name'].toString();
+    clinic.field = "Cardiology Clinic";
+    clinic.offer = 30;
+    clinic.price = 500;
   }
 }
